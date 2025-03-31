@@ -3,7 +3,7 @@ Simulator for the PIC16F84
 
 | Programm | Inhalt | Max. Erreich. | Erledigt |
 |----------|--------|---------------|----------|
-| 1 (MUSS) | Die einfachen Literalbefehle, u.a. MOVLW, ADDLW, SUBLW | 61 |    |
+| 1 (MUSS) | Die einfachen Literalbefehle, u.a. MOVLW, ADDLW, SUBLW | 6 |    |
 | 2 / 21 (MUSS) | u.a. CALL, GOTO (vereinfacht, ohne Rücksicht auf PCLATH) | 1 |
 | 3 (MUSS) | u.a. MOVWF, MOVF, SUBWF (nur direkte Adressierung, aber mit d-Bit Auswert.) | 1 |
 | 4 (MUSS) | u.a. DCFSZ, INCFSZ, RLF, RRF (nur direkte Adressierung, aber mit d-Bit Auswert.) | 1 |
