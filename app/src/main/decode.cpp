@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include <cstdint>
 
-// Define the Logger class (similar to Kotlin's Logger class)
 class Logger {
 public:
     static void info(const std::string& message) {
@@ -10,11 +9,10 @@ public:
     }
 };
 
-// Define the Instruction class (similar to Kotlin's Instruction class)
 class Instruction {
 public:
     enum class OperationCode {
-        // Add operation codes here
+        // operation codes 
         ADDWF,
         ANDWF,
         CLRF,
@@ -76,7 +74,6 @@ private:
     int fileAddress_ = 0;
 };
 
-// Define the Decoder class (similar to Kotlin's Decoder class)
 class Decoder {
 public:
     static const int LITERAL_8BIT_MASK =    0b00_0000_1111_1111;
