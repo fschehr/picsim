@@ -56,16 +56,3 @@ private:
     OperationCode opc_;
     std::vector<int> arguments_;
 };
-/*
-//zum testen
-int main() {
-    Instruction instruction(Instruction::OperationCode::ADDWF, 0x01, 0x02);
-    std::cout << "Operation Code: " << static_cast<int>(instruction.getOpc()) << std::endl;
-    std::cout << "Arguments: ";
-    for (int arg : instruction.getArguments()) {
-        std::cout << arg << " ";
-    }
-    std::cout << std::endl;
-    return 0;
-}
-*/

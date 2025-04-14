@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
-#include "pars.cpp" 
+#include "pars.cpp"
 #include "simvm.cpp"
 
 class Logger {

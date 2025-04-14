@@ -1,22 +1,13 @@
-#include <vector>
-#include <stdexcept>
-#include <functional>
-#include <map>
-#include <mutex>
-#include <cmath>
-#include <iostream>
-#include <string>
-#include <memory>
-#include "ProgramMemory.h"
-#include "RamMemory.h"
-#include "StackMemory.h"
-#include "EepromMemory.h"
-#include "Instruction.h"
-#include "Decoder.h"
-#include "LiteralExecution.h"
-#include "JumpExecution.h"
-#include "ByteExecution.h"
-#include "BitExecution.h"
+#include "../memory/program.cpp"
+#include "../memory/ram.cpp"
+#include "../memory/stack.cpp"
+#include "../memory/eeprom.cpp"
+#include "../instruction.cpp"
+#include "../decode.cpp"
+#include "literalex.cpp"
+#include "jumpex.cpp"
+#include "byte.cpp"
+#include "bit.cpp"
 
 class InstructionExecution {
 private:

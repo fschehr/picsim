@@ -1,93 +1,28 @@
 #include <iostream>
 #include <vector>
-#include <array>
 #include <stdexcept>
 #include <string>
-#include "decode.cpp" // Include the Decoder and Instruction classes
+#include "instruction.cpp"
+#include "memory/ram.cpp"
+#include "memory/stack.cpp"
+#include "memory/eeprom.cpp"
+#include "memory/program.cpp"
+#include "decode.cpp"
 
-class Logger {
-public:
-    static void info(const std::string& message) {
-        std::cout << "INFO: " << message << std::endl;
-    }
-};
-
-class Instruction {
-public:
-    virtual int getOpc() = 0;
-    virtual std::string getArguments() = 0;
-};
-
-class Decoder {
-public:
-    Instruction* decode(int opcode) {
-        // Implement the decoding logic here
-        // For demonstration purposes, return a dummy instruction
-        return 0;
-    }
-};
-
-class RamMemory {
+class ConcreteInstruction : public Instruction {
 private:
-    std::vector<unsigned char> memory;
+    int opc;
+    std::string arguments;
 
 public:
-    RamMemory(int size) : memory(size) {}
+    ConcreteInstruction(int opc, const std::string& arguments) : opc(opc), arguments(arguments) {}
 
-    unsigned char get(int address) {
-        return memory[address];
+    int getOpc() override {
+        return opc;
     }
 
-    void set(int address, unsigned char value) {
-        memory[address] = value;
-    }
-};
-
-class ProgramMemory {
-private:
-    std::vector<short> memory;
-
-public:
-    ProgramMemory(int size) : memory(size) {}
-
-    short get(int address) {
-        return memory[address];
-    }
-
-    void set(int address, short value) {
-        memory[address] = value;
-    }
-};
-
-class StackMemory {
-private:
-    std::vector<int> memory;
-
-public:
-    StackMemory(int size) : memory(size) {}
-
-    int get(int address) {
-        return memory[address];
-    }
-
-    void set(int address, int value) {
-        memory[address] = value;
-    }
-};
-
-class EepromMemory {
-private:
-    std::vector<unsigned char> memory;
-
-public:
-    EepromMemory(int size) : memory(size) {}
-
-    unsigned char get(int address) {
-        return memory[address];
-    }
-
-    void set(int address, unsigned char value) {
-        memory[address] = value;
+    std::string getArguments() override {
+        return arguments;
     }
 };
 
@@ -127,7 +62,7 @@ private:
     StackMemory stack;
     EepromMemory eeprom;
     Decoder decoder; // Use the Decoder class
-    InstructionExecution executor;
+            Instruction* instruction = new ConcreteInstruction(prog[i], ""); // Replace with a concrete implementation
 
     bool running = false;
     bool loaded = false;
