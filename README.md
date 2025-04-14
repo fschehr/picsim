@@ -1,6 +1,25 @@
 # PIC16F84-Simulator
 Simulator for the PIC16F84
 
+## Components
+- **Parser**: Parses `.LST` files into executable instructions.
+- **Decoder**: Decodes instructions into operations.
+- **Simulator VM**: Executes the instructions using a virtual machine.
+
+## Usage
+1. Compile the project using a C++ compiler.
+2. Run the simulator with a `.LST` file as an argument:
+   ```
+   ./simulator TPicSim1.LST
+   ```
+3. View the output and debug information in the console.
+
+## Example
+To test the simulator, use one of the provided `.LST` files in the `testprog` directory.
+```
+./simulator ../testprog/TPicSim1.LST
+```
+
 | Programm | Inhalt | Max. Erreich. | Erledigt |
 |----------|--------|---------------|----------|
 | 1 (MUSS) | Die einfachen Literalbefehle, u.a. MOVLW, ADDLW, SUBLW | 6 |    |

@@ -36,4 +36,21 @@ public:
             return nullptr;
         }
     }
+    size_t getLineCount(std::string filename) const {
+        size_t lineCount = 0;
+        std::ifstream file(filename);
+        if (!file.is_open()) {
+            throw std::runtime_error("Failed to open file");
+        }else{
+            std::string line;
+            while (std::getline(file, line)) {
+                if (line[0] != ' ') {
+                    lineCount++;
+                }
+            }
+            file.close();
+        }
+        return lineCount;
+    }
+
 };

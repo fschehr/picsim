@@ -3,8 +3,8 @@
 #include <array>
 #include <stdexcept>
 #include <string>
+#include "decode.cpp" // Include the Decoder and Instruction classes
 
-// Define the Logger class (similar to Kotlin's Logger class)
 class Logger {
 public:
     static void info(const std::string& message) {
@@ -12,14 +12,12 @@ public:
     }
 };
 
-// Define the Instruction class (similar to Kotlin's Instruction class)
 class Instruction {
 public:
     virtual int getOpc() = 0;
     virtual std::string getArguments() = 0;
 };
 
-// Define the Decoder class (similar to Kotlin's Decoder class)
 class Decoder {
 public:
     Instruction* decode(int opcode) {
@@ -29,7 +27,6 @@ public:
     }
 };
 
-// Define the RamMemory class (similar to Kotlin's RamMemory class)
 class RamMemory {
 private:
     std::vector<unsigned char> memory;
@@ -129,7 +126,7 @@ private:
     std::vector<Instruction*> programMemory;
     StackMemory stack;
     EepromMemory eeprom;
-    Decoder decoder;
+    Decoder decoder; // Use the Decoder class
     InstructionExecution executor;
 
     bool running = false;
@@ -138,7 +135,7 @@ private:
 public:
     PicSimulatorVM() : ram(ramSize), program(programMemorySize), programMemory(programMemorySize), stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {}
 
-    void initialize(std::vector<short> prog) {
+    void initialize(const std::vector<short>& prog) {
         programDecode(prog);
         load(prog);
         while (running) {
@@ -146,14 +143,14 @@ public:
         }
     }
 
-    void programDecode(std::vector<short> prog) {
-        for (int i = 0; i < prog.size(); i++) {
-            Instruction* instruction = decoder.decode(prog[i]);
+    void programDecode(const std::vector<short>& prog) {
+        for (size_t i = 0; i < prog.size(); i++) {
+            Instruction* instruction = new Instruction(decoder.decode(prog[i]));
             programMemory[i] = instruction;
         }
-        for (int i = 0; i < programMemory.size(); i++) {
+        for (size_t i = 0; i < programMemory.size(); i++) {
             if (programMemory[i] != nullptr) {
-                std::cout << "Instruction " << programMemory[i]->getOpc() << " with arguments " << programMemory[i]->getArguments() << std::endl;
+                std::cout << "Instruction " << static_cast<int>(programMemory[i]->getOpc()) << " with arguments " << programMemory[i]->getArguments() << std::endl;
             }
         }
     }
@@ -162,10 +159,10 @@ public:
         running = false;
     }
 
-    void load(std::vector<short> file) {
+    void load(const std::vector<short>& file) {
         stop();
 
-        for (int address = 0; address < file.size(); address++) {
+        for (size_t address = 0; address < file.size(); address++) {
             program.set(address, file[address]);
         }
 

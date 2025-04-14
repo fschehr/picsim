@@ -65,6 +65,13 @@ public:
 
     int getFileAddress() const { return fileAddress_; }
 
+    std::string getArguments() const {
+        // Return a string representation of the arguments for debugging
+        return "Destination: " + std::to_string(destination_) + ", Address: " + std::to_string(address_) +
+               ", Literal: " + std::to_string(literal_) + ", BitAddress: " + std::to_string(bitAddress_) +
+               ", FileAddress: " + std::to_string(fileAddress_);
+    }
+
 private:
     OperationCode opcode_;
     int destination_ = 0;
@@ -122,7 +129,7 @@ public:
                 if ((code >> 7) == 2) { // CLRW
                     return Instruction(Instruction::OperationCode::CLRW);
                 } else if ((code >> 7) == 0 && (code & 31) == 0) { // NOP
-                    return Instruction(Instruction::Operation
+                    return Instruction(Instruction::Operation);
                     } else if ((code >> 7) == 3) { // CLRF
                         int address = code & FILE_ADDRESS_MASK;
                         return Instruction(Instruction::OperationCode::CLRF, 0, address);
@@ -235,6 +242,5 @@ public:
         std::cout << "Decoded instruction: " << static_cast<int>(instruction.getOpcode()) << std::endl;
         return 0;
     }
-    
-               
-    
+
+

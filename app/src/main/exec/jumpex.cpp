@@ -1,0 +1,41 @@
+#include "InstructionExecution.h"
+#include "Instruction.h"
+#include "RamMemory.h"
+#include <cstdint>
+
+class JumpExecution {
+private:
+    InstructionExecution& executor;
+
+public:
+    explicit JumpExecution(InstructionExecution& executor) : executor(executor) {}
+
+    void executeCALL(const Instruction& instruction) {
+        // Save address of next instruction to stack memory
+        executor.stack.push(executor.getProgramCounter());
+
+        // Consists of the opcode/address given as argument and the upper bits (bit 3 + 4) of PCLATH register
+        int pclathBits = (executor.ram.get(RamMemory<uint8_t>::SFR::PCLATH) & 0b00011000) << 8;
+
+        int address = instruction.getArguments()[0]; // Load jump address
+        address = address & 2047;                   // Clear upper two bits
+        address = address | pclathBits;             // Adding PCLATH
+
+        executor.setProgramCounter(address);
+    }
+
+    /**
+     * Makes a jump to the given address inside of program memory.
+     *
+     * @param instruction Instruction consisting of OPC and arguments
+     */
+    void executeGOTO(const Instruction& instruction) {
+        int pclathBits = (executor.ram.get(RamMemory<uint8_t>::SFR::PCLATH) & 0b00011000) << 8;
+
+        int address = instruction.getArguments()[0]; // Load jump address
+        address = address & 0b001111111111;          // Clear upper two bits
+        address = address | pclathBits;             // Adding PCLATH
+
+        executor.setProgramCounter(address);
+    }
+};
