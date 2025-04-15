@@ -161,7 +161,7 @@ int main() {
     Decoder decoder;
     int code = 0x0064; // Example code
     Instruction instruction = decoder.decode(code);
-    std::cout << "Decoded instruction: " << static_cast<int>(instruction.getOpcode()) << std::endl;
+    std::cout << "Decoded instruction: " << static_cast<int>(instruction.getOpc()) << std::endl;
     return 0;
 }
 

@@ -9,23 +9,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add source files
 set(SOURCES
-    app/src/main/app.cpp
-    app/src/main/simvm.cpp
-    app/src/main/decode.cpp
-    app/src/main/pars.cpp
-    app/src/main/fileReader.cpp
-    app/src/main/instruction.cpp
-    app/src/main/memory/eeprom.cpp
-    app/src/main/memory/program.cpp
-    app/src/main/memory/ram.cpp
-    app/src/main/memory/stack.cpp
-    app/src/main/memory/watcher.cpp
-    app/src/main/exec/bit.cpp
-    app/src/main/exec/byte.cpp
-    app/src/main/exec/exwatcher.cpp
-    app/src/main/exec/instructionex.cpp
-    app/src/main/exec/jumpex.cpp
-    app/src/main/exec/literalex.cpp
+    app/main/app.cpp
+    app/main/simvm.cpp
+    app/main/decode.cpp
+    app/main/pars.cpp
+    app/main/fileReader.cpp
+    app/main/instruction.cpp
+    app/main/memory/eeprom.cpp
+    app/main/memory/program.cpp
+    app/main/memory/ram.cpp
+    app/main/memory/stack.cpp
+    app/main/memory/watcher.cpp
+    app/main/exec/bit.cpp
+    app/main/exec/byte.cpp
+    app/main/exec/exwatcher.cpp
+    app/main/exec/instructionex.cpp
+    app/main/exec/jumpex.cpp
+    app/main/exec/literalex.cpp
 )
 
 # Add executable

@@ -6,21 +6,6 @@
 #include "pars.cpp"
 #include "simvm.cpp"
 
-class Logger {
-public:
-    static void info(const std::string& message) {
-        std::cout << "INFO: " << message << std::endl;
-    }
-};
-
-
-class App {
-public:
-    std::string getGreeting() {
-        return "Hello World!";
-    }
-};
-
 int main(int argc, char* argv[]) {
     std::string fileName;
     if (argc > 1) {
@@ -39,8 +24,6 @@ int main(int argc, char* argv[]) {
         for (const auto& line : lines) {
             std::cout << line << std::endl;
         }
-
-        Logger::info(App().getGreeting());
 
         PicSimulatorVM vm;
         vm.initialize(lines);
