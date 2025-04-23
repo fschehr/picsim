@@ -46,7 +46,7 @@ public:
     T pop() {
         std::lock_guard<std::mutex> lock(mutex);
         if (isEmpty()) {
-            throw std::out_of_range("Stack underflow detected, stack is empty");
+            throw std::out_of_range("Stack underflow");
         }
         T oldValue = memory[pointer];
         firePropertyChange("memory", pointer, oldValue, T());

@@ -8,6 +8,8 @@
 #include "memory/eeprom.cpp"
 #include "memory/program.cpp"
 #include "decode.cpp"
+#include "instruction.cpp"
+#include "exec/instructionex.cpp"
 
 class ConcreteInstruction : public Instruction {
 private:
@@ -17,34 +19,12 @@ private:
 public:
     ConcreteInstruction(int opc, const std::string& arguments) : opc(opc), arguments(arguments) {}
 
-    int getOpc() override {
+    OperationCode getOpc() override {
         return opc;
     }
 
     std::string getArguments() override {
         return arguments;
-    }
-};
-
-class InstructionExecution {
-private:
-    ProgramMemory& program;
-    RamMemory& ram;
-    StackMemory& stack;
-    EepromMemory& eeprom;
-
-public:
-    InstructionExecution(ProgramMemory& program, RamMemory& ram, StackMemory& stack, EepromMemory& eeprom)
-        : program(program), ram(ram), stack(stack), eeprom(eeprom) {}
-
-    int execute() {
-        // Implement the execution logic here
-        // For demonstration purposes, return a dummy value
-        return 0;
-    }
-
-    void reset() {
-        // Implement the reset logic here
     }
 };
 
@@ -58,17 +38,25 @@ private:
 
     RamMemory ram;
     ProgramMemory program;
-    std::vector<Instruction*> programMemory;
+    std::vector<Instruction*> programMemory; 
     StackMemory stack;
     EepromMemory eeprom;
-    Decoder decoder; // Use the Decoder class
-            Instruction* instruction = new ConcreteInstruction(prog[i], ""); // Replace with a concrete implementation
+    Decoder decoder;
+    InstructionExecution executor;
 
     bool running = false;
     bool loaded = false;
 
 public:
-    PicSimulatorVM() : ram(ramSize), program(programMemorySize), programMemory(programMemorySize), stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {}
+    PicSimulatorVM()
+        : logger("PicSimulatorVM"), ram(ramSize), program(programMemorySize), programMemory(programMemorySize),
+          stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {}
+
+    ~PicSimulatorVM() {
+        for (Instruction* instruction : programMemory) {
+            delete instruction;
+        }
+    }
 
     void initialize(const std::vector<short>& prog) {
         programDecode(prog);
@@ -79,13 +67,16 @@ public:
     }
 
     void programDecode(const std::vector<short>& prog) {
+        if (prog.size() > programMemory.size()) {
+            throw std::runtime_error("Program size exceeds program memory capacity");
+        }
         for (size_t i = 0; i < prog.size(); i++) {
-            Instruction* instruction = new Instruction(decoder.decode(prog[i]));
+            Instruction* instruction = new ConcreteInstruction(decoder.decode(prog[i]), ""); //what is the next step of the operation? https://www.youtube.com/watch?v=UFM2tJzi2NI&pp=ygUmd2hhdCBpcyB0aGUgbmV4dCBzdGVwIG9mIHRoZSBvcGVyYXRpb24%3D
             programMemory[i] = instruction;
         }
         for (size_t i = 0; i < programMemory.size(); i++) {
             if (programMemory[i] != nullptr) {
-                std::cout << "Instruction " << static_cast<int>(programMemory[i]->getOpc()) << " with arguments " << programMemory[i]->getArguments() << std::endl;
+                std::cout << "Instruction " << programMemory[i]->getOpc() << " with arguments " << programMemory[i]->getArguments() << std::endl;
             }
         }
     }
@@ -113,9 +104,7 @@ public:
                 running = true;
                 executor.reset();
             }
-
             return executor.execute();
         }
     }
 };
-
