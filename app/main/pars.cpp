@@ -1,27 +1,28 @@
-#include <fstream>
+#include "pars.h"
+#include "fileReader.h"
 #include <vector>
 #include <string>
 #include <stdexcept>
 #include <sstream>
+#include <iostream>
 
 class Parser {
 public:
     short* parse(const std::string& filename, int& size) {
         try {
-            std::ifstream file(filename);
-            if (!file.is_open()) {
-                throw std::runtime_error("Failed to open file");
+            FileReader fileReader;
+            std::vector<std::string> lines = fileReader.read(filename);
+            if (lines.empty()) {
+                throw std::runtime_error("File is empty or could not be read");
             }
 
             std::vector<std::string> converter;
-            std::string line;
-            while (std::getline(file, line)) {
-                if (line[0] != ' ') {
+            for (const auto& line : lines) {
+                if (!line.empty() && line[0] != ' ') {
                     converter.push_back(line.substr(5, 4));
                 }
             }
 
-            file.close();
             size = converter.size();
             short* output = new short[size];
             for (int i = 0; i < size; i++) {

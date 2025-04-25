@@ -1,9 +1,9 @@
-#include <vector>
+#include "eeprom.h"
 #include <stdexcept>
-#include <mutex>
 #include <functional>
-#include <string>
+#include <mutex>
 #include <map>
+#include <vector>
 
 template <typename T>
 class EepromMemory {

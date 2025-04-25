@@ -1,15 +1,15 @@
+#include "simvm.h"
+#include "instruction.h"
+#include "memory/ram.h"
+#include "memory/stack.h"
+#include "memory/eeprom.h"
+#include "memory/program.h"
+#include "decode.h"
+#include "exec/instructionex.h"
 #include <iostream>
 #include <vector>
 #include <stdexcept>
 #include <string>
-#include "instruction.cpp"
-#include "memory/ram.cpp"
-#include "memory/stack.cpp"
-#include "memory/eeprom.cpp"
-#include "memory/program.cpp"
-#include "decode.cpp"
-#include "instruction.cpp"
-#include "exec/instructionex.cpp"
 
 class ConcreteInstruction : public Instruction {
 private:

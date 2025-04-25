@@ -1,9 +1,4 @@
-#include <vector>
-#include <stdexcept>
-#include <mutex>
-#include <functional>
-#include <string>
-#include <map>
+#include "stack.h"
 
 template <typename T>
 class StackMemory {

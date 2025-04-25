@@ -1,7 +1,7 @@
-#include "../instruction.cpp"
-#include "../memory/stack.cpp"
-#include "../memory/ram.cpp"
-#include "instructionex.cpp"
+#include "instructionex.h"
+#include "../instruction.h"
+#include "../memory/stack.h"
+#include "../memory/ram.h"
 #include <cstdint>
 
 class LiteralExecution {

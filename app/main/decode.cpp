@@ -1,7 +1,8 @@
+#include "decode.h"
+#include "instruction.h"
 #include <iostream>
 #include <stdexcept>
 #include <cstdint>
-#include "instruction.cpp"
 
 class Decoder {
 public:

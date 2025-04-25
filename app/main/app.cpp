@@ -1,10 +1,9 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <string>
 #include <stdexcept>
-#include "pars.cpp"
-#include "simvm.cpp"
+#include "pars.h"
+#include "simvm.h"
 
 int main(int argc, char* argv[]) {
     std::string fileName;

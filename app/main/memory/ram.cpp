@@ -1,9 +1,9 @@
-#include <vector>
+#include "ram.h"
 #include <stdexcept>
-#include <mutex>
 #include <functional>
-#include <string>
+#include <mutex>
 #include <map>
+#include <vector>
 
 template <typename T>
 class RamMemory {

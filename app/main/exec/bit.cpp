@@ -1,6 +1,6 @@
-#include "../instruction.cpp"
-#include "../memory/ram.cpp"
-#include "instructionex.cpp"
+#include "instructionex.h"
+#include "../instruction.h"
+#include "../memory/ram.h"
 #include <cstdint>
 
 class BitExecution {

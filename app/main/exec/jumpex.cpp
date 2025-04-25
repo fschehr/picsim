@@ -1,5 +1,7 @@
-#include "instructionex.cpp"
-#include "../instruction.cpp"
+#include "jumpex.h"
+#include "instructionex.h"
+#include "../instruction.h"
+#include "../memory/ram.h"
 #include <cstdint>
 
 class JumpExecution {
