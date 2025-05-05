@@ -51,14 +51,13 @@ public:
     };
 
 private:
-    static const int BANK_SIZE = 128;
     std::vector<T> bank0;
     std::vector<T> bank1;
     std::map<std::string, std::function<void(int, T, T)>> propertyChangeListeners;
     mutable std::mutex mutex;
 
 public:
-    RamMemory() : bank0(BANK_SIZE), bank1(BANK_SIZE) {}
+    RamMemory(int BANK_SIZE) : bank0(BANK_SIZE), bank1(BANK_SIZE) {}
 
     void addPropertyChangeListener(const std::string& propertyName, std::function<void(int, T, T)> listener) {
         std::lock_guard<std::mutex> lock(mutex);
@@ -90,43 +89,21 @@ public:
         std::lock_guard<std::mutex> lock(mutex);
         if (address < 0 || address >= BANK_SIZE) {
             throw std::out_of_range("Address isn't implemented");
-        } else if (address < 0x0C) {
-            switch (address) {
-                case 0x00: // INDF
-                    break;
-                case 0x02: case 0x03: case 0x04: case 0x0A: case 0x0B: {
-                    T oldValue = bank0[address];
-                    bank0[address] = value;
-                    bank1[address] = value;
-                    firePropertyChange("bank0", address, oldValue, value);
-                    firePropertyChange("bank1", address, oldValue, value);
-                    break;
-                }
-                default: {
-                    if (bank == Bank::BANK_0) {
-                        T oldValue = bank0[address];
-                        bank0[address] = value;
-                        firePropertyChange("bank0", address, oldValue, value);
-                    } else {
-                        T oldValue = bank1[address];
-                        bank1[address] = value;
-                        firePropertyChange("bank1", address, oldValue, value);
-                    }
-                    break;
-                }
+        }
+
+        T oldValue = (bank == Bank::BANK_0) ? bank0[address] : bank1[address];
+        if (bank == Bank::BANK_0) {
+            bank0[address] = value;
+            if (address < 0x0C) {
+                bank1[address] = value; // Mapped to second bank
             }
         } else {
-            T oldValue = (bank == Bank::BANK_0) ? bank0[address] : bank1[address];
-            if (bank == Bank::BANK_0) {
-                bank0[address] = value;
-                bank1[address] = value; // Mapped to second bank
-            } else {
-                bank1[address] = value;
-                bank0[address] = value; // Mapped to second bank
+            bank1[address] = value;
+            if (address < 0x0C) {
+                bank0[address] = value; // Mapped to first bank
             }
-            firePropertyChange("bank0", address, oldValue, value);
-            firePropertyChange("bank1", address, oldValue, value);
         }
+        firePropertyChange("ram", address, oldValue, value);
     }
 
     void set(const SFR& sfr, const T& value) {

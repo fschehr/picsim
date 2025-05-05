@@ -54,6 +54,11 @@ public:
     void setProgramCounter(int value);
     void setWorkingRegister(uint8_t value);
     void setRuntimeCounter(double value);
+
+    int getWorkingRegister();
+    bool checkZeroFlag(int value);
+    bool checkCarryFlag(int value);
+    bool checkDigitCarryFlag(int value);
 };
 
 #endif // INSTRUCTIONEX_H

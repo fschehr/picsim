@@ -20,7 +20,7 @@ public:
         static const std::vector<SFR>& entries();
     };
 
-    RamMemory();
+    RamMemory(int BANK_SIZE);
     void addPropertyChangeListener(const std::string& propertyName, std::function<void(int, T, T)> listener);
     void removePropertyChangeListener(const std::string& propertyName);
     T get(int address) const;
@@ -30,7 +30,6 @@ public:
     T get(const SFR& sfr) const;
 
 private:
-    static const int BANK_SIZE = 128;
     std::vector<T> bank0;
     std::vector<T> bank1;
     std::map<std::string, std::function<void(int, T, T)>> propertyChangeListeners;

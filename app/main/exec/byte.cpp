@@ -1,3 +1,4 @@
+#include "byte.h"
 #include "instructionex.h"
 #include "../instruction.h"
 #include "../memory/ram.h"

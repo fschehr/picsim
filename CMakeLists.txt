@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.10)
 project(picsim)
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD 22)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add source files
 set(SOURCES
@@ -27,16 +27,3 @@ set(SOURCES
     app/main/exec/jumpex.cpp
     app/main/exec/literalex.cpp
 )
-
-# Add executable
-add_executable(simulator ${SOURCES})
-
-# Include directories
-target_include_directories(simulator PRIVATE app/src/main)
-
-# Enable warnings
-if (MSVC)
-    target_compile_options(simulator PRIVATE /W4 /WX)
-else()
-    target_compile_options(simulator PRIVATE -Wall -Wextra -Werror)
-endif()

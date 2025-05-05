@@ -2,6 +2,8 @@
 #define INSTRUCTION_H
 
 #include <vector>
+#include <string>
+#include <ostream>
 
 class Instruction {
 public:
@@ -14,10 +16,13 @@ public:
     Instruction(OperationCode opc, int arguments = 0, int argument2 = 0);
     OperationCode getOpc() const;
     std::vector<int> getArguments() const;
+    std::string getArgumentsAsString() const;
 
 private:
     OperationCode opc_;
     std::vector<int> arguments_;
 };
+
+std::ostream& operator<<(std::ostream& os, Instruction::OperationCode opc);
 
 #endif // INSTRUCTION_H

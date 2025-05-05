@@ -1,5 +1,4 @@
 #include "simvm.h"
-#include "instruction.h"
 #include "memory/ram.h"
 #include "memory/stack.h"
 #include "memory/eeprom.h"
@@ -13,34 +12,36 @@
 
 class ConcreteInstruction : public Instruction {
 private:
-    int opc;
     std::string arguments;
 
 public:
-    ConcreteInstruction(int opc, const std::string& arguments) : opc(opc), arguments(arguments) {}
+    ConcreteInstruction(OperationCode opc, const std::string& arguments) 
+        : Instruction(opc), arguments(arguments) {}
 
-    OperationCode getOpc() override {
-        return opc;
+    ConcreteInstruction(Instruction inst)
+        : Instruction(inst.getOpc()), arguments(inst.getArgumentsAsString()) {}
+    
+    OperationCode getConcOpc() {
+        return getOpc();
     }
 
-    std::string getArguments() override {
+    std::string getConcArguments() {
         return arguments;
     }
 };
 
 class PicSimulatorVM {
 private:
-    Logger logger;
-    int ramSize = 128;
+    int ramBankSize = 128;
     int programMemorySize = 1024;
     int stackSize = 8;
     int eepromSize = 64;
 
-    RamMemory ram;
-    ProgramMemory program;
+    RamMemory<uint8_t> ram;
+    ProgramMemory<uint16_t> program;
     std::vector<Instruction*> programMemory; 
-    StackMemory stack;
-    EepromMemory eeprom;
+    StackMemory<int> stack;
+    EepromMemory<uint8_t> eeprom;
     Decoder decoder;
     InstructionExecution executor;
 
@@ -49,8 +50,9 @@ private:
 
 public:
     PicSimulatorVM()
-        : logger("PicSimulatorVM"), ram(ramSize), program(programMemorySize), programMemory(programMemorySize),
-          stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {}
+        : ram(ramBankSize), program(programMemorySize), stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {
+        programMemory.resize(programMemorySize, nullptr);
+    }
 
     ~PicSimulatorVM() {
         for (Instruction* instruction : programMemory) {
@@ -71,20 +73,22 @@ public:
             throw std::runtime_error("Program size exceeds program memory capacity");
         }
         for (size_t i = 0; i < prog.size(); i++) {
-            Instruction* instruction = new ConcreteInstruction(decoder.decode(prog[i]), ""); //what is the next step of the operation? https://www.youtube.com/watch?v=UFM2tJzi2NI&pp=ygUmd2hhdCBpcyB0aGUgbmV4dCBzdGVwIG9mIHRoZSBvcGVyYXRpb24%3D
+            Instruction* instruction = new ConcreteInstruction(decoder.decode(prog[i])); //what is the next step of the operation? https://www.youtube.com/watch?v=UFM2tJzi2NI&pp=ygUmd2hhdCBpcyB0aGUgbmV4dCBzdGVwIG9mIHRoZSBvcGVyYXRpb24%3D
             programMemory[i] = instruction;
         }
         for (size_t i = 0; i < programMemory.size(); i++) {
             if (programMemory[i] != nullptr) {
-                std::cout << "Instruction " << programMemory[i]->getOpc() << " with arguments " << programMemory[i]->getArguments() << std::endl;
+                std::cout << "Instruction " << programMemory[i]->getOpc() << " with arguments " << programMemory[i]->getArgumentsAsString() << std::endl;
             }
         }
     }
 
     void stop() {
-        running = false;
+        running = false; //for readability
     }
-
+    void start() {
+        running = true; //for readability
+    }
     void load(const std::vector<short>& file) {
         stop();
 
@@ -92,7 +96,7 @@ public:
             program.set(address, file[address]);
         }
 
-        loaded = true;
+        start();
         executor.reset();
     }
 

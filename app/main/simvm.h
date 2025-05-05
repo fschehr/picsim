@@ -3,7 +3,16 @@
 
 #include <vector>
 #include <string>
-
+#include <instruction.h>
+class ConcreteInstruction{
+    public:
+        ConcreteInstruction(OperationCode opc, const std::string& arguments);
+        ConcreteInstruction(Instruction inst);
+        OperationCode getConcOpc();
+        std::string getConcArguments(); 
+    private:
+        std::string arguments;
+}
 class PicSimulatorVM {
 public:
     PicSimulatorVM();
