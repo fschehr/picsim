@@ -55,6 +55,12 @@ public:
     void setWorkingRegister(uint8_t value);
     void setRuntimeCounter(double value);
 
+    void setZeroFlag();
+
+    void setRamContent(int address, uint8_t value);
+    void setRamContent(RamMemory<uint8_t>::SFR sfr, uint8_t value);
+    void setRamContent(RamMemory<uint8_t>::Bank bank, int address, uint8_t value);
+
     void pushStack(int value);
     int popStack();
 
@@ -66,7 +72,10 @@ public:
     StackMemory<int>& getStack();
     uint8_t getRamContent(int address);
     uint8_t getRamContent(RamMemory<uint8_t>::SFR sfr) const;
-    uint8_t getRamContent(int bank, int address) const;
+    uint8_t getRamContent(RamMemory<uint8_t>::Bank bank, int address) const;
+    int getFileAddress(const Instruction& instruction) const;
+    RamMemory<uint8_t>::Bank getSelectedBank(const Instruction& instruction) const;
+    bool isCarryFlag() const;
 };
 
 #endif // INSTRUCTIONEX_H

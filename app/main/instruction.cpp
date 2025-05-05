@@ -3,6 +3,7 @@
 #include <sstream>
 #include "instruction.h"
 
+
 class Instruction {
 public:
     enum class OperationCode {
@@ -68,6 +69,15 @@ public:
         return oss.str();
     }
 
+    RamMemory<uint8_t>::Bank getBank() const {
+        if (opc_ == OperationCode::MOVF || opc_ == OperationCode::MOVWF) {
+            return RamMemory<uint8_t>::Bank::BANK_0;
+        } else if (opc_ == OperationCode::ADDLW || opc_ == OperationCode::ANDLW || opc_ == OperationCode::IORLW ||
+                   opc_ == OperationCode::SUBLW || opc_ == OperationCode::XORLW) {
+            return RamMemory<uint8_t>::Bank::BANK_1;
+        }
+        return RamMemory<uint8_t>::Bank::BANK_0; // Default case
+    }
 private:
     OperationCode opc_;
     std::vector<int> arguments_;

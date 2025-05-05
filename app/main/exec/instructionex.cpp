@@ -187,13 +187,19 @@ public:
         return programCounter;
     }
     bool checkZeroFlag(int value) {
+        ram.set(STATUS, (value & 0xFF) == 0 ? ram.get(STATUS) | 0x04 : ram.get(STATUS) & ~0x04);
         return (value & 0xFF) == 0;
     }
-    bool checkCarryFlag(int value) {
-        return (value & 0x100) != 0;
+    bool checkCarryFlag(bool condition) {
+        ram.set(STATUS, condition ? ram.get(STATUS) | 0x01 : ram.get(STATUS) & ~0x01);
+        return condition;
     }
-    bool checkDigitCarryFlag(int value) {
-        return (value & 0x10) != 0;
+    bool checkDigitCarryFlag(bool condition) {
+        ram.set(STATUS, condition ? ram.get(STATUS) | 0x02 : ram.get(STATUS) & ~0x02);
+        return condition;
+    }
+    bool isCarryFlag() const {
+        return (ram.get(STATUS) & 0x01) != 0;
     }
     StackMemory<int>& getStack(){
         return stack;
@@ -209,11 +215,29 @@ public:
     uint8_t getRamContent(RamMemory<uint8_t>::SFR sfr) const {
         return ram.get(sfr);
     }
-    uint8_t getRamContent(int bank, int address) const {
+    uint8_t getRamContent(RamMemory<uint8_t>::Bank bank, int address) const {
             // Assuming bank switching is handled externally, calculate the actual address
-            int actualAddress = (bank << 7) | address; // Example: Combine bank and address
+            int actualAddress = (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
             return ram.get(actualAddress);
         }
+    //set ram content
+    void setRamContent(RamMemory<uint8_t>::SFR sfr, uint8_t value) {
+        ram.set(sfr, value);
+    }
+    void setRamContent(RamMemory<uint8_t>::Bank bank, int address, uint8_t value) {
+        // Assuming bank switching is handled externally, calculate the actual address
+        int actualAddress = (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
+        ram.set(bank, actualAddress, value);
+    }
+
+    int getFileAddress(const Instruction& instruction) const {
+        int address = instruction.getArguments()[0];
+        RamMemory<uint8_t>::Bank bank = instruction.getBank();
+        return (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
+    }
+    RamMemory<uint8_t>::Bank getSelectedBank(const Instruction& instruction) {
+        return instruction.getBank();
+    }
 
     void pushStack(int value) {
         stack.push(value);
