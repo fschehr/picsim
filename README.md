@@ -10,8 +10,9 @@ Simulator for the PIC16F84
 
 # Windows (required)
 ```bash
-mkdir build # if needed 
-cd build
+# if needed
+# mkdir build 
+# cd build
 cmake -G "MinGW Makefiles" ..
 cmake --build .
 ```
