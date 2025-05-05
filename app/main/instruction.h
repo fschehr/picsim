@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <ostream>
+#include "memory/ram.h"
 
 class Instruction {
 public:
@@ -17,7 +18,7 @@ public:
     OperationCode getOpc() const;
     std::vector<int> getArguments() const;
     std::string getArgumentsAsString() const;
-
+    RamMemory<uint8_t>::Bank getBank() const;
 private:
     OperationCode opc_;
     std::vector<int> arguments_;
