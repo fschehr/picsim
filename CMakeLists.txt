@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 
 # Project name
 project(picsim)
@@ -6,6 +6,9 @@ project(picsim)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 22)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Add ftxui library as a subproject
+add_subdirectory(external/ftxui)
 
 # Add source files
 set(SOURCES
@@ -26,4 +29,13 @@ set(SOURCES
     app/main/exec/instructionex.cpp
     app/main/exec/jumpex.cpp
     app/main/exec/literalex.cpp
+)
+
+add_executable(picsim ${SOURCES})
+
+# Add needed ftxui library stuff
+target_link_libraries(picsim
+    PRIVATE ftxui::screen # screen buffer, where elements (UI) are drawn on
+    PRIVATE ftxui::dom # defines Elements that are drawn on the screen
+    PRIVATE ftxui::component # components allowing user interaction
 )

@@ -1,0 +1,9 @@
+prefix="C:/Program Files (x86)/picsim"
+libdir="C:/Program Files (x86)/picsim/lib"
+includedir="C:/Program Files (x86)/picsim/include"
+
+Name: ftxui
+Description: 
+Version: 6.1.8
+Cflags: -I${includedir}
+Libs: -L${libdir} -lftxui-component -lftxui-dom -lftxui-screen
