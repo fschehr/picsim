@@ -74,7 +74,7 @@ public:
 
     void executeRETLW(const Instruction& instruction) {
         // Restores address of next instruction from stack memory
-        executor.setProgramCounter(executor.stack.pop());
+        executor.setProgramCounter(executor.popStack());
         executor.setWorkingRegister(instruction.getArguments()[0]);
     }
 };

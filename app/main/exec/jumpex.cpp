@@ -13,10 +13,10 @@ public:
 
     void executeCALL(const Instruction& instruction) {
         // Save address of next instruction to stack memory
-        executor.stack.push(executor.getProgramCounter());
+        executor.pushStack(executor.getProgramCounter());
 
         // Consists of the opcode/address given as argument and the upper bits (bit 3 + 4) of PCLATH register
-        int pclathBits = (executor.ram.get(RamMemory<uint8_t>::SFR::PCLATH) & 0b00011000) << 8;
+        int pclathBits = (executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[9].address) & 0b00011000) << 8;
 
         int address = instruction.getArguments()[0]; // Load jump address
         address = address & 2047;                   // Clear upper two bits
@@ -31,7 +31,7 @@ public:
      * @param instruction Instruction consisting of OPC and arguments
      */
     void executeGOTO(const Instruction& instruction) {
-        int pclathBits = (executor.ram.get(RamMemory<uint8_t>::SFR::PCLATH) & 0b00011000) << 8;
+        int pclathBits = (executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[9].address) & 0b00011000) << 8;
 
         int address = instruction.getArguments()[0]; // Load jump address
         address = address & 0b001111111111;          // Clear upper two bits

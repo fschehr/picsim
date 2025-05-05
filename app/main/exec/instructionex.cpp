@@ -180,14 +180,46 @@ public:
         ram.set(EECON1, 0x00);
         ram.set(EECON2, 0x00);
     }
-    int getWorkingRegister() const {
+    int getWorkingRegister() {
         return workingRegister;
     }
     int getProgramCounter() const {
         return programCounter;
     }
-    double getRuntimeCounter() const {
-        return runtimeCounter;
+    bool checkZeroFlag(int value) {
+        return (value & 0xFF) == 0;
+    }
+    bool checkCarryFlag(int value) {
+        return (value & 0x100) != 0;
+    }
+    bool checkDigitCarryFlag(int value) {
+        return (value & 0x10) != 0;
+    }
+    StackMemory<int>& getStack(){
+        return stack;
+    }
+    int getProgramCounter() {
+        return programCounter;
+    }
+
+    //get ram content
+    uint8_t getRamContent(int address) {
+        return ram.get(address);
+    }
+    uint8_t getRamContent(RamMemory<uint8_t>::SFR sfr) const {
+        return ram.get(sfr);
+    }
+    uint8_t getRamContent(int bank, int address) const {
+            // Assuming bank switching is handled externally, calculate the actual address
+            int actualAddress = (bank << 7) | address; // Example: Combine bank and address
+            return ram.get(actualAddress);
+        }
+
+    void pushStack(int value) {
+        stack.push(value);
+    }
+    int popStack() {
+        return stack.pop();
     }
 private:
     void updateRuntimeCounter(int cycles) {
@@ -239,4 +271,5 @@ private:
     void setRuntimeCounter(double value) {
         runtimeCounter = value;
     }
+    
 };

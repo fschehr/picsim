@@ -55,10 +55,18 @@ public:
     void setWorkingRegister(uint8_t value);
     void setRuntimeCounter(double value);
 
+    void pushStack(int value);
+    int popStack();
+
     int getWorkingRegister();
     bool checkZeroFlag(int value);
     bool checkCarryFlag(int value);
     bool checkDigitCarryFlag(int value);
+    int getProgramCounter();
+    StackMemory<int>& getStack();
+    uint8_t getRamContent(int address);
+    uint8_t getRamContent(RamMemory<uint8_t>::SFR sfr) const;
+    uint8_t getRamContent(int bank, int address) const;
 };
 
 #endif // INSTRUCTIONEX_H
