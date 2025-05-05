@@ -4,11 +4,10 @@ cmake_minimum_required(VERSION 3.11)
 project(picsim)
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 22)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add ftxui library as a subproject
-add_subdirectory(external/ftxui)
+add_subdirectory(third_party/ftxui)
 
 # Add source files
 set(SOURCES
@@ -32,7 +31,6 @@ set(SOURCES
     app/main/memory/stack.cpp
     app/main/memory/stack.h
     app/main/memory/watcher.cpp
-    app/main/memory/watcher.h
     app/main/exec/bit.cpp
     app/main/exec/bit.h
     app/main/exec/byte.cpp

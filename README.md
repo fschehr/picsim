@@ -6,6 +6,16 @@ Simulator for the PIC16F84
 - **Decoder**: Decodes instructions into operations.
 - **Simulator VM**: Executes the instructions using a virtual machine.
 
+## Build
+
+# Windows (required)
+```bash
+mkdir build # if needed 
+cd build
+cmake -G "MinGW Makefiles" ..
+cmake --build .
+```
+
 ## Usage
 1. Compile the project using a C++ compiler.
 2. Run the simulator with a `.LST` file as an argument:
