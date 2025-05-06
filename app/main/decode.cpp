@@ -4,8 +4,6 @@
 #include <stdexcept>
 #include <cstdint>
 
-class Decoder {
-public:
     static const int LITERAL_8BIT_MASK = 0b00000011111111;
     static const int LITERAL_OPC_MASK = 0b11111100000000;
     static const int OPERATION_TYPE_MASK = 0b11000000000000;
@@ -20,7 +18,7 @@ public:
     static const int BIT_ADDRESS_OFFSET = 7;
     static const int DESTINATION_BIT_OFFSET = 7;
 
-    Instruction decode(int code) {
+    Instruction Decoder::decode(int code) {
         int operationType = (code & OPERATION_TYPE_MASK) >> OPERATION_TYPE_OFFSET;
 
         switch (operationType) {
@@ -37,7 +35,7 @@ public:
         }
     }
 
-    Instruction decodeByteOrControlOriented(int code) {
+    Instruction Decoder::decodeByteOrControlOriented(int code) {
         // Distinguish between byte-oriented and control operations
         switch (code) {
             case 0x0064:
@@ -98,7 +96,7 @@ public:
         throw std::invalid_argument("Illegal operation type determined");
     }
 
-    Instruction decodeBitOriented(int code) {
+    Instruction Decoder::decodeBitOriented(int code) {
         int bitAddress = (code & BIT_ADDRESS_MASK) >> BIT_ADDRESS_OFFSET;
         int fileAddress = code & FILE_ADDRESS_MASK;
 
@@ -115,7 +113,7 @@ public:
         throw std::invalid_argument("Illegal operation type determined");
     }
 
-    Instruction decodeJumpOriented(int code) {
+    Instruction Decoder::decodeJumpOriented(int code) {
         int address = code & LITERAL_11BIT_MASK;
 
         switch (code & JUMP_OPC_MASK) {
@@ -127,7 +125,7 @@ public:
         throw std::invalid_argument("Illegal operation type determined");
     }
 
-    Instruction decodeLiteralOriented(int code) {
+    Instruction Decoder::decodeLiteralOriented(int code) {
         int literal = code & LITERAL_8BIT_MASK;
 
         switch (code & LITERAL_OPC_MASK) {
@@ -156,7 +154,6 @@ public:
         }
         throw std::invalid_argument("Illegal operation type determined");
     }
-};
 
 int main() {
     Decoder decoder;

@@ -3,14 +3,12 @@
 #include "../memory/ram.h"
 #include <cstdint>
 
-class BitExecution {
-private:
     InstructionExecution& executor;
 
-public:
-    explicit BitExecution(InstructionExecution& executor) : executor(executor) {}
 
-    void executeBCF(const Instruction& instruction) {
+    explicit BitExecution::BitExecution(InstructionExecution& executor) : executor(executor) {}
+
+    void BitExecution::executeBCF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         RamMemory<uint8_t>::Bank bank = executor.getSelectedBank(instruction);
 
@@ -27,7 +25,7 @@ public:
      *
      * @param instruction Instruction consisting of OPC and arguments.
      */
-    void executeBSF(const Instruction& instruction) {
+    void BitExecution::executeBSF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -45,7 +43,7 @@ public:
      *
      * @param instruction Instruction consisting of OPC and arguments.
      */
-    void executeBTFSC(const Instruction& instruction) {
+    void BitExecution::executeBTFSC(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -64,7 +62,7 @@ public:
      *
      * @param instruction Instruction consisting of OPC and arguments.
      */
-    void executeBTFSS(const Instruction& instruction) {
+    void BitExecution::executeBTFSS(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -76,4 +74,3 @@ public:
             executor.setProgramCounter(executor.getProgramCounter() + 1);
         }
     }
-};

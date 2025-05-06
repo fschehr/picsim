@@ -8,6 +8,10 @@
 #include "../instruction.h"
 #include "../decode.h"
 #include <mutex>
+#include "literalex.h"
+#include "jumpex.h"
+#include "byte.h"
+#include "bit.h"
 
 class LiteralExecution;
 class JumpExecution;
@@ -27,10 +31,10 @@ private:
     StackMemory<int>& stack;
     EepromMemory<uint8_t>& eeprom;
 
-    LiteralExecution& literalExecutionUnit;
-    JumpExecution& jumpExecutionUnit;
-    ByteExecution& byteAndControlExecutionUnit;
-    BitExecution& bitExecutionUnit;
+    LiteralExecution literalExecutionUnit;
+    JumpExecution jumpExecutionUnit;
+    ByteExecution byteAndControlExecutionUnit;
+    BitExecution bitExecutionUnit;
 
     std::mutex lock;
     Decoder decoder;
@@ -66,15 +70,15 @@ public:
 
     int getWorkingRegister();
     bool checkZeroFlag(int value);
-    bool checkCarryFlag(int value);
-    bool checkDigitCarryFlag(int value);
+    bool checkCarryFlag(bool condition);
+    bool checkDigitCarryFlag(bool condition);
     int getProgramCounter();
     StackMemory<int>& getStack();
     uint8_t getRamContent(int address);
     uint8_t getRamContent(RamMemory<uint8_t>::SFR sfr) const;
     uint8_t getRamContent(RamMemory<uint8_t>::Bank bank, int address) const;
     int getFileAddress(const Instruction& instruction) const;
-    RamMemory<uint8_t>::Bank getSelectedBank(const Instruction& instruction) const;
+    RamMemory<uint8_t>::Bank getSelectedBank(const Instruction& instruction) ;
     bool isCarryFlag() const;
 };
 

@@ -4,14 +4,11 @@
 #include "../memory/ram.h"
 #include <cstdint>
 
-class LiteralExecution {
-private:
     InstructionExecution& executor;
 
-public:
-    explicit LiteralExecution(InstructionExecution& executor) : executor(executor) {}
+    explicit LiteralExecution::LiteralExecution(InstructionExecution& executor) : executor(executor) {}
 
-    void executeADDLW(const Instruction& instruction) {
+    void LiteralExecution::executeADDLW(const Instruction& instruction) {
         uint8_t argument = instruction.getArguments()[0];
         uint8_t workingRegister = executor.getWorkingRegister();
 
@@ -24,7 +21,7 @@ public:
         executor.setWorkingRegister(static_cast<uint8_t>(result));
     }
 
-    void executeSUBLW(const Instruction& instruction) {
+    void LiteralExecution::executeSUBLW(const Instruction& instruction) {
         uint8_t argument = instruction.getArguments()[0];
         uint8_t workingRegister = executor.getWorkingRegister();
 
@@ -37,7 +34,7 @@ public:
         executor.setWorkingRegister(static_cast<uint8_t>(result));
     }
 
-    void executeANDLW(const Instruction& instruction) {
+    void LiteralExecution::executeANDLW(const Instruction& instruction) {
         uint8_t argument = instruction.getArguments()[0];
         uint8_t workingRegister = executor.getWorkingRegister();
 
@@ -47,12 +44,12 @@ public:
         executor.setWorkingRegister(static_cast<uint8_t>(result));
     }
 
-    void executeMOVLW(const Instruction& instruction) {
+    void LiteralExecution::executeMOVLW(const Instruction& instruction) {
         uint8_t argument = instruction.getArguments()[0];
         executor.setWorkingRegister(argument);
     }
 
-    void executeIORLW(const Instruction& instruction) {
+    void LiteralExecution::executeIORLW(const Instruction& instruction) {
         uint8_t argument = instruction.getArguments()[0];
         uint8_t workingRegister = executor.getWorkingRegister();
 
@@ -62,7 +59,7 @@ public:
         executor.setWorkingRegister(static_cast<uint8_t>(result));
     }
 
-    void executeXORLW(const Instruction& instruction) {
+    void LiteralExecution::executeXORLW(const Instruction& instruction) {
         uint8_t argument = instruction.getArguments()[0];
         uint8_t workingRegister = executor.getWorkingRegister();
 
@@ -72,9 +69,8 @@ public:
         executor.setWorkingRegister(static_cast<uint8_t>(result));
     }
 
-    void executeRETLW(const Instruction& instruction) {
+    void LiteralExecution::executeRETLW(const Instruction& instruction) {
         // Restores address of next instruction from stack memory
         executor.setProgramCounter(executor.popStack());
         executor.setWorkingRegister(instruction.getArguments()[0]);
     }
-};

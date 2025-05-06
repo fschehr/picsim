@@ -1,6 +1,8 @@
 {
     "C_Cpp.default.compilerPath": "c:\\MinGW\\bin\\mingw-get.exe",
     "files.associations": {
+        "*.scan": "rex",
+        "*.pars": "rex",
         "string": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -58,7 +60,12 @@
         "text_encoding": "cpp",
         "thread": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "chrono": "cpp",
+        "csignal": "cpp",
+        "cstdarg": "cpp",
+        "list": "cpp",
+        "iomanip": "cpp"
     },
     "cSpell.words": [
         "picsim"

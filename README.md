@@ -16,6 +16,11 @@ Simulator for the PIC16F84
 cmake -G "MinGW Makefiles" ..
 cmake --build .
 ```
+OR one command:
+```bash
+#be in \picsim
+rmdir build -Recurse -Force; mkdir build; cd build; cmake -G "MinGW Makefiles" ..; cmake --build .
+```
 
 ## Usage
 1. Compile the project using a C++ compiler.

@@ -4,14 +4,11 @@
 #include "../memory/ram.h"
 #include <cstdint>
 
-class JumpExecution {
-private:
     InstructionExecution& executor;
 
-public:
-    explicit JumpExecution(InstructionExecution& executor) : executor(executor) {}
+    explicit JumpExecution::JumpExecution(InstructionExecution& executor) : executor(executor) {}
 
-    void executeCALL(const Instruction& instruction) {
+    void JumpExecution::executeCALL(const Instruction& instruction) {
         // Save address of next instruction to stack memory
         executor.pushStack(executor.getProgramCounter());
 
@@ -30,7 +27,7 @@ public:
      *
      * @param instruction Instruction consisting of OPC and arguments
      */
-    void executeGOTO(const Instruction& instruction) {
+    void JumpExecution::executeGOTO(const Instruction& instruction) {
         int pclathBits = (executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[9].address) & 0b00011000) << 8;
 
         int address = instruction.getArguments()[0]; // Load jump address
@@ -39,4 +36,3 @@ public:
 
         executor.setProgramCounter(address);
     }
-};

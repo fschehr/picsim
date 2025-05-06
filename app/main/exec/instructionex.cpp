@@ -28,8 +28,7 @@ RamMemory<uint8_t>::SFR TRISB = RamMemory<uint8_t>::SFR::entries()[13];
 RamMemory<uint8_t>::SFR EECON1 = RamMemory<uint8_t>::SFR::entries()[14];
 RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
 
-class InstructionExecution {
-private:
+
     // Logger (placeholder for simplicity)
     std::string LOG = "InstructionExecution";
 
@@ -58,14 +57,15 @@ private:
     // Decoder
     Decoder decoder;
 
-public:
-    InstructionExecution(ProgramMemory<uint16_t>& programMemory, RamMemory<uint8_t>& ram,
+    InstructionExecution::InstructionExecution(ProgramMemory<uint16_t>& programMemory, RamMemory<uint8_t>& ram,
                          StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom)
         : programMemory(programMemory), ram(ram), stack(stack), eeprom(eeprom),
           literalExecutionUnit(*this), jumpExecutionUnit(*this),
-          byteAndControlExecutionUnit(*this), bitExecutionUnit(*this) {}
+          byteAndControlExecutionUnit(*this), bitExecutionUnit(*this),
+          workingRegister(0), instructionRegister(0), programCounter(0),
+          runtimeCounter(0.0), frequency(4000000.0) {}
 
-    void init() {
+    void InstructionExecution::init() {
         // Observe RAM memory for detecting reading/writing the EEPROM
         ram.addPropertyChangeListener("ram", [this](int address, uint8_t oldValue, uint8_t newValue) {
             if (address == EECON1.address) {
@@ -82,7 +82,7 @@ public:
         });
     }
 
-    int execute() {
+    int InstructionExecution::execute() {
         std::lock_guard<std::mutex> guard(lock);
 
         try {
@@ -153,7 +153,7 @@ public:
         return programCounter;
     }
 
-    void reset() {
+    void InstructionExecution::reset() {
         setWorkingRegister(0x00);
         setProgramCounter(0x00);
         setInstructionRegister(0x00);
@@ -180,97 +180,97 @@ public:
         ram.set(EECON1, 0x00);
         ram.set(EECON2, 0x00);
     }
-    int getWorkingRegister() {
+    int InstructionExecution::getWorkingRegister() {
         return workingRegister;
     }
-    int getProgramCounter() const {
+    int InstructionExecution::getProgramCounter() {
         return programCounter;
     }
-    bool checkZeroFlag(int value) {
+    bool InstructionExecution::checkZeroFlag(int value) {
         ram.set(STATUS, (value & 0xFF) == 0 ? ram.get(STATUS) | 0x04 : ram.get(STATUS) & ~0x04);
         return (value & 0xFF) == 0;
     }
-    bool checkCarryFlag(bool condition) {
+    bool InstructionExecution::checkCarryFlag(bool condition) {
         ram.set(STATUS, condition ? ram.get(STATUS) | 0x01 : ram.get(STATUS) & ~0x01);
         return condition;
     }
-    bool checkDigitCarryFlag(bool condition) {
+    bool InstructionExecution::checkDigitCarryFlag(bool condition) {
         ram.set(STATUS, condition ? ram.get(STATUS) | 0x02 : ram.get(STATUS) & ~0x02);
         return condition;
     }
-    bool isCarryFlag() const {
+    bool InstructionExecution::isCarryFlag() const {
         return (ram.get(STATUS) & 0x01) != 0;
     }
-    StackMemory<int>& getStack(){
+    StackMemory<int>& InstructionExecution::getStack(){
         return stack;
     }
-    int getProgramCounter() {
+    int InstructionExecution::getProgramCounter() {
         return programCounter;
     }
 
     //get ram content
-    uint8_t getRamContent(int address) {
+    uint8_t InstructionExecution::getRamContent(int address) {
         return ram.get(address);
     }
-    uint8_t getRamContent(RamMemory<uint8_t>::SFR sfr) const {
+    uint8_t InstructionExecution::getRamContent(RamMemory<uint8_t>::SFR sfr) const {
         return ram.get(sfr);
     }
-    uint8_t getRamContent(RamMemory<uint8_t>::Bank bank, int address) const {
+    uint8_t InstructionExecution::getRamContent(RamMemory<uint8_t>::Bank bank, int address) const {
             // Assuming bank switching is handled externally, calculate the actual address
             int actualAddress = (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
             return ram.get(actualAddress);
         }
     //set ram content
-    void setRamContent(RamMemory<uint8_t>::SFR sfr, uint8_t value) {
+    void InstructionExecution::setRamContent(RamMemory<uint8_t>::SFR sfr, uint8_t value) {
         ram.set(sfr, value);
     }
-    void setRamContent(RamMemory<uint8_t>::Bank bank, int address, uint8_t value) {
+    void InstructionExecution::setRamContent(RamMemory<uint8_t>::Bank bank, int address, uint8_t value) {
         // Assuming bank switching is handled externally, calculate the actual address
         int actualAddress = (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
         ram.set(bank, actualAddress, value);
     }
 
-    int getFileAddress(const Instruction& instruction) const {
+    int InstructionExecution::getFileAddress(const Instruction& instruction) const {
         int address = instruction.getArguments()[0];
         RamMemory<uint8_t>::Bank bank = instruction.getBank();
         return (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
     }
-    RamMemory<uint8_t>::Bank getSelectedBank(const Instruction& instruction) {
+    RamMemory<uint8_t>::Bank InstructionExecution::getSelectedBank(const Instruction& instruction) {
         return instruction.getBank();
     }
 
-    void pushStack(int value) {
+    void InstructionExecution::pushStack(int value) {
         stack.push(value);
     }
-    int popStack() {
+    int InstructionExecution::popStack() {
         return stack.pop();
     }
-private:
-    void updateRuntimeCounter(int cycles) {
+
+    void InstructionExecution::updateRuntimeCounter(int cycles) {
         double timePerCycle = 4000000.0 / frequency;
         runtimeCounter += timePerCycle * cycles;
     }
 
-    void updateTimer() {
+    void InstructionExecution::updateTimer() {
         if (ram.get(TMR0) == 0xFF) {
             ram.set(INTCON, ram.get(INTCON) | 4);
         }
         ram.set(TMR0, ram.get(TMR0) + 1);
     }
 
-    bool checkTMR0Interrupt() {
+    bool InstructionExecution::checkTMR0Interrupt() {
         return (ram.get(INTCON) & 0b10100100) == 0xA4;
     }
 
-    bool checkRB0Interrupt() {
+    bool InstructionExecution::checkRB0Interrupt() {
         return (ram.get(INTCON) & 0b10010010) == 0x92;
     }
 
-    bool checkRBInterrupts() {
+    bool InstructionExecution::checkRBInterrupts() {
         return (ram.get(INTCON) & 0b10001001) == 0x89;
     }
 
-    void callISR(int address) {
+    void InstructionExecution::callISR(int address) {
         ram.set(INTCON, ram.get(INTCON) & 0b01111111);
         stack.push(programCounter);
 
@@ -280,20 +280,18 @@ private:
         setProgramCounter(address);
     }
 
-    void setInstructionRegister(uint16_t value) {
+    void InstructionExecution::setInstructionRegister(uint16_t value) {
         instructionRegister = value;
     }
 
-    void setProgramCounter(int value) {
+    void InstructionExecution::setProgramCounter(int value) {
         programCounter = value;
     }
 
-    void setWorkingRegister(uint8_t value) {
+    void InstructionExecution::setWorkingRegister(uint8_t value) {
         workingRegister = value;
     }
 
-    void setRuntimeCounter(double value) {
+    void InstructionExecution::setRuntimeCounter(double value) {
         runtimeCounter = value;
     }
-    
-};

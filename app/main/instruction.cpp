@@ -3,85 +3,39 @@
 #include <sstream>
 #include "instruction.h"
 
+Instruction::Instruction(OperationCode opc, int arguments, int argument2)
+    : opc_(opc), arguments_{arguments, argument2} {}
 
-class Instruction {
-public:
-    enum class OperationCode {
-        // Byte-Oriented file register operations
-        ADDWF,
-        ANDWF,
-        CLRF,
-        CLRW,
-        COMF,
-        DECF,
-        DECFSZ,
-        INCF,
-        INCFSZ,
-        IORWF,
-        MOVF,
-        MOVWF,
-        NOP,
-        RLF,
-        RRF,
-        SUBWF,
-        SWAPF,
-        XORWF,
+Instruction::OperationCode Instruction::getOpc() const {
+    return opc_;
+}
 
-        // Bit-Oriented file register operations
-        BCF,
-        BSF,
-        BTFSC,
-        BTFSS,
+std::vector<int> Instruction::getArguments() const {
+    return arguments_;
+}
 
-        // Literal and control operations
-        ADDLW,
-        ANDLW,
-        CALL,
-        CLRWDT,
-        GOTO,
-        IORLW,
-        MOVLW,
-        RETFIE,
-        RETLW,
-        RETURN,
-        SLEEP,
-        SUBLW,
-        XORLW,
-    };
-
-    Instruction(OperationCode opc, int arguments = 0, int argument2 = 0) 
-        : opc_(opc), arguments_{arguments, argument2} {}
-
-    OperationCode getOpc() const { return opc_; }
-
-    std::vector<int> getArguments() const { return arguments_; }
-
-    std::string getArgumentsAsString() const {
-        std::ostringstream oss;
-        oss << "[";
-        for (size_t i = 0; i < arguments_.size(); ++i) {
-            oss << arguments_[i];
-            if (i < arguments_.size() - 1) {
-                oss << ", ";
-            }
+std::string Instruction::getArgumentsAsString() const {
+    std::ostringstream oss;
+    oss << "[";
+    for (size_t i = 0; i < arguments_.size(); ++i) {
+        oss << arguments_[i];
+        if (i < arguments_.size() - 1) {
+            oss << ", ";
         }
-        oss << "]";
-        return oss.str();
     }
+    oss << "]";
+    return oss.str();
+}
 
-    RamMemory<uint8_t>::Bank getBank() const {
-        if (opc_ == OperationCode::MOVF || opc_ == OperationCode::MOVWF) {
-            return RamMemory<uint8_t>::Bank::BANK_0;
-        } else if (opc_ == OperationCode::ADDLW || opc_ == OperationCode::ANDLW || opc_ == OperationCode::IORLW ||
-                   opc_ == OperationCode::SUBLW || opc_ == OperationCode::XORLW) {
-            return RamMemory<uint8_t>::Bank::BANK_1;
-        }
-        return RamMemory<uint8_t>::Bank::BANK_0; // Default case
+RamMemory<uint8_t>::Bank Instruction::getBank() const {
+    if (opc_ == OperationCode::MOVF || opc_ == OperationCode::MOVWF) {
+        return RamMemory<uint8_t>::Bank::BANK_0;
+    } else if (opc_ == OperationCode::ADDLW || opc_ == OperationCode::ANDLW || opc_ == OperationCode::IORLW ||
+               opc_ == OperationCode::SUBLW || opc_ == OperationCode::XORLW) {
+        return RamMemory<uint8_t>::Bank::BANK_1;
     }
-private:
-    OperationCode opc_;
-    std::vector<int> arguments_;
-};
+    return RamMemory<uint8_t>::Bank::BANK_0; // Default case
+}
 
 std::ostream& operator<<(std::ostream& os, Instruction::OperationCode opc) {
     switch (opc) {

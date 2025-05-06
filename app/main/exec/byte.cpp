@@ -4,14 +4,11 @@
 #include "../memory/ram.h"
 #include <cstdint>
 
-class ByteExecution {
-private:
     InstructionExecution& executor;
 
-public:
-    explicit ByteExecution(InstructionExecution& executor) : executor(executor) {}
+    explicit ByteExecution::ByteExecution(InstructionExecution& executor) : executor(executor) {}
 
-    void executeADDWF(const Instruction& instruction) {
+    void ByteExecution::executeADDWF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -29,7 +26,7 @@ public:
         }
     }
 
-    void executeANDWF(const Instruction& instruction) {
+    void ByteExecution::executeANDWF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -45,7 +42,7 @@ public:
         }
     }
 
-    void executeXORWF(const Instruction& instruction) {
+    void ByteExecution::executeXORWF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         RamMemory<uint8_t>::Bank bank = executor.getSelectedBank(instruction);
 
@@ -61,7 +58,7 @@ public:
         }
     }
 
-    void executeSUBWF(const Instruction& instruction) {
+    void ByteExecution::executeSUBWF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -79,23 +76,23 @@ public:
         }
     }
 
-    void executeCLRW() {
+    void ByteExecution::executeCLRW() {
         executor.setWorkingRegister(0x00);
         executor.setZeroFlag();
     }
 
-    void executeRETURN() {
+    void ByteExecution::executeRETURN() {
         executor.setProgramCounter(executor.popStack());
     }
 
-    void executeMOVWF(const Instruction& instruction) {
+    void ByteExecution::executeMOVWF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
         executor.setRamContent(bank, address, executor.getWorkingRegister());
     }
 
-    void executeCLRF(const Instruction& instruction) {
+    void ByteExecution::executeCLRF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -103,7 +100,7 @@ public:
         executor.setZeroFlag();
     }
 
-    void executeCOMF(const Instruction& instruction) {
+    void ByteExecution::executeCOMF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -119,7 +116,7 @@ public:
         }
     }
 
-    void executeDECF(const Instruction& instruction) {
+    void ByteExecution::executeDECF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -135,7 +132,7 @@ public:
         }
     }
 
-    void executeINCF(const Instruction& instruction) {
+    void ByteExecution::executeINCF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -151,7 +148,7 @@ public:
         }
     }
 
-    void executeMOVF(const Instruction& instruction) {
+    void ByteExecution::executeMOVF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -166,7 +163,7 @@ public:
         }
     }
 
-    void executeIORWF(const Instruction& instruction) {
+    void ByteExecution::executeIORWF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -182,7 +179,7 @@ public:
         }
     }
 
-    void executeDECFSZ(const Instruction& instruction) {
+    void ByteExecution::executeDECFSZ(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -200,7 +197,7 @@ public:
         }
     }
 
-    void executeINCFSZ(const Instruction& instruction) {
+    void ByteExecution::executeINCFSZ(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -218,7 +215,7 @@ public:
         }
     }
 
-    void executeRLF(const Instruction& instruction) {
+    void ByteExecution::executeRLF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -235,7 +232,7 @@ public:
         }
     }
 
-    void executeRRF(const Instruction& instruction) {
+    void ByteExecution::executeRRF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -252,11 +249,11 @@ public:
         }
     }
 
-    void executeNOP() {
+    void ByteExecution::executeNOP() {
         // No operation
     }
 
-    void executeSWAPF(const Instruction& instruction) {
+    void ByteExecution::executeSWAPF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -270,8 +267,7 @@ public:
         }
     }
 
-    void executeRETFIE(const Instruction& instruction) {
+    void ByteExecution::executeRETFIE(const Instruction& instruction) {
         executor.setRamContent(RamMemory<uint8_t>::SFR::entries()[10], executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[10]) | 0x80);
         executor.setProgramCounter(executor.popStack());
     }
-};
