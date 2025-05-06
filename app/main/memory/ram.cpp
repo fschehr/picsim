@@ -1,7 +1,7 @@
 #include "ram.h"
 #include <stdexcept>
 template <typename T>
-RamMemory<T>::SFR RamMemory<T>::SFR::valueOf(Bank bank, int address) {
+typename RamMemory<T>::SFR RamMemory<T>::SFR::valueOf(Bank bank, int address) {
     for (const auto& sfr : entries()) {
         if ((sfr.mapped && address == sfr.address) || (sfr.bank == bank && address == sfr.address)) {
             return sfr;
@@ -10,6 +10,7 @@ RamMemory<T>::SFR RamMemory<T>::SFR::valueOf(Bank bank, int address) {
     throw std::invalid_argument("No such address found");
 }
 
+template <>
 const std::vector<RamMemory<int>::SFR>& RamMemory<int>::SFR::entries() {
     static const std::vector<SFR> sfrEntries = {
         {Bank::BANK_0, 0x00, true},  // INDF
@@ -31,8 +32,8 @@ const std::vector<RamMemory<int>::SFR>& RamMemory<int>::SFR::entries() {
     };
     return sfrEntries;
 }
-
-RamMemory<int>::RamMemory(int BANK_SIZE) : bank0(BANK_SIZE), bank1(BANK_SIZE) {}
+template <typename T>
+RamMemory<T>::RamMemory(int BANK_SIZE) : bank0(BANK_SIZE), bank1(BANK_SIZE) {}
 
 template <typename T>
 void RamMemory<T>::addPropertyChangeListener(const std::string& propertyName, std::function<void(int, T, T)> listener) {
@@ -96,8 +97,8 @@ T RamMemory<T>::get(const SFR &sfr) const
 {
     return get(sfr.bank, sfr.address);
 }
-
-void RamMemory<int>::firePropertyChange(const std::string& propertyName, int index, int oldValue, int newValue) {
+template <typename T>
+void RamMemory<T>::firePropertyChange(const std::string& propertyName, int index, T oldValue, T newValue) {
     if (propertyChangeListeners.find(propertyName) != propertyChangeListeners.end()) {
         propertyChangeListeners[propertyName](index, oldValue, newValue);
     }

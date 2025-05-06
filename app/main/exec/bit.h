@@ -8,11 +8,10 @@ class InstructionExecution;
 
 class BitExecution {
 private:
-    InstructionExecution& executor;
+    InstructionExecution& executor; // Reference to InstructionExecution
 
 public:
     explicit BitExecution(InstructionExecution& executor);
-
     void executeBCF(const Instruction& instruction);
     void executeBSF(const Instruction& instruction);
     void executeBTFSC(const Instruction& instruction);

@@ -3,10 +3,7 @@
 #include "../memory/ram.h"
 #include <cstdint>
 
-    InstructionExecution& executor;
-
-
-    explicit BitExecution::BitExecution(InstructionExecution& executor) : executor(executor) {}
+    BitExecution::BitExecution(InstructionExecution& executor) : executor(executor) {}
 
     void BitExecution::executeBCF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);
