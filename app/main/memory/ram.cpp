@@ -1,7 +1,7 @@
 #include "ram.h"
 #include <stdexcept>
-
-RamMemory<int>::SFR RamMemory<int>::SFR::valueOf(Bank bank, int address) {
+template <typename T>
+RamMemory<T>::SFR RamMemory<T>::SFR::valueOf(Bank bank, int address) {
     for (const auto& sfr : entries()) {
         if ((sfr.mapped && address == sfr.address) || (sfr.bank == bank && address == sfr.address)) {
             return sfr;
@@ -34,17 +34,19 @@ const std::vector<RamMemory<int>::SFR>& RamMemory<int>::SFR::entries() {
 
 RamMemory<int>::RamMemory(int BANK_SIZE) : bank0(BANK_SIZE), bank1(BANK_SIZE) {}
 
-void RamMemory<int>::addPropertyChangeListener(const std::string& propertyName, std::function<void(int, int, int)> listener) {
+template <typename T>
+void RamMemory<T>::addPropertyChangeListener(const std::string& propertyName, std::function<void(int, T, T)> listener) {
     std::lock_guard<std::mutex> lock(mutex);
     propertyChangeListeners[propertyName] = listener;
 }
-
-void RamMemory<int>::removePropertyChangeListener(const std::string& propertyName) {
+template <typename T>
+void RamMemory<T>::removePropertyChangeListener(const std::string& propertyName) {
     std::lock_guard<std::mutex> lock(mutex);
     propertyChangeListeners.erase(propertyName);
 }
 
-int RamMemory<int>::get(int address) const {
+template <typename T>
+T RamMemory<T>::get(int address) const {
     std::lock_guard<std::mutex> lock(mutex);
     if (address < 0 || address >= bank0.size() * 2) {
         throw std::out_of_range("Address isn't implemented");
@@ -52,7 +54,8 @@ int RamMemory<int>::get(int address) const {
     return (address < bank0.size()) ? bank0[address] : bank1[address - bank0.size()];
 }
 
-int RamMemory<int>::get(Bank bank, int address) const {
+template <typename T>
+T RamMemory<T>::get(Bank bank, int address) const {
     std::lock_guard<std::mutex> lock(mutex);
     if (address < 0 || address >= bank0.size()) {
         throw std::out_of_range("Address isn't implemented");
@@ -88,8 +91,8 @@ void RamMemory<T>::set(const SFR &sfr, const T &value) {
 }
 
 
-
-int RamMemory<int>::get(const SFR &sfr) const
+template <typename T>
+T RamMemory<T>::get(const SFR &sfr) const
 {
     return get(sfr.bank, sfr.address);
 }
