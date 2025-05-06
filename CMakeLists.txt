@@ -35,7 +35,6 @@ set(SOURCES
     app/main/exec/bit.h
     app/main/exec/byte.cpp
     app/main/exec/byte.h
-    app/main/exec/exwatcher.cpp
     app/main/exec/exwatcher.h
     app/main/exec/instructionex.cpp
     app/main/exec/instructionex.h
