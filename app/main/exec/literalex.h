@@ -10,7 +10,7 @@ private:
     InstructionExecution& executor;
 
 public:
-    explicit LiteralExecution(InstructionExecution& executor);
+    LiteralExecution(InstructionExecution& executor);
 
     void executeADDLW(const Instruction& instruction);
     void executeSUBLW(const Instruction& instruction);

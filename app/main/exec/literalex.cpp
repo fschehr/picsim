@@ -4,9 +4,7 @@
 #include "../memory/ram.h"
 #include <cstdint>
 
-    InstructionExecution& executor;
-
-    explicit LiteralExecution::LiteralExecution(InstructionExecution& executor) : executor(executor) {}
+    LiteralExecution::LiteralExecution(InstructionExecution& executor) : executor(executor) {}
 
     void LiteralExecution::executeADDLW(const Instruction& instruction) {
         uint8_t argument = instruction.getArguments()[0];

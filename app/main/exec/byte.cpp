@@ -4,9 +4,7 @@
 #include "../memory/ram.h"
 #include <cstdint>
 
-    InstructionExecution& executor;
-
-    explicit ByteExecution::ByteExecution(InstructionExecution& executor) : executor(executor) {}
+    ByteExecution::ByteExecution(InstructionExecution& executor) : executor(executor) {}
 
     void ByteExecution::executeADDWF(const Instruction& instruction) {
         int address = executor.getFileAddress(instruction);

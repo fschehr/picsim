@@ -47,3 +47,5 @@ void EepromMemory<T>::firePropertyChange(const std::string& propertyName, int in
         propertyChangeListeners[propertyName](index, oldValue, newValue);
     }
 }
+
+template class EepromMemory<uint8_t>;

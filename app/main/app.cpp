@@ -4,11 +4,11 @@
 #include <stdexcept>
 #include "pars.h"
 #include "simvm.h"
-#include <ftxui/dom/elements.hpp>
-#include <ftxui/screen/screen.hpp>
+//#include <ftxui/dom/elements.hpp>
+//#include <ftxui/screen/screen.hpp>
 
 int main(int argc, char* argv[]) {
-    using namespace ftxui;
+    //using namespace ftxui;
 
     std::string fileName;
     if (argc > 1) {
@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 
     // ui
 
-    // 
+    /*
     Element document = hbox({
         text("left")   | border,
         text("middle") | border | flex,
@@ -52,4 +52,5 @@ int main(int argc, char* argv[]) {
     screen.Print();
 
     return 0;
+    */
 }

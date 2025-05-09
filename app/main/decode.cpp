@@ -155,12 +155,4 @@
         throw std::invalid_argument("Illegal operation type determined");
     }
 
-int main() {
-    Decoder decoder;
-    int code = 0x0064; // Example code
-    Instruction instruction = decoder.decode(code);
-    std::cout << "Decoded instruction: " << instruction.getOpc() << std::endl;
-    return 0;
-}
-
 

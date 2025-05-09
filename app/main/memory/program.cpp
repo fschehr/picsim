@@ -50,3 +50,5 @@ void ProgramMemory<T>::firePropertyChange(const std::string& propertyName, int i
         propertyChangeListeners[propertyName](index, oldValue, newValue);
     }
 }
+
+template class ProgramMemory<uint16_t>;

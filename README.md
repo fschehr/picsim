@@ -19,7 +19,7 @@ cmake --build .
 OR one command:
 ```bash
 #be in \picsim
-rmdir build -Recurse -Force; mkdir build; cd build; cmake -G "MinGW Makefiles" ..; cmake --build .
+rmdir build -Recurse -Force; mkdir build; cd build; cmake -G "MinGW Makefiles" ..; cmake --build . ; cd ..
 ```
 
 ## Usage

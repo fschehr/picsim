@@ -10,7 +10,7 @@ private:
     InstructionExecution& executor;
 
 public:
-    explicit JumpExecution(InstructionExecution& executor);
+    JumpExecution(InstructionExecution& executor);
 
     void executeCALL(const Instruction& instruction);
     void executeGOTO(const Instruction& instruction);

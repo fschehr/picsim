@@ -29,41 +29,20 @@ RamMemory<uint8_t>::SFR EECON1 = RamMemory<uint8_t>::SFR::entries()[14];
 RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
 
 
-    // Logger (placeholder for simplicity)
-    std::string LOG = "InstructionExecution";
-
-    // Registers and counters
-    uint8_t workingRegister = 0;
-    uint16_t instructionRegister = 0;
-    int programCounter = 0;
-    double runtimeCounter = 0.0;
-    double frequency = 4000000.0;
-
-    // Memory components
-    ProgramMemory<uint16_t>& programMemory;
-    RamMemory<uint8_t>& ram;
-    StackMemory<int>& stack;
-    EepromMemory<uint8_t>& eeprom;
-
-    // ALU components
-    LiteralExecution literalExecutionUnit;
-    JumpExecution jumpExecutionUnit;
-    ByteExecution byteAndControlExecutionUnit;
-    BitExecution bitExecutionUnit;
-
-    // Synchronization
-    std::mutex lock;
-
-    // Decoder
-    Decoder decoder;
-
     InstructionExecution::InstructionExecution(ProgramMemory<uint16_t>& programMemory, RamMemory<uint8_t>& ram,
-                         StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom)
+                                               StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom)
         : programMemory(programMemory), ram(ram), stack(stack), eeprom(eeprom),
-          literalExecutionUnit(*this), jumpExecutionUnit(*this),
-          byteAndControlExecutionUnit(*this), bitExecutionUnit(*this),
-          workingRegister(0), instructionRegister(0), programCounter(0),
-          runtimeCounter(0.0), frequency(4000000.0) {}
+          literalExecutionUnit(*this), 
+          jumpExecutionUnit(*this),
+          byteAndControlExecutionUnit(*this), 
+          bitExecutionUnit(*this),
+          workingRegister(0), 
+          instructionRegister(0), 
+          programCounter(0),
+          runtimeCounter(0.0), 
+          frequency(4000000.0) 
+    {
+    }
 
     void InstructionExecution::init() {
         // Observe RAM memory for detecting reading/writing the EEPROM
@@ -204,9 +183,6 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     StackMemory<int>& InstructionExecution::getStack(){
         return stack;
     }
-    int InstructionExecution::getProgramCounter() {
-        return programCounter;
-    }
 
     //get ram content
     uint8_t InstructionExecution::getRamContent(int address) {
@@ -294,4 +270,9 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
 
     void InstructionExecution::setRuntimeCounter(double value) {
         runtimeCounter = value;
+    }
+
+    void InstructionExecution::setZeroFlag() {
+        uint8_t status = ram.get(STATUS);
+        ram.set(STATUS, (status | 0x04));
     }

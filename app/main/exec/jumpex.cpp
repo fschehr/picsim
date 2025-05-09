@@ -4,9 +4,7 @@
 #include "../memory/ram.h"
 #include <cstdint>
 
-    InstructionExecution& executor;
-
-    explicit JumpExecution::JumpExecution(InstructionExecution& executor) : executor(executor) {}
+    JumpExecution::JumpExecution(InstructionExecution& executor) : executor(executor) {}
 
     void JumpExecution::executeCALL(const Instruction& instruction) {
         // Save address of next instruction to stack memory

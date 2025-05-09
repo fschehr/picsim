@@ -32,6 +32,30 @@ const std::vector<RamMemory<int>::SFR>& RamMemory<int>::SFR::entries() {
     };
     return sfrEntries;
 }
+
+template <>
+const std::vector<RamMemory<uint8_t>::SFR>& RamMemory<uint8_t>::SFR::entries() {
+    static const std::vector<SFR> sfrEntries = {
+        {Bank::BANK_0, 0x00, true},  // INDF
+        {Bank::BANK_0, 0x01, false}, // TMR0
+        {Bank::BANK_0, 0x02, true},  // PCL
+        {Bank::BANK_0, 0x03, true},  // STATUS
+        {Bank::BANK_0, 0x04, true},  // FSR
+        {Bank::BANK_0, 0x05, false}, // PORTA
+        {Bank::BANK_0, 0x06, false}, // PORTB
+        {Bank::BANK_0, 0x08, false}, // EEDATA
+        {Bank::BANK_0, 0x09, false}, // EEADR
+        {Bank::BANK_0, 0x0A, true},  // PCLATH
+        {Bank::BANK_0, 0x0B, true},  // INTCON
+        {Bank::BANK_1, 0x01, false}, // OPTION
+        {Bank::BANK_1, 0x05, false}, // TRISA
+        {Bank::BANK_1, 0x06, false}, // TRISB
+        {Bank::BANK_1, 0x08, false}, // EECON1
+        {Bank::BANK_1, 0x09, false}, // EECON2
+    };
+    return sfrEntries;
+}
+
 template <typename T>
 RamMemory<T>::RamMemory(int BANK_SIZE) : bank0(BANK_SIZE), bank1(BANK_SIZE) {}
 
@@ -103,3 +127,5 @@ void RamMemory<T>::firePropertyChange(const std::string& propertyName, int index
         propertyChangeListeners[propertyName](index, oldValue, newValue);
     }
 }
+
+template class RamMemory<uint8_t>;

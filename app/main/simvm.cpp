@@ -10,6 +10,11 @@
 #include <stdexcept>
 #include <string>
 
+template class RamMemory<uint8_t>;
+template class ProgramMemory<uint16_t>;
+template class StackMemory<int>;
+template class EepromMemory<uint8_t>;
+
 ConcreteInstruction::ConcreteInstruction(Instruction::OperationCode opc, const std::string& arguments)
     : Instruction(opc), arguments(arguments) {}
 

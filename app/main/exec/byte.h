@@ -11,7 +11,7 @@ private:
     InstructionExecution& executor;
 
 public:
-    explicit ByteExecution(InstructionExecution& executor);
+    ByteExecution(InstructionExecution& executor);
 
     void executeADDWF(const Instruction& instruction);
     void executeANDWF(const Instruction& instruction);
