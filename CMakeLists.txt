@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 3.11)
 # Project name
 project(picsim)
 
-set(CMAKE_EXECUTABLE_SUFFIX ".out")
+#let cmake turn it into an .out file, else: exe
+#set(CMAKE_EXECUTABLE_SUFFIX ".out")
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)

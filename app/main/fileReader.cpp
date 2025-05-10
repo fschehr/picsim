@@ -15,8 +15,7 @@ void Logger::warning(const std::string& message) {
 std::vector<std::string> FileReader::read(const std::string& filePath) {
     try {
         Logger::info("Reading file");
-        std::string resourcePath = "../testprogs" + filePath;
-        std::ifstream file(resourcePath);
+        std::ifstream file(filePath);
         if (!file.is_open()) {
             throw std::runtime_error("Datei kann nicht geffnet werden");
         }

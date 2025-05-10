@@ -32,6 +32,7 @@ int main(int argc, char* argv[]) {
         vm.initialize(lines);
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
+        std::cin.get(); // Wait for user input before closing
         return 1;
     }
 
@@ -50,7 +51,10 @@ int main(int argc, char* argv[]) {
     );
     Render(screen, document);
     screen.Print();
-
-    return 0;
     */
+
+    
+    std::cin.get(); // Wait for user input before closing
+    return 0;
+   
 }
