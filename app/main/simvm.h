@@ -9,6 +9,7 @@
 #include "memory/eeprom.h"
 #include "decode.h"
 #include "exec/instructionex.h"
+#include "logger.h"
 
 class ConcreteInstruction : public Instruction {
 public:

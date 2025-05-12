@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdexcept>
 #include <mutex>
+#include "../logger.h"
 
 template <typename T>
 class StackMemory {

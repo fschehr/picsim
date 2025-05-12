@@ -3,12 +3,7 @@
 
 #include <string>
 #include <vector>
-
-class Logger {
-public:
-    static void info(const std::string& message);
-    static void warning(const std::string& message);
-};
+#include "logger.h"
 
 class FileReader {
 public:

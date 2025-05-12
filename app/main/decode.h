@@ -2,6 +2,7 @@
 #define DECODE_H
 
 #include "instruction.h"
+#include "logger.h"
 
 class Decoder {
 public:

@@ -3,6 +3,7 @@
 
 #include "../instruction.h"
 #include "../memory/ram.h"
+#include "../logger.h"
 
 class InstructionExecution;
 
