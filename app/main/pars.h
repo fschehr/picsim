@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "logger.h"
 
 class Parser {
 public:

@@ -9,6 +9,8 @@
 #include <vector>
 #include <stdexcept>
 #include <string>
+#include <thread>
+#include <chrono>
 
 template class RamMemory<uint8_t>;
 template class ProgramMemory<uint16_t>;
@@ -16,10 +18,10 @@ template class StackMemory<int>;
 template class EepromMemory<uint8_t>;
 
 ConcreteInstruction::ConcreteInstruction(Instruction::OperationCode opc, const std::string& arguments)
-    : Instruction(opc), arguments(arguments) {}
+    : Instruction(opc, {}), arguments(arguments) {}
 
 ConcreteInstruction::ConcreteInstruction(Instruction inst)
-    : Instruction(inst.getOpc()), arguments(inst.getArgumentsAsString()) {}
+    : Instruction(inst.getOpc(), inst.getArguments()), arguments(inst.getArgumentsAsString()) {}
 
 Instruction::OperationCode ConcreteInstruction::getConcOpc() {
     return this->getOpc();
@@ -31,10 +33,12 @@ std::string ConcreteInstruction::getConcArguments() {
 
 PicSimulatorVM::PicSimulatorVM()
     : ram(ramBankSize), program(programMemorySize), stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {
+    Logger::info("Simulator constructed");
     programMemory.resize(programMemorySize, nullptr);
 }
 
 PicSimulatorVM::~PicSimulatorVM() {
+    Logger::info("Simulator destructed");
     for (Instruction* instruction : programMemory) {
         delete instruction;
     }
@@ -45,6 +49,7 @@ void PicSimulatorVM::initialize(const std::vector<short>& prog) {
     load(prog);
     while (running) {
         execute();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500)); // sleep for 500ms
     }
 }
 
@@ -77,7 +82,7 @@ void PicSimulatorVM::load(const std::vector<short>& file) {
     for (size_t address = 0; address < file.size(); address++) {
         program.set(address, file[address]);
     }
-
+    loaded = true;
     start();
     executor.reset();
 }

@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include <mutex>
+#include "../logger.h"
 
 template <typename T>
 class RamMemory {

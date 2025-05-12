@@ -27,6 +27,8 @@ set(SOURCES
     app/main/fileReader.h
     app/main/instruction.cpp
     app/main/instruction.h
+    app/main/logger.cpp
+    app/main/logger.h
     app/main/memory/eeprom.cpp
     app/main/memory/eeprom.h
     app/main/memory/program.cpp

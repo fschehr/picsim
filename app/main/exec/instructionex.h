@@ -12,6 +12,7 @@
 #include "jumpex.h"
 #include "byte.h"
 #include "bit.h"
+#include "../logger.h"
 
 class LiteralExecution;
 class JumpExecution;
