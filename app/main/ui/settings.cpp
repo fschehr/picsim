@@ -1,0 +1,49 @@
+#include <ftxui/dom/elements.hpp>
+#include <ftxui/component/component.hpp>
+
+#include "settings_window/registers.cpp"
+#include "settings_window/ioPins.cpp"
+#include "settings_window/cycles.cpp"
+#include "settings_window/flags.cpp"
+#include "settings_window/stack.cpp"
+
+ftxui::Component Settings() {
+    using namespace ftxui;
+
+    auto registersComponent = Registers();
+    auto ioPinsComponent = IoPins();
+    auto cyclesComponent = Cycles();
+    auto flagsComponent = Flags();
+    auto stackComponent = Stack();
+
+    auto container = Container::Vertical({
+        registersComponent,
+        ioPinsComponent,
+        cyclesComponent,
+        flagsComponent,
+        stackComponent
+    });
+
+    auto settings_renderer = Renderer(container, [
+        registersComponent,
+        ioPinsComponent,
+        cyclesComponent,
+        flagsComponent,
+        stackComponent
+    ] {
+        return window(
+            text(" Settings "),
+            center(
+                vbox({
+                    registersComponent->Render() | flex,
+                    ioPinsComponent->Render() | flex,
+                    cyclesComponent->Render() | flex,
+                    flagsComponent->Render() | flex,
+                    stackComponent->Render() | flex,
+                })
+            )
+        );
+    });
+
+    return settings_renderer;
+}
