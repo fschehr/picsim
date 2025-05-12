@@ -65,7 +65,8 @@
         "csignal": "cpp",
         "cstdarg": "cpp",
         "list": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "xstring": "cpp"
     },
     "cSpell.words": [
         "picsim"
