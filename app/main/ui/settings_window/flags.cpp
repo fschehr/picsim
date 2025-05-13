@@ -19,16 +19,17 @@ ftxui::Component Flags() {
     auto flags_renderer = Renderer([&] {
         auto table = Table({
             {
-                text("Z"),
-                text("DC"),
-                text("C"),
+                text("Z") | center | flex,
+                text("DC") | center | flex,
+                text("C") | center | flex,
             },
             {
-                text(zFlagSet ? "1" : "0"),
-                text(dcFlagSet ? "1" : "0"),
-                text(cFlagSet ? "1" : "0"),}
+                text(zFlagSet ? "1" : "0") | flex,
+                text(dcFlagSet ? "1" : "0") | flex,
+                text(cFlagSet ? "1" : "0") | flex,
+            }
         });
-    
+        
         table.SelectRow(0).Border(DOUBLE);
         table.SelectRow(0).SeparatorVertical(LIGHT);
         
@@ -36,9 +37,7 @@ ftxui::Component Flags() {
 
         return window(
             text(" Flags "),
-            center(
-                table.Render() | flex
-            )
+            table.Render() | flex
         );
     });
 

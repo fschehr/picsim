@@ -7,6 +7,11 @@
 #include "settings_window/flags.cpp"
 #include "settings_window/stack.cpp"
 
+/**
+ * @brief Creates the Settings component.
+ * 
+ * @return ftxui::Component The Settings component.
+ */
 ftxui::Component Settings() {
     using namespace ftxui;
 
@@ -34,14 +39,18 @@ ftxui::Component Settings() {
         return window(
             text(" Settings "),
             vbox({
-                registersComponent->Render() | xflex,
-                ioPinsComponent->Render() | xflex,
-                cyclesComponent->Render() | xflex,
-                hbox({
-                    flagsComponent->Render() | xflex,
-                    stackComponent->Render() | xflex,
-                }) | xflex
-            }) | xflex
+                filler(),
+                vbox({
+                    registersComponent->Render() | xflex,
+                    ioPinsComponent->Render() | xflex,
+                    cyclesComponent->Render() | xflex,
+                    hbox({
+                        flagsComponent->Render() | xflex,
+                        stackComponent->Render() | xflex,
+                    }) | xflex
+                }) | xflex,
+                filler()
+            }) | flex
         ) | flex;
     });
 
