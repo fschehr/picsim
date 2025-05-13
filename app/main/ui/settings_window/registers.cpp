@@ -9,8 +9,8 @@ ftxui::Component StatusRegisterColumn(std::string columnName) {
     
     auto column = Renderer(button, [button, columnName] {
         return vbox({
-            text(columnName) | center,
-            button->Render() | center
+            text(columnName) | center | flex,
+            button->Render() | center | flex
         });
     });
 
@@ -32,42 +32,73 @@ ftxui::Component StatusRegister() {
     
     // Kombiniere alle Spalten horizontal
     auto all_columns = Container::Horizontal({
-        col_irp, col_rp1, col_rp0, col_to, col_pd, col_z, col_dc, col_c
-    });
+        col_irp | xflex,
+        col_rp1 | xflex,
+        col_rp0 | xflex,
+        col_to | xflex,
+        col_pd | xflex,
+        col_z | xflex,
+        col_dc | xflex,
+        col_c | xflex
+    }) | xflex;
     
-    // Erstelle den Renderer für das gesamte Status-Register
+    // Erstelle den Renderer für das gesamte Status-Register mit flex, um volle Breite zu nutzen
     auto statusRegisters_renderer = Renderer(all_columns, [all_columns] {
         return vbox({
-            text("Status Register") | center,
-            all_columns->Render() | flex
-        });
+            text("Status Register") | center | bgcolor(Color::Aquamarine1) | color(Color::Black),
+            text(" ") | center,
+            all_columns->Render() | xflex
+        }) | xflex;
     });
 
     return statusRegisters_renderer;
+}
+
+ftxui::Component WRegister() {
+    using namespace ftxui;
+
+    auto wRegister_renderer = Renderer([] {
+        return vbox({
+            text("W Register") | center | bgcolor(Color::SeaGreen1) | color(Color::Black),
+            text(" ") | center,
+            hbox({
+                text("0") | center | xflex,
+                text("0") | center | xflex,
+                text("0") | center | xflex,
+                text("0") | center | xflex,
+                text("0") | center | xflex,
+                text("0") | center | xflex,
+                text("0") | center | xflex,
+                text("0") | center | xflex
+            }) | xflex
+        });
+    });
+
+    return wRegister_renderer;
 }
 
 ftxui::Component Registers() {
     using namespace ftxui;
 
     auto StatusRegisterComponent = StatusRegister();
-    // auto WRegisterComponent = WRegister();
+    auto WRegisterComponent = WRegister();
 
     auto container = Container::Vertical({
         StatusRegisterComponent,
-        // WRegisterComponent,
+        WRegisterComponent,
     });
 
     auto registers_renderer = Renderer(container, [
-        StatusRegisterComponent
-        // WRegisterComponent
+        StatusRegisterComponent,
+        WRegisterComponent
     ] {
         return window(
             text(" Registers "),
             vbox({
-                StatusRegisterComponent->Render() | flex | center,
+                StatusRegisterComponent->Render() | flex,  // Entferne center, um volle Breite zu nutzen
                 separatorDashed(),
-                // WRegisterComponent->Render() | flex,
-            })
+                WRegisterComponent->Render() | flex,
+            }) | xflex
         );
     });
 

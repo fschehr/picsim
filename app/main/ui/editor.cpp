@@ -37,7 +37,7 @@ ftxui::Component EditorLine(const std::string &line, int lineNumber, bool *break
         Element lineElement = text(lineCopy);
 
         if (*breakpointState) {
-            lineElement = lineElement | bgcolor(Color::Red);
+            lineElement = lineElement | bgcolor(Color::RedLight) | color(Color::Black);
         }
 
         return lineElement | flex;
@@ -62,7 +62,7 @@ ftxui::Component Editor(const std::string &filePath, const std::vector<std::stri
 
     auto breakpointStates = std::make_shared<std::vector<BoolWrapper>>(fileLines.size());
     std::fill(breakpointStates->begin(), breakpointStates->end(), BoolWrapper{false});
-    
+
     for(size_t i = 0; i < breakpointStates->size(); ++i) {
        if ((*breakpointStates)[i].value) {
            std::cerr << "DEBUG: breakpointStates->at(" << i << ").value ist TRUE nach Initialisierung." << std::endl;

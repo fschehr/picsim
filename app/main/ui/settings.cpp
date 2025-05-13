@@ -34,15 +34,15 @@ ftxui::Component Settings() {
         return window(
             text(" Settings "),
             vbox({
-                registersComponent->Render() | flex,
-                ioPinsComponent->Render() | flex,
-                cyclesComponent->Render() | flex,
+                registersComponent->Render() | xflex,
+                ioPinsComponent->Render() | xflex,
+                cyclesComponent->Render() | xflex,
                 hbox({
-                    flagsComponent->Render() | flex,
-                    stackComponent->Render() | flex,
-                }) | flex
-            }) | flex
-        );
+                    flagsComponent->Render() | xflex,
+                    stackComponent->Render() | xflex,
+                }) | xflex
+            }) | xflex
+        ) | flex;
     });
 
     return settings_renderer;
