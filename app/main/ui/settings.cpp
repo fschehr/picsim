@@ -21,7 +21,7 @@ ftxui::Component Settings() {
         ioPinsComponent,
         cyclesComponent,
         flagsComponent,
-        stackComponent
+        stackComponent,
     });
 
     auto settings_renderer = Renderer(container, [
@@ -33,15 +33,15 @@ ftxui::Component Settings() {
     ] {
         return window(
             text(" Settings "),
-            center(
-                vbox({
-                    registersComponent->Render() | flex,
-                    ioPinsComponent->Render() | flex,
-                    cyclesComponent->Render() | flex,
+            vbox({
+                registersComponent->Render() | flex,
+                ioPinsComponent->Render() | flex,
+                cyclesComponent->Render() | flex,
+                hbox({
                     flagsComponent->Render() | flex,
                     stackComponent->Render() | flex,
-                })
-            )
+                }) | flex
+            }) | flex
         );
     });
 

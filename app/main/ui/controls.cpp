@@ -24,7 +24,7 @@ ftxui::Component Controls() {
         IgnoreButton,
         StepInButton,
         StepOutButton,
-        StepOverButton,
+        StepOverButton
     });
 
     auto controls_renderer = Renderer(container, [=] {

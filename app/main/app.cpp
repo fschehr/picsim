@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <fstream> // Hinzugefügt für Dateieingabe
 #include "pars.h"
 #include "simvm.h"
 #include "ui/document.cpp"
@@ -38,9 +39,21 @@ int main(int argc, char* argv[]) {
     //     return 1;
     // }
 
+    std::vector<std::string> fileLines;
+    std::ifstream fileStream(filePath);
+    if (fileStream.is_open()) {
+        std::string line;
+        while (std::getline(fileStream, line)) {
+            fileLines.push_back(line);
+        }
+        fileStream.close();
+    } else {
+        fileLines.push_back("Fehler: Datei konnte nicht geöffnet werden: " + filePath);
+    }
+
     // ui
     auto screen = ScreenInteractive::Fullscreen();
-    auto document = Document();
+    auto document = Document(filePath, fileLines);
     screen.Loop(document);
     
     std::cin.get(); // Wait for user input before closing

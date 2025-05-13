@@ -1,8 +1,12 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/component/component.hpp>
 
+
 ftxui::Component Cycles() {
     using namespace ftxui;
+
+    std::string microseconds;
+    int frequency;
 
     auto container = Container::Vertical({
 
