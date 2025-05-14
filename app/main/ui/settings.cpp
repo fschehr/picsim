@@ -22,32 +22,32 @@ ftxui::Component Settings() {
     auto stackComponent = Stack();
 
     auto container = Container::Vertical({
-        registersComponent,
-        ioPinsComponent,
         cyclesComponent,
         flagsComponent,
         stackComponent,
+        registersComponent,
+        ioPinsComponent,
     });
 
     auto settings_renderer = Renderer(container, [
-        registersComponent,
-        ioPinsComponent,
         cyclesComponent,
         flagsComponent,
-        stackComponent
+        stackComponent,
+        registersComponent,
+        ioPinsComponent
     ] {
         return window(
             text(" Settings "),
             vbox({
                 filler(),
                 vbox({
-                    registersComponent->Render() | xflex,
-                    ioPinsComponent->Render() | xflex,
                     cyclesComponent->Render() | xflex,
                     hbox({
                         flagsComponent->Render() | xflex,
                         stackComponent->Render() | xflex,
-                    }) | xflex
+                    }) | xflex,
+                    registersComponent->Render() | xflex,
+                    ioPinsComponent->Render() | xflex
                 }) | xflex,
                 filler()
             }) | flex

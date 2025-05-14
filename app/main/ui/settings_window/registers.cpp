@@ -2,45 +2,95 @@
 #include <ftxui/dom/table.hpp>
 #include <ftxui/component/component.hpp>
 
-ftxui::Component StatusRegisterColumn(std::string columnName) {
-    using namespace ftxui;
+// ftxui::Component StatusRegisterColumn(std::string columnName) {
+//     using namespace ftxui;
 
-    auto button = Button("0", [] {} );
+//     auto button = Button("0", [] {} );
     
-    auto column = Renderer(button, [button, columnName] {
-        return vbox({
-            text(columnName) | center | flex,
-            button->Render() | center | flex
-        });
-    });
+//     auto column = Renderer(button, [button, columnName] {
+//         return vbox({
+//             text(columnName) | center | flex,
+//             button->Render() | center | flex
+//         });
+//     });
 
-    return column;
-}
+//     return column;
+// }
 
+/**
+ * @brief Creates the Status Register component.
+ * 
+ * @return ftxui::Component The Status Register component.
+ */
 ftxui::Component StatusRegister() {
     using namespace ftxui;
     
-    // Erstelle 8 Spalten für die Status-Register-Bits
-    auto col_irp = StatusRegisterColumn("IRP");
-    auto col_rp1 = StatusRegisterColumn("RP1");
-    auto col_rp0 = StatusRegisterColumn("RP0");
-    auto col_to = StatusRegisterColumn("TO");
-    auto col_pd = StatusRegisterColumn("PD");
-    auto col_z = StatusRegisterColumn("Z");
-    auto col_dc = StatusRegisterColumn("DC");
-    auto col_c = StatusRegisterColumn("C");
+    ftxui::Component columns[8] = {};
+    static std::string column_labels[8] = {
+        "IRP", "RP1", "RP0", "TO", "PD", "Z", "DC", "C"
+    };
+    static std::string status_labels[8] = {
+        "0", "0", "0", "0", "0", "0", "0", "0"
+    };
+
+    ftxui::Component buttons[8] = {
+        Button(&status_labels[0], [] {
+            status_labels[0] = (status_labels[0]) == "0" ? "1" : "0";
+        }),
+        Button(&status_labels[1], [] {
+            status_labels[1] = status_labels[1] == "0" ? "1" : "0";
+        }),
+        Button(&status_labels[2], [] {
+            status_labels[2] = status_labels[2] == "0" ? "1" : "0";
+        }),
+        Button(&status_labels[3], [] {
+            status_labels[3] = status_labels[3] == "0" ? "1" : "0";
+        }),
+        Button(&status_labels[4], [] {
+            status_labels[4] = status_labels[4] == "0" ? "1" : "0";
+        }),
+        Button(&status_labels[5], [] {
+            status_labels[5] = status_labels[5] == "0" ? "1" : "0";
+        }),
+        Button(&status_labels[6], [] {
+            status_labels[6] = status_labels[6] == "0" ? "1" : "0";
+        }),
+        Button(&status_labels[7], [] {
+            status_labels[7] = status_labels[7] == "0" ? "1" : "0";
+        })
+    };
+
+    auto allButtons = Container::Horizontal({
+        buttons[0] | xflex,
+        buttons[1] | xflex,
+        buttons[2] | xflex,
+        buttons[3] | xflex,
+        buttons[4] | xflex,
+        buttons[5] | xflex,
+        buttons[6] | xflex,
+        buttons[7] | xflex
+    });
+
+    for (int i = 0; i <= 7; ++i) {
+        columns[i] = Renderer(allButtons, [buttons, i] {
+            return vbox({
+                text(column_labels[i]) | center | flex,
+                buttons[i]->Render() | center | flex,
+            });
+        });
+    }
     
     // Kombiniere alle Spalten horizontal
     auto all_columns = Container::Horizontal({
-        col_irp | xflex,
-        col_rp1 | xflex,
-        col_rp0 | xflex,
-        col_to | xflex,
-        col_pd | xflex,
-        col_z | xflex,
-        col_dc | xflex,
-        col_c | xflex
-    }) | xflex;
+        columns[0]| xflex,
+        columns[1]| xflex,
+        columns[2]| xflex,
+        columns[3]| xflex,
+        columns[4]| xflex,
+        columns[5]| xflex,
+        columns[6]| xflex,
+        columns[7]| xflex
+    });
     
     // Erstelle den Renderer für das gesamte Status-Register mit flex, um volle Breite zu nutzen
     auto statusRegisters_renderer = Renderer(all_columns, [all_columns] {

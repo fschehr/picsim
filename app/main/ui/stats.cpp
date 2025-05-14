@@ -20,47 +20,47 @@ ftxui::Component Stats() {
             text(" Stats "),
             hbox({
                 hbox({
-                    text(" Program Counter:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" Program Counter ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + pc + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 }),
                 text("   "),
                 hbox({
-                    text(" FSR:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" FSR ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + fsr + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 }),
                 text("   "),
                 hbox({
-                    text(" Stackpointer:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" Stackpointer ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + stackPointer + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 }),
                 text("   "),
                 hbox({
-                    text(" PCL:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" PCL ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + pcl + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 }),
                 text("   "),
                 hbox({
-                    text(" PCLATH:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" PCLATH ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + pclath + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 }),
                 text("   "),
                 hbox({
-                    text(" Status:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" Status ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + status + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 }),
                 text("   "),
                 hbox({
-                    text(" VT:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" VT ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + vt + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 }),
                 text("   "),
                 hbox({
-                    text(" WDT:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" WDT ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + wdt + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 }),
                 text("   "),
                 hbox({
-                    text(" W-Register:") | bgcolor(Color::White) | color(Color::Black) | bold,
+                    text(" W-Register ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + wRegister + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 })
             }) | center

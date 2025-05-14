@@ -1,5 +1,6 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/component/component.hpp>
+#include <cstdlib>
 
 /**
  * @brief Creates the main set of control buttons for the PIC-Simulator.
@@ -9,7 +10,15 @@
 ftxui::Component Controls(bool *statsVisible) {
     using namespace ftxui;
 
-    std::string toggleStatsLabel = *statsVisible ? "Hide Stats" : "Show Stats";
+    auto OpenDocumentationButton = Button("Docs", [] {
+        #ifdef _WIN32
+            system("start ..\\documentation\\Doku_Simulator_20200604.pdf");
+        #elif defined(__APPLE__)
+            system("open documentation/Doku_Simulator_20200604.pdf");
+        #else
+            system("xdg-open documentation/Doku_Simulator_20200604.pdf");
+        #endif
+    });
 
     auto GoButton = Button("Go", [] { 1 + 1; });
     auto ResetButton = Button("Reset", [] { 1 + 1; });
@@ -17,23 +26,31 @@ ftxui::Component Controls(bool *statsVisible) {
     auto StepInButton = Button("Step In", [] { 1 + 1; });
     auto StepOutButton = Button("Step Out", [] { 1 + 1; });
     auto StepOverButton = Button("Step Over", [] { 1 + 1; });
-    auto ToggleStatsButton = Button(toggleStatsLabel, [statsVisible] { *statsVisible = !*statsVisible; });
+    
+    static std::string stats_label = "Show Stats";
+    auto StatsButton = Button(&stats_label, [statsVisible] { 
+        *statsVisible = !(*statsVisible);
+        stats_label = *statsVisible ? "Hide Stats" : "Show Stats";
+    });
 
     auto container = Container::Horizontal({
+        OpenDocumentationButton,
         GoButton,
         ResetButton,
         IgnoreButton,
         StepInButton,
         StepOutButton,
         StepOverButton,
-        ToggleStatsButton
+        StatsButton
     });
 
     auto controls_renderer = Renderer(container, [=] {
         return window(
             text(" Controls "),
             hbox({
-                filler(),
+                hbox({
+                    OpenDocumentationButton->Render(),
+                }) | xflex,
                 hbox({
                     GoButton->Render(),
                     ResetButton->Render(),
@@ -41,12 +58,11 @@ ftxui::Component Controls(bool *statsVisible) {
                     StepInButton->Render(),
                     StepOutButton->Render(),
                     StepOverButton->Render()
-                }),
+                }) | xflex,
                 hbox({
-                    filler(),
-                    ToggleStatsButton->Render() | align_right,
-                }) | xflex
-            })
+                    StatsButton->Render(),
+                }) | align_right
+            }) | xflex
         );
     });
 

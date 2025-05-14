@@ -10,15 +10,39 @@ ftxui::Component PortA() {
     using namespace ftxui;
 
     ftxui::Component columns[8] = {};
-    ftxui::Component buttons[5] = {
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {})
+    static std::string pin_labels[8] = {
+        "0", "0", "0", "0", "0", "0", "0", "0"
+    };
+    static std::string tris_labels[8] = {
+        "i", "i", "i", "i", "i", "o", "o", "o"
+    };
+    static bool disabled = false;
+    
+    ftxui::Component buttons[8] = {
+        Button(&pin_labels[0], [] {
+            pin_labels[0] = (pin_labels[0]) == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[1], [] {
+            pin_labels[1] = pin_labels[1] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[2], [] {
+            pin_labels[2] = pin_labels[2] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[3], [] {
+            pin_labels[3] = pin_labels[3] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[4], [] {
+            pin_labels[4] = pin_labels[4] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[5], [] {}),
+        Button(&pin_labels[6], [] {}),
+        Button(&pin_labels[7], [] {})
     };
 
     auto allButtons = Container::Horizontal({
+        buttons[7] | xflex,
+        buttons[6] | xflex,
+        buttons[5] | xflex,
         buttons[4] | xflex,
         buttons[3] | xflex,
         buttons[2] | xflex,
@@ -28,19 +52,19 @@ ftxui::Component PortA() {
 
     for (int i = 7; i >= 0; --i) {
         if (i == 7 || i == 6 || i == 5) {
-            columns[i] = Renderer([i] {
-                return vbox({
-                    text(std::to_string(i)) | center | flex,
-                    text("o") | center | flex,
-                    text("0") | center | flex,
-                });
-            });
-        } else if (4 >= i || i >= 0) {
             columns[i] = Renderer(allButtons, [buttons, i] {
                 return vbox({
                     text(std::to_string(i)) | center | flex,
-                    text("i") | center | flex,
-                    buttons[i]->Render() | center | flex
+                    text(tris_labels[i]) | center | flex,
+                    buttons[i]->Render() | color(Color::GrayDark) | center | flex,
+                });
+            });
+        } else {
+            columns[i] = Renderer(allButtons, [buttons, i] {
+                return vbox({
+                    text(std::to_string(i)) | center | flex,
+                    text(tris_labels[i]) | center | flex,
+                    buttons[i]->Render() | center | flex,
                 });
             });
         }
@@ -80,15 +104,39 @@ ftxui::Component PortB() {
     using namespace ftxui;
 
     ftxui::Component columns[8] = {};
+    static std::string pin_labels[8] = {
+        "0", "0", "0", "0", "0", "0", "0", "0"
+    };
+    static std::string tris_labels[8] = {
+        "i", "i", "i", "i", "i", "o", "o", "o"
+    };
+    static bool disabled = false;
+
     ftxui::Component buttons[8] = {
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {}),
-        Button("0", [] {})
+        Button(&pin_labels[0], [] {
+            pin_labels[0] = (pin_labels[0]) == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[1], [] {
+            pin_labels[1] = pin_labels[1] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[2], [] {
+            pin_labels[2] = pin_labels[2] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[3], [] {
+            pin_labels[3] = pin_labels[3] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[4], [] {
+            pin_labels[4] = pin_labels[4] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[5], [] {
+            pin_labels[5] = pin_labels[5] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[6], [] {
+            pin_labels[6] = pin_labels[6] == "0" ? "1" : "0";
+        }),
+        Button(&pin_labels[7], [] {
+            pin_labels[7] = pin_labels[7] == "0" ? "1" : "0";
+        })
     };
     
     auto allButtons = Container::Horizontal({
@@ -106,7 +154,7 @@ ftxui::Component PortB() {
         columns[i] = Renderer(allButtons, [buttons, i] {
             return vbox({
                 text(std::to_string(i)) | center | flex,
-                text("i") | center | flex,
+                text(tris_labels[i]) | center | flex,
                 buttons[i]->Render() | center | flex,
             });
         });
