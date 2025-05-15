@@ -3,8 +3,10 @@
 #include <cctype>  // Für isdigit
 #include <iostream> // Für std::cout
 
-ftxui::Component Cycles() {
+ftxui::Component Runtime() {
     using namespace ftxui;
+
+    static std::string runtime = "0000";
 
     static std::string frequency; // in Hz
     static std::string microseconds;
@@ -35,15 +37,19 @@ ftxui::Component Cycles() {
         frequencyInput
     ] {
         return window(
-            text(" Cycles "),
+            text(" Runtime "),
             vbox({
                 hbox({
-                    frequencyInput->Render() | xflex,
-                    center(
-                        text("  →  ") | xflex
-                    ),
-                    text(microseconds + "us") | align_right | xflex,
-                }) | flex,
+                    hbox({
+                        frequencyInput->Render() | xflex,
+                        center(
+                            text("  →  ") | xflex
+                        ),
+                        text(microseconds + "µs") | align_right | xflex,
+                    }) | flex,
+                    text("  ⇒  ") | xflex,
+                    text(" Runtime: " + runtime + "µs ") | bgcolor(Color::White) | color(Color::Black) | xflex,
+                }) | center,
                 invalidInput ? text("Invalid input") | bgcolor(Color::IndianRed) | color(Color::White) | xflex : vbox({}) | size(WIDTH, EQUAL, 0),
             }) | xflex
         );

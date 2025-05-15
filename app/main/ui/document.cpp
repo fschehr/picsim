@@ -4,6 +4,8 @@
 #include "registerTable.cpp"
 #include "settings.cpp"
 #include "stats.cpp"
+#include "runtime.cpp"
+#include "ledArray.cpp"
 
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/component/component.hpp>
@@ -24,16 +26,30 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
     static bool statsVisible = false;
     static int editorRegistersWidth = 33;
 
+    static bool portBBits[8] = {false, false, false, false, false, false, false, false};
+    
+    static bool* portBPointers[8] = {
+        &portBBits[0], &portBBits[1], &portBBits[2], &portBBits[3], 
+        &portBBits[4], &portBBits[5], &portBBits[6], &portBBits[7]
+    };
+
     auto controlsComponent = Controls(&statsVisible);
+    auto runtimeComponent = Runtime();
+    auto ledArrayComponent = LedArray(portBPointers);
     auto editorComponent = Editor(filePath, fileLines);
     auto registerTableComponent = RegisterTable();
-    auto settingsComponent = Settings();
+    auto settingsComponent = Settings(portBPointers);
     auto statsComponent = Stats();
-
 
     auto editorRegistersSplitter = ResizableSplitLeft(
         registerTableComponent,
-        editorComponent,
+        Container::Vertical({
+            Container::Horizontal({
+                runtimeComponent | xflex,
+                ledArrayComponent | xflex
+            }),
+            editorComponent,
+        }),
         &editorRegistersWidth
     );
 
