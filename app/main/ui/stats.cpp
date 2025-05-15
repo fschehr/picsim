@@ -13,7 +13,6 @@ ftxui::Component Stats() {
     static std::string status = "00";
     static std::string vt = "00";
     static std::string wdt = "00";
-    static std::string wRegister = "00";
 
     auto stats_renderer = Renderer([] {
         return window(
@@ -57,11 +56,6 @@ ftxui::Component Stats() {
                 hbox({
                     text(" WDT ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + wdt + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
-                }),
-                text("   "),
-                hbox({
-                    text(" W-Register ") | bgcolor(Color::White) | color(Color::Black) | bold,
-                    text(" " + wRegister + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 })
             }) | center
         );

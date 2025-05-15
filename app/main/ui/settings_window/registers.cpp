@@ -2,21 +2,6 @@
 #include <ftxui/dom/table.hpp>
 #include <ftxui/component/component.hpp>
 
-// ftxui::Component StatusRegisterColumn(std::string columnName) {
-//     using namespace ftxui;
-
-//     auto button = Button("0", [] {} );
-    
-//     auto column = Renderer(button, [button, columnName] {
-//         return vbox({
-//             text(columnName) | center | flex,
-//             button->Render() | center | flex
-//         });
-//     });
-
-//     return column;
-// }
-
 /**
  * @brief Creates the Status Register component.
  * 
@@ -107,20 +92,26 @@ ftxui::Component StatusRegister() {
 ftxui::Component WRegister() {
     using namespace ftxui;
 
+    static bool wRegBits[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    static std::string wRegHex = "00";
+
     auto wRegister_renderer = Renderer([] {
         return vbox({
-            text("W Register") | center | bgcolor(Color::SeaGreen1) | color(Color::Black),
+            text("W-Register") | center | bgcolor(Color::SeaGreen1) | color(Color::Black),
             text(" ") | center,
             hbox({
-                text("0") | center | xflex,
-                text("0") | center | xflex,
-                text("0") | center | xflex,
-                text("0") | center | xflex,
-                text("0") | center | xflex,
-                text("0") | center | xflex,
-                text("0") | center | xflex,
-                text("0") | center | xflex
-            }) | xflex
+                text(std::to_string(wRegBits[0])) | xflex,
+                text(std::to_string(wRegBits[1])) | xflex,
+                text(std::to_string(wRegBits[2])) | xflex,
+                text(std::to_string(wRegBits[3])) | xflex,
+                text(" "),
+                text(std::to_string(wRegBits[4])) | xflex,
+                text(std::to_string(wRegBits[5])) | xflex,
+                text(std::to_string(wRegBits[6])) | xflex,
+                text(std::to_string(wRegBits[7])) | xflex,
+                text(" → ") | xflex,
+                text("0x" + wRegHex) | xflex,
+            }) | center
         });
     });
 

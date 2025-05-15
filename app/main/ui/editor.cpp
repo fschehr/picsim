@@ -96,7 +96,7 @@ ftxui::Component Editor(const std::string &filePath, const std::vector<std::stri
         } else {
             return window(
                 text(" " + filePath + " "),
-                container->Render() | vscroll_indicator | hscroll_indicator | frame | flex
+                container->Render() | vscroll_indicator | frame | flex
             );
         }
 

@@ -22,8 +22,7 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
     using namespace ftxui;
 
     static bool statsVisible = false;
-    // add further global variables from backend here (pc, fsr, etc.) -> parameters for windows
-    static int editorRegistersWidth = 40;
+    static int editorRegistersWidth = 33;
 
     auto controlsComponent = Controls(&statsVisible);
     auto editorComponent = Editor(filePath, fileLines);

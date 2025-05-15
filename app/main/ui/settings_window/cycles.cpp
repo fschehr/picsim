@@ -6,7 +6,7 @@
 ftxui::Component Cycles() {
     using namespace ftxui;
 
-    static std::string frequency;
+    static std::string frequency; // in Hz
     static std::string microseconds;
     static bool invalidInput = false;
 
@@ -14,12 +14,12 @@ ftxui::Component Cycles() {
     inputOption.on_change = [&]() {
         invalidInput = false;
         if (!frequency.empty()) {
-            microseconds = std::to_string(std::stoi(frequency) / 4);
-            
             for (char c : frequency) {
                 if (!std::isdigit(c)) {
                     invalidInput = true;
                     break;
+                } else {
+                    microseconds = std::to_string(4 / std::stoi(frequency)); // 4 / Cycles = Microseconds per Cycle
                 }
             }
         }
@@ -39,7 +39,10 @@ ftxui::Component Cycles() {
             vbox({
                 hbox({
                     frequencyInput->Render() | xflex,
-                    text(" → " + microseconds + "us") | xflex
+                    center(
+                        text("  →  ") | xflex
+                    ),
+                    text(microseconds + "us") | align_right | xflex,
                 }) | flex,
                 invalidInput ? text("Invalid input") | bgcolor(Color::IndianRed) | color(Color::White) | xflex : vbox({}) | size(WIDTH, EQUAL, 0),
             }) | xflex
