@@ -2,16 +2,8 @@
 #include <ftxui/component/component.hpp>
 #include <sstream>
 
-ftxui::Component RegisterTable() {
+ftxui::Component RegisterTable(std::string (&registerValues)[32][8]) {
     using namespace ftxui;
-
-    static std::string registerValues[32][8] = {};
-    
-    for (int i = 0; i < 32; ++i) {
-        for (int j = 0; j < 8; ++j) {
-            registerValues[i][j] = "00";
-        }
-    }
 
     auto container = Container::Vertical({});
 
@@ -26,7 +18,7 @@ ftxui::Component RegisterTable() {
             registerInputOption.placeholder = hexPos.str(); // No° des Registers
             registerInputOption.multiline = false;
             
-            registerInputOption.on_change = [i, j]() {
+            registerInputOption.on_change = [i, j, &registerValues]() {
                 if (registerValues[i][j].length() > 2) {
                     registerValues[i][j] = registerValues[i][j].substr(0, 2);
                 }

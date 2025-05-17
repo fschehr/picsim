@@ -7,34 +7,52 @@
  * @param portBBits Array of pointers to boolean values representing the state of Port B pins
  * @return ftxui::Component The LED Array component.
  */
-ftxui::Component LedArray(bool *portBBits[]) {
+ftxui::Component LedArray(std::string &portBHex, std::string &trisBHex) {
     using namespace ftxui;
 
-    bool raLedArray[8] = {false, false, false, false, false, false, false, false};
-    
-    auto all_columns = Container::Horizontal({
-        Button("RA0", [&raLedArray] { raLedArray[0] = !raLedArray[0]; }) | xflex,
-    });
+    auto ledArray_renderer = Renderer([&portBHex, &trisBHex] {
+        static bool trisBBits[8] = {false, false, false, false, false, false, false, false};
+        unsigned int trisBValue = 0;
+        for (int i = 0; i < 8; i++) {
+            if (trisBHex.length() > 0) {
+                std::stringstream ss;
+                ss << std::hex << trisBHex;
+                ss >> trisBValue;
+            }
+            trisBBits[i] = (trisBValue & (1 << 0)) != 0;
+        }
 
-    auto ledArray_renderer = Renderer(all_columns, [all_columns, portBBits] {
+        static bool raLedArray[8] = {false, false, false, false, false, false, false, false};
+        unsigned int portBValue = 0;
+        
+        if (portBHex.length() > 0) {
+            std::stringstream ss;
+            ss << std::hex << portBHex;
+            ss >> portBValue;
+        }
+    
+        for (int i = 0; i < 8; i++) {
+            raLedArray[i] = (portBValue & (1 << i)) != 0;
+        }
+
         return window(
             text(" LED-Array "),
             hbox({
-                text("  ") | (portBBits[7] != nullptr && *(portBBits[7]) ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
+                text("  ") | (raLedArray[7] && !trisBBits[7] ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
                 text(" "),
-                text("  ") | (portBBits[6] != nullptr && *(portBBits[6]) ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
+                text("  ") | (raLedArray[6] && !trisBBits[6] ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
                 text(" "),
-                text("  ") | (portBBits[5] != nullptr && *(portBBits[5]) ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
+                text("  ") | (raLedArray[5] && !trisBBits[5] ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
                 text(" "),
-                text("  ") | (portBBits[4] != nullptr && *(portBBits[4]) ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
+                text("  ") | (raLedArray[4] && !trisBBits[4] ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
                 text(" "),
-                text("  ") | (portBBits[3] != nullptr && *(portBBits[3]) ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
+                text("  ") | (raLedArray[3] && !trisBBits[3] ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
                 text(" "),
-                text("  ") | (portBBits[2] != nullptr && *(portBBits[2]) ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
+                text("  ") | (raLedArray[2] && !trisBBits[2] ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
                 text(" "),
-                text("  ") | (portBBits[1] != nullptr && *(portBBits[1]) ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
+                text("  ") | (raLedArray[1] && !trisBBits[1] ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
                 text(" "),
-                text("  ") | (portBBits[0] != nullptr && *(portBBits[0]) ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
+                text("  ") | (raLedArray[0] && !trisBBits[0] ? bgcolor(Color::RedLight) : bgcolor(Color::DarkRed)),
             }) | center
         );
     });

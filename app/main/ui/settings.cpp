@@ -12,11 +12,21 @@
  * 
  * @return ftxui::Component The Settings component.
  */
-ftxui::Component Settings(bool *portBBits[]) {
+ftxui::Component Settings(
+    std::string &portAHex,
+    std::string &portBHex,
+    std::string &trisAHex,
+    std::string &trisBHex
+) {
     using namespace ftxui;
 
     auto registersComponent = Registers();
-    auto ioPinsComponent = IoPins(portBBits);
+    auto ioPinsComponent = IoPins(
+        portAHex,
+        portBHex,
+        trisAHex,
+        trisBHex
+    );
     auto flagsComponent = Flags();
     auto stackComponent = Stack();
 

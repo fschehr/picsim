@@ -23,22 +23,35 @@
 ftxui::Component Document(const std::string &filePath, const std::vector<std::string>& fileLines) {
     using namespace ftxui;
 
+    // UI Variables
     static bool statsVisible = false;
     static int editorRegistersWidth = 33;
-
-    static bool portBBits[8] = {false, false, false, false, false, false, false, false};
+    static int currentLine = 0;
     
-    static bool* portBPointers[8] = {
-        &portBBits[0], &portBBits[1], &portBBits[2], &portBBits[3], 
-        &portBBits[4], &portBBits[5], &portBBits[6], &portBBits[7]
-    };
+    // Sim Variables
+    static std::string registerValues[32][8] = {};
+
+    for (int i = 0; i < 32; ++i) {
+        for (int j = 0; j < 8; ++j) {
+            registerValues[i][j] = "00";
+        }
+    }
+
+    // temporarily set the register values for the tris registers here
+    registerValues[16][5] = "1F"; // TRISA
+    registerValues[16][6] = "FF"; // TRISB
 
     auto controlsComponent = Controls(&statsVisible);
     auto runtimeComponent = Runtime();
-    auto ledArrayComponent = LedArray(portBPointers);
-    auto editorComponent = Editor(filePath, fileLines);
-    auto registerTableComponent = RegisterTable();
-    auto settingsComponent = Settings(portBPointers);
+    auto ledArrayComponent = LedArray(registerValues[0][6], registerValues[16][6]);
+    auto editorComponent = Editor(filePath, fileLines, currentLine);
+    auto registerTableComponent = RegisterTable(registerValues);
+    auto settingsComponent = Settings(
+        registerValues[0][5], // Port A Pins
+        registerValues[0][6], // Port B Pins
+        registerValues[16][5], // TRISA
+        registerValues[16][6]  // TRISB
+    );
     auto statsComponent = Stats();
 
     auto runtimeLedContainer = Container::Horizontal({
