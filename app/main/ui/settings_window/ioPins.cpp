@@ -3,22 +3,7 @@
 #include <sstream>
 #include <iomanip>
 #include <string>
-
-void updateHexValue(bool portBits[8], std::string &portHex) {
-    unsigned int portValue = 0;
-    for (int i = 0; i < 8; i++) {
-        if (portBits[i]) {
-            portValue |= (1 << i);
-        }
-    }
-    std::stringstream ss;
-    ss << std::hex << std::uppercase << portValue;
-    portHex = ss.str();
-
-    if (portHex.length() == 1) {
-        portHex = "0" + portHex;
-    }
-}
+#include "../../utils.hpp"
 
 /**
  * @brief Creates the Port A section of the I/O Pins component.

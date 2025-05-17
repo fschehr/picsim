@@ -29,6 +29,8 @@ set(SOURCES
     app/main/instruction.h
     app/main/logger.cpp
     app/main/logger.h
+    app/main/utils.cpp
+    app/main/utils.hpp
     app/main/memory/eeprom.cpp
     app/main/memory/eeprom.h
     app/main/memory/program.cpp

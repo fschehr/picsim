@@ -19,6 +19,7 @@ ftxui::Component Editor(const std::string &filePath, const std::vector<std::stri
     using namespace ftxui;
 
     int lineCount  = fileLines.size();
+    int digitsCount = std::to_string(lineCount).length();
 
     // Holds the state of each line's breakpoint.
     std::vector<bool*> breakpointsStatesList;
@@ -35,11 +36,15 @@ ftxui::Component Editor(const std::string &filePath, const std::vector<std::stri
         auto checkbox = Checkbox("", breakpointsStatesList[i], CheckboxOption{});
 
         // Renders the line with the checkbox and the code.
-        auto line = Renderer(checkbox, [i, checkbox, &fileLines, breakpointsStatesList, currentLine] {
+        auto line = Renderer(checkbox, [i, checkbox, &fileLines, breakpointsStatesList, currentLine, digitsCount] {
             return hbox({
-                text(std::to_string(i + 1)) | color(Color::GrayDark) | align_right | size(WIDTH, EQUAL, 3),
-                text(" "),
-                checkbox->Render(),
+                text(" ") | ( currentLine == i ? bgcolor(Color::Orange1) : bgcolor(Color::Black)),
+                text(std::string(digitsCount - std::to_string(i + 1).length(), ' ') + std::to_string(i + 1))
+                    | ( currentLine == i ? bgcolor(Color::Orange1)  | color(Color::Black) : bgcolor(Color::Black) | color(Color::GrayDark))
+                    | align_right
+                    | size(WIDTH, EQUAL, digitsCount),
+                text(" ") | ( currentLine == i ? bgcolor(Color::Orange1) : bgcolor(Color::Black)),
+                checkbox->Render() | ( currentLine == i ? bgcolor(Color::Orange1) | color(Color::Black) : bgcolor(Color::Black) | color(Color::White)),
                 (text(fileLines[i]) | ( currentLine == i ? bgcolor(Color::Orange1) | color(Color::Black) : *breakpointsStatesList[i] ? bgcolor(Color::IndianRed1) | color(Color::Black) : bgcolor(Color::Black)) | xflex_grow) 
             }) | xflex;
         });

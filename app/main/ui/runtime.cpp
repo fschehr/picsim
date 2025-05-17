@@ -48,7 +48,8 @@ ftxui::Component Runtime() {
                         text(microseconds + "µs") | align_right | xflex,
                     }) | flex,
                     text("  ⇒  ") | xflex,
-                    text(" Runtime: " + runtime + "µs ") | bgcolor(Color::White) | color(Color::Black) | xflex,
+                    text(" Runtime ") | bgcolor(Color::White) | color(Color::Black) | xflex,
+                    text(" " + runtime + "µs ") | bgcolor(Color::GrayLight) | color(Color::Black) | xflex,
                 }) | center,
                 invalidInput ? text("Invalid input") | bgcolor(Color::IndianRed) | color(Color::White) | xflex : vbox({}) | size(WIDTH, EQUAL, 0),
             }) | xflex

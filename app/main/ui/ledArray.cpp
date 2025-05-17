@@ -1,6 +1,7 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/component/component.hpp>
 
+// TODO: When tris for port b is set to i, then changing the values of port b should not change the led value for that pin
 /**
  * @brief Creates the LED Array component.
  * 

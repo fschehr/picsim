@@ -31,15 +31,17 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
     // Sim Variables
     static std::string registerValues[32][8] = {};
 
+    // Initialize all registers to "00"
     for (int i = 0; i < 32; ++i) {
         for (int j = 0; j < 8; ++j) {
             registerValues[i][j] = "00";
         }
     }
 
-    // temporarily set the register values for the tris registers here
+    // Overwrite registers with their initial values
     registerValues[16][5] = "1F"; // TRISA
     registerValues[16][6] = "FF"; // TRISB
+    registerValues[0][3] = "18"; // STATUS
 
     auto controlsComponent = Controls(&statsVisible);
     auto runtimeComponent = Runtime();
@@ -47,12 +49,18 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
     auto editorComponent = Editor(filePath, fileLines, currentLine);
     auto registerTableComponent = RegisterTable(registerValues);
     auto settingsComponent = Settings(
+        registerValues[0][3], // Status Register
         registerValues[0][5], // Port A Pins
         registerValues[0][6], // Port B Pins
         registerValues[16][5], // TRISA
         registerValues[16][6]  // TRISB
     );
-    auto statsComponent = Stats();
+    auto statsComponent = Stats(
+        registerValues[0][2], // program counter low
+        registerValues[1][2], // program counter high latch
+        registerValues[0][3], // status register
+        registerValues[0][4] // file select register
+    );
 
     auto runtimeLedContainer = Container::Horizontal({
         runtimeComponent | xflex,

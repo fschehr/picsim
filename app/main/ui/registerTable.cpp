@@ -45,6 +45,8 @@ ftxui::Component RegisterTable(std::string (&registerValues)[32][8]) {
             Elements cellElements;
             
             for (int j = 0; j < 8; ++j) {
+                // Element cellElement = container->ChildAt(i)->ChildAt(j)->Render();
+                // cellElements.push_back(cellElement | size(ftxui::WIDTH, ftxui::EQUAL, 3));
                 cellElements.push_back(container->ChildAt(i)->ChildAt(j)->Render() | size(ftxui::WIDTH, ftxui::EQUAL, 3));
             }
 

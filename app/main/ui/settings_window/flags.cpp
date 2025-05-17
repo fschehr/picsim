@@ -30,7 +30,7 @@ ftxui::Component Flags() {
             }
         });
         
-        table.SelectRow(0).Border(DOUBLE);
+        table.SelectRow(0).Border(LIGHT);
         table.SelectRow(0).SeparatorVertical(LIGHT);
         
         table.SelectRow(1).Border(LIGHT);

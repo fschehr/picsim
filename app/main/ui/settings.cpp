@@ -13,6 +13,7 @@
  * @return ftxui::Component The Settings component.
  */
 ftxui::Component Settings(
+    std::string &statusHex,
     std::string &portAHex,
     std::string &portBHex,
     std::string &trisAHex,
@@ -20,7 +21,9 @@ ftxui::Component Settings(
 ) {
     using namespace ftxui;
 
-    auto registersComponent = Registers();
+    auto registersComponent = Registers(
+        statusHex
+    );
     auto ioPinsComponent = IoPins(
         portAHex,
         portBHex,
