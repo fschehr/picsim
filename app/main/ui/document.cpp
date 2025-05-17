@@ -41,15 +41,19 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
     auto settingsComponent = Settings(portBPointers);
     auto statsComponent = Stats();
 
+    auto runtimeLedContainer = Container::Horizontal({
+        runtimeComponent | xflex,
+        ledArrayComponent | xflex
+    });
+    
+    auto editorWithRuntimeContainer = Container::Vertical({
+        runtimeLedContainer,
+        editorComponent
+    });
+
     auto editorRegistersSplitter = ResizableSplitLeft(
         registerTableComponent,
-        Container::Vertical({
-            Container::Horizontal({
-                runtimeComponent | xflex,
-                ledArrayComponent | xflex
-            }),
-            editorComponent,
-        }),
+        editorWithRuntimeContainer,
         &editorRegistersWidth
     );
 
@@ -64,7 +68,9 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
         controlsComponent,
         statsComponent,
         settingsComponent,
-        editorRegistersSplitter
+        editorRegistersSplitter,
+        runtimeComponent,
+        ledArrayComponent
     ] {
         return vbox({
             controlsComponent->Render(),

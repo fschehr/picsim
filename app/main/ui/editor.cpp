@@ -2,105 +2,61 @@
 #include <ftxui/component/component.hpp>
 #include <ftxui/screen/color.hpp>
 #include <vector>
+#include <list>
 #include <string>
 #include <memory>
 #include <iostream>
 
-struct BoolWrapper {
-    bool value = false;
-};
-
-/**
- * @brief Combines a line of code and a Checkbox allowing to set breakpoints in a loaded program.
- * 
- * @param line The line of code to be displayed.
- * @param lineNumber The line number of the code.
- * @param breakpointState Pointer to a boolean indicating the state of the breakpoint.
- * @return ftxui::Component The component representing the line of code with a breakpoint checkbox.
- */
-ftxui::Component EditorLine(const std::string &line, int lineNumber, bool *breakpointState) {
-    using namespace ftxui;
-
-    if (*breakpointState) {
-        std::cerr << "DEBUG: breakpointState für Zeile '" << line << "' ist TRUE vor Checkbox-Erstellung." << std::endl;
-    } else {
-        std::cerr << "DEBUG: breakpointState für Zeile '" << line << "' ist FALSE vor Checkbox-Erstellung." << std::endl;
-    }
-
-    auto lineNumberElement = Renderer([lineNumber] {
-        return text(std::to_string(lineNumber + 1)) | color(Color::GrayDark) | align_right | size(WIDTH, EQUAL, 3);
-    });
-
-    auto breakpointMark = Checkbox("", breakpointState);
-
-    auto lineText = Renderer([lineCopy = line, breakpointState] {
-        Element lineElement = text(lineCopy);
-
-        if (*breakpointState) {
-            lineElement = lineElement | bgcolor(Color::RedLight) | color(Color::Black);
-        }
-
-        return lineElement | flex;
-    });
-
-    return Container::Horizontal({
-        lineNumberElement,
-        Renderer([] { return text(" ") | size(WIDTH, EQUAL, 1); }),
-        breakpointMark,
-        lineText,
-    });
-}
-
 /**
  * @brief Creates the editor component for displaying lines of code.
  * 
+ * @param filePath The path of the file being edited.
  * @param fileLines The lines of code to be displayed.
+ * 
  * @return ftxui::Component The editor component.
  */
 ftxui::Component Editor(const std::string &filePath, const std::vector<std::string>& fileLines) {
     using namespace ftxui;
 
-    auto breakpointStates = std::make_shared<std::vector<BoolWrapper>>(fileLines.size());
-    std::fill(breakpointStates->begin(), breakpointStates->end(), BoolWrapper{false});
+    int lineCount  = fileLines.size();
 
-    for(size_t i = 0; i < breakpointStates->size(); ++i) {
-       if ((*breakpointStates)[i].value) {
-           std::cerr << "DEBUG: breakpointStates->at(" << i << ").value ist TRUE nach Initialisierung." << std::endl;
-       }
+    // Holds the state of each line's breakpoint.
+    std::vector<bool*> breakpointsStatesList;
+    for (int i = 0; i < lineCount; ++i) {
+        breakpointsStatesList.push_back(new bool(false));
     }
+    
+    // Vector to track the components for each line.
+    std::vector<Component> lineComponents;
 
-    auto container = Container::Vertical({
-        
-    });
+    // Create a editor line for each line of code from a checkbox and text
+    for (int i = 0; i < lineCount; ++i) {
+        // The checkbox for the current line of code.
+        auto checkbox = Checkbox("", breakpointsStatesList[i], CheckboxOption{});
 
-    if (!fileLines.empty()) {
-        for (size_t i = 0; i < fileLines.size(); ++i) {
-            (*breakpointStates)[i].value = false; // explicitly set to false (-> seems to not work)
-            container->Add(EditorLine(fileLines[i], i, &((*breakpointStates)[i].value)));
-        }
-    } else {
-        return Renderer([=] {
-            return window(
-                text(" Editor "),
-                text("No lines to display.") | center
-            );
+        // Renders the line with the checkbox and the code.
+        auto line = Renderer(checkbox, [i, checkbox, &fileLines, breakpointsStatesList] {
+            return hbox({
+                text(std::to_string(i + 1)) | color(Color::GrayDark) | align_right | size(WIDTH, EQUAL, 3),
+                text(" "),
+                checkbox->Render(),
+                (text(fileLines[i]) | ( *breakpointsStatesList[i] ? bgcolor(Color::IndianRed1) | color(Color::Black) : bgcolor(Color::Black)) | xflex_grow) 
+            }) | xflex;
         });
+
+        lineComponents.push_back(line);
     }
+    
+    // Container holding all the lines of code (needed for interactivity)
+    auto container = Container::Vertical({lineComponents});
 
-    auto editor_renderer = Renderer(container, [=] {
-        if (container->ChildCount() == 0) {
-            return window(
-                text(" " + filePath + " "),
-                text("No lines to display.") | center
-            );
-        } else {
-            return window(
-                text(" " + filePath + " "),
-                container->Render() | vscroll_indicator | frame | flex
-            );
-        }
-
+    // Renderer for the editor window component
+    auto editor = Renderer(container, [container, filePath] {
+        return window(
+            text(" " + filePath + " "),
+            container->Render() | yframe | yflex
+        ) | flex;
     });
 
-    return editor_renderer;
+    return editor;
 }
