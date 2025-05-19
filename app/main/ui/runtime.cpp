@@ -2,17 +2,19 @@
 #include <ftxui/component/component.hpp>
 #include <cctype>  // Für isdigit
 #include <iostream> // Für std::cout
+#include "../simvm.h"
 
-ftxui::Component Runtime() {
+ftxui::Component Runtime(PicSimulatorVM &vm) {
     using namespace ftxui;
 
     static std::string runtime = "0000";
 
     static std::string frequency; // in Hz
-    static std::string microseconds;
+    // static std::string microseconds;
     static bool invalidInput = false;
 
     InputOption inputOption;
+    inputOption.placeholder = std::to_string(vm.microseconds);
     inputOption.on_change = [&]() {
         invalidInput = false;
         if (!frequency.empty()) {
@@ -21,7 +23,7 @@ ftxui::Component Runtime() {
                     invalidInput = true;
                     break;
                 } else {
-                    microseconds = std::to_string(4 / std::stoi(frequency)); // 4 / Cycles = Microseconds per Cycle
+                    vm.microseconds = 4 / std::stoi(frequency); // 4 / Cycles = Microseconds per Cycle
                 }
             }
         }
@@ -34,6 +36,7 @@ ftxui::Component Runtime() {
     });
 
     auto registers_renderer = Renderer(container, [
+        &vm,
         frequencyInput
     ] {
         return window(
@@ -45,11 +48,11 @@ ftxui::Component Runtime() {
                         center(
                             text("  →  ") | xflex
                         ),
-                        text(microseconds + "µs") | align_right | xflex,
+                        text(std::to_string(vm.microseconds) + "µs") | align_right | xflex,
                     }) | flex,
                     text("  ⇒  ") | xflex,
                     text(" Runtime ") | bgcolor(Color::White) | color(Color::Black) | xflex,
-                    text(" " + runtime + "µs ") | bgcolor(Color::GrayLight) | color(Color::Black) | xflex,
+                    text(" " + std::to_string(vm.runtime) + "µs ") | bgcolor(Color::GrayLight) | color(Color::Black) | xflex,
                 }) | center,
                 invalidInput ? text("Invalid input") | bgcolor(Color::IndianRed) | color(Color::White) | xflex : vbox({}) | size(WIDTH, EQUAL, 0),
             }) | xflex

@@ -8,11 +8,15 @@
 #include "../instruction.h"
 #include "../decode.h"
 #include <mutex>
+#include <functional>
 #include "literalex.h"
 #include "jumpex.h"
 #include "byte.h"
 #include "bit.h"
 #include "../logger.h"
+
+// Vorwärtsdeklaration anstatt #include simvm.h
+class PicSimulatorVM;
 
 class LiteralExecution;
 class JumpExecution;
@@ -39,6 +43,9 @@ private:
 
     std::mutex lock;
     Decoder decoder;
+    
+    // Callback-Funktion für Zyklusaktualisierungen
+    std::function<void(int)> cycleUpdateCallback;
 
     void updateRuntimeCounter(int cycles);
     void updateTimer();
@@ -54,6 +61,11 @@ public:
     void init();
     int execute();
     void reset();
+    
+    // Setter für die Callback-Funktion
+    void setCycleUpdateCallback(std::function<void(int)> callback) {
+        cycleUpdateCallback = callback;
+    }
 
     void setInstructionRegister(uint16_t value);
     void setProgramCounter(int value);

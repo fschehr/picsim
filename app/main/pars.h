@@ -7,7 +7,9 @@
 
 class Parser {
 public:
-    short* parse(const std::string& filename, int& size);
+    short* parseToShort(const std::string& filename, int& size);
+    std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> parseToPair(const std::string& filename);
+    // https://media.tenor.com/AT7MQToJVHoAAAAM/oh-vector.gif
 };
 
 #endif // PARS_H

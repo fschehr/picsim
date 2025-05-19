@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <thread>
 #include "instruction.h"
 #include "memory/program.h"
 #include "memory/stack.h"
@@ -29,10 +30,16 @@ public:
     void initialize(const std::vector<short>& prog);
     void stop();
     void load(const std::vector<short>& file);
-    int execute();
+    void execute();
+    void executeStep(); // Führt einen einzelnen Schritt aus
     void programDecode(const std::vector<short>& prog);
     void start();
-
+    void reset(); // Neue Methode zum Zurücksetzen der VM
+    void updateCyclesCounter(int cycles);
+    void updateRuntimeCounter();
+    short microseconds = 100;
+    short cycles;
+    int runtime;
 private:
     int ramBankSize = 128;
     int programMemorySize = 1024;
@@ -49,6 +56,7 @@ private:
 
     bool running = false;
     bool loaded = false;
+    std::thread executionThread;
 };
 
 #endif // SIMVM_H

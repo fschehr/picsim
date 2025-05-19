@@ -15,16 +15,15 @@
  * 
  * @return ftxui::Component The editor component.
  */
-ftxui::Component Editor(const std::string &filePath, const std::vector<std::string>& fileLines, int &currentLine) {
+ftxui::Component Editor(const std::string &filePath, std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> &fileLines, int &currentLine) {
     using namespace ftxui;
 
     int lineCount  = fileLines.size();
     int digitsCount = std::to_string(lineCount).length();
 
     // Holds the state of each line's breakpoint.
-    std::vector<bool*> breakpointsStatesList;
     for (int i = 0; i < lineCount; ++i) {
-        breakpointsStatesList.push_back(new bool(false));
+        fileLines[i].first.second = new bool(false);
     }
     
     // Vector to track the components for each line.
@@ -33,10 +32,15 @@ ftxui::Component Editor(const std::string &filePath, const std::vector<std::stri
     // Create a editor line for each line of code from a checkbox and text
     for (int i = 0; i < lineCount; ++i) {
         // The checkbox for the current line of code.
-        auto checkbox = Checkbox("", breakpointsStatesList[i], CheckboxOption{});
+        CheckboxOption checkboxOptions = CheckboxOption{};
+        checkboxOptions.on_change = [&fileLines, i] {
+            // Toggle the breakpoint state when the checkbox is clicked.
+            Logger::info("Breakpoint at line " + std::to_string(i + 1) + ": " + (*fileLines[i].first.second ? "Enabled" : "Disabled"));
+        };
+        auto checkbox = Checkbox("", fileLines[i].first.second, checkboxOptions);
 
         // Renders the line with the checkbox and the code.
-        auto line = Renderer(checkbox, [i, checkbox, &fileLines, breakpointsStatesList, currentLine, digitsCount] {
+        auto line = Renderer(checkbox, [i, checkbox, &fileLines, currentLine, digitsCount] {
             return hbox({
                 text(" ") | ( currentLine == i ? bgcolor(Color::Orange1) : bgcolor(Color::Black)),
                 text(std::string(digitsCount - std::to_string(i + 1).length(), ' ') + std::to_string(i + 1))
@@ -45,7 +49,7 @@ ftxui::Component Editor(const std::string &filePath, const std::vector<std::stri
                     | size(WIDTH, EQUAL, digitsCount),
                 text(" ") | ( currentLine == i ? bgcolor(Color::Orange1) : bgcolor(Color::Black)),
                 checkbox->Render() | ( currentLine == i ? bgcolor(Color::Orange1) | color(Color::Black) : bgcolor(Color::Black) | color(Color::White)),
-                (text(fileLines[i]) | ( currentLine == i ? bgcolor(Color::Orange1) | color(Color::Black) : *breakpointsStatesList[i] ? bgcolor(Color::IndianRed1) | color(Color::Black) : bgcolor(Color::Black)) | xflex_grow) 
+                (text(fileLines[i].second.second) | ( currentLine == i ? bgcolor(Color::Orange1) | color(Color::Black) : *fileLines[i].first.second ? bgcolor(Color::IndianRed1) | color(Color::Black) : bgcolor(Color::Black)) | xflex_grow) 
             }) | xflex;
         });
 

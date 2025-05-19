@@ -11,6 +11,7 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <sstream>
 
 template class RamMemory<uint8_t>;
 template class ProgramMemory<uint16_t>;
@@ -33,12 +34,22 @@ std::string ConcreteInstruction::getConcArguments() {
 
 PicSimulatorVM::PicSimulatorVM()
     : ram(ramBankSize), program(programMemorySize), stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {
+    // Logger auf Dateiausgabe umstellen
+    Logger::setOutputToFile();
     Logger::info("Simulator constructed");
     programMemory.resize(programMemorySize, nullptr);
+    
+    // Setze den Callback für Zyklusaktualisierungen
+    executor.setCycleUpdateCallback([this](int cycles) {
+        this->updateCyclesCounter(cycles);
+    });
 }
 
 PicSimulatorVM::~PicSimulatorVM() {
     Logger::info("Simulator destructed");
+    // Stellen Sie sicher, dass alle Thread-Aktivitäten beendet sind
+    stop();
+    
     for (Instruction* instruction : programMemory) {
         delete instruction;
     }
@@ -47,10 +58,7 @@ PicSimulatorVM::~PicSimulatorVM() {
 void PicSimulatorVM::initialize(const std::vector<short>& prog) {
     programDecode(prog);
     load(prog);
-    while (running) {
-        execute();
-        std::this_thread::sleep_for(std::chrono::milliseconds(500)); // sleep for 500ms
-    }
+    // execute(); //is called in ui
 }
 
 void PicSimulatorVM::programDecode(const std::vector<short>& prog) {
@@ -63,17 +71,51 @@ void PicSimulatorVM::programDecode(const std::vector<short>& prog) {
     }
     for (size_t i = 0; i < programMemory.size(); i++) {
         if (programMemory[i] != nullptr) {
-            std::cout << "Instruction " << programMemory[i]->getOpc() << " with arguments " << programMemory[i]->getArgumentsAsString() << std::endl;
+            std::stringstream ss;
+            ss << programMemory[i]->getOpc();
+            Logger::info("Instruction " + ss.str() + 
+                        " with arguments " + programMemory[i]->getArgumentsAsString());
         }
     }
 }
 
 void PicSimulatorVM::stop() {
     running = false;
+    
+    // Warten bis ein laufender Thread beendet ist, falls vorhanden und joinable
+    if (executionThread.joinable()) {
+        executionThread.join();
+    }
 }
 
 void PicSimulatorVM::start() {
     running = true;
+}
+
+void PicSimulatorVM::reset() {
+    Logger::info("Resetting simulator");
+    stop(); // Das beendet den Thread und setzt running auf false
+    executor.reset();
+    start(); // Setzt running wieder auf true
+}
+
+// Neue Methode für die Ausführung eines einzelnen Schritts
+void PicSimulatorVM::executeStep() {
+    if (!loaded) {
+        throw std::runtime_error("No executable program loaded");
+    }
+    
+    if (!running) {
+        running = true;
+        executor.reset();
+    }
+    
+    // Nur einen einzigen Befehl ausführen
+    try {
+        executor.execute();
+    } catch (const std::exception& e) {
+        Logger::warning(std::string("Fehler bei der Ausführung eines Schritts: ") + e.what());
+    }
 }
 
 void PicSimulatorVM::load(const std::vector<short>& file) {
@@ -87,14 +129,45 @@ void PicSimulatorVM::load(const std::vector<short>& file) {
     executor.reset();
 }
 
-int PicSimulatorVM::execute() {
+void PicSimulatorVM::execute() {
     if (!loaded) {
         throw std::runtime_error("No executable program loaded");
-    } else {
-        if (!running) {
-            running = true;
-            executor.reset();
-        }
-        return executor.execute();
     }
+    
+    // Wenn bereits ein Thread läuft, nichts tun
+    if (executionThread.joinable()) {
+        return;
+    }
+    
+    if (!running) {
+        running = true;
+        executor.reset();
+    }
+    
+    // Thread starten, der kontinuierlich Instruktionen ausführt
+    executionThread = std::thread([this]() {
+        try {
+            while (running && loaded) {
+                // Führe eine Instruktion aus
+                executor.execute();
+                
+                // Kleine Pause für CPU-Entlastung und um UI-Thread Zeit zu geben
+                std::this_thread::sleep_for(std::chrono::microseconds(microseconds));
+            }
+        } catch (const std::exception& e) {
+            Logger::warning(std::string("Fehler bei der Ausführung: ") + e.what());
+            running = false; // Bei Fehler die Ausführung stoppen
+        }
+    });
+    
+    // Thread im Hintergrund laufen lassen
+    executionThread.detach();
+}
+void PicSimulatorVM::updateCyclesCounter(int i) {
+    cycles += i;
+    //Logger::info("Runtime counter incremented by " + std::to_string(increment) + ", new value: " + std::to_string(runtimeCounter));
+    updateRuntimeCounter();
+}
+void PicSimulatorVM::updateRuntimeCounter() {
+    runtime = cycles * microseconds; 
 }

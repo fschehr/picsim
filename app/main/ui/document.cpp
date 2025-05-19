@@ -4,6 +4,7 @@
 #include "registerTable.cpp"
 #include "settings.cpp"
 #include "stats.cpp"
+#include "logs.cpp"
 #include "runtime.cpp"
 #include "ledArray.cpp"
 
@@ -11,20 +12,22 @@
 #include <ftxui/component/component.hpp>
 #include <vector>
 #include <string>
-
+#include "../simvm.h"
 /**
  * @brief The main UI component
  * 
  * @param filePath The filepath from the program argument
+ * 
  * @param fileLines The lines of code from the file
  * 
  * @return ftxui::Component The component representing the application
  */
-ftxui::Component Document(const std::string &filePath, const std::vector<std::string>& fileLines) {
+ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> &fileLines, PicSimulatorVM &vm) {
     using namespace ftxui;
 
     // UI Variables
     static bool statsVisible = false;
+    static bool logsVisible = false;
     static int editorRegistersWidth = 33;
     static int currentLine = 0;
     
@@ -43,8 +46,8 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
     registerValues[16][6] = "FF"; // TRISB
     registerValues[0][3] = "18"; // STATUS
 
-    auto controlsComponent = Controls(&statsVisible);
-    auto runtimeComponent = Runtime();
+    auto controlsComponent = Controls(&statsVisible, &logsVisible, vm);
+    auto runtimeComponent = Runtime(vm);
     auto ledArrayComponent = LedArray(registerValues[0][6], registerValues[16][6]);
     auto editorComponent = Editor(filePath, fileLines, currentLine);
     auto registerTableComponent = RegisterTable(registerValues);
@@ -55,6 +58,7 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
         registerValues[16][5], // TRISA
         registerValues[16][6]  // TRISB
     );
+    auto logsComponent = Logs();
     auto statsComponent = Stats(
         registerValues[0][2], // program counter low
         registerValues[1][2], // program counter high latch
@@ -80,6 +84,7 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
 
     auto appLayout = Container::Vertical({
         controlsComponent,
+        logsComponent,
         statsComponent,
         settingsComponent,
         editorRegistersSplitter
@@ -87,6 +92,7 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
 
     auto document_renderer = Renderer(appLayout, [
         controlsComponent,
+        logsComponent,
         statsComponent,
         settingsComponent,
         editorRegistersSplitter,
@@ -95,6 +101,7 @@ ftxui::Component Document(const std::string &filePath, const std::vector<std::st
     ] {
         return vbox({
             controlsComponent->Render(),
+            logsVisible ? logsComponent->Render() : vbox({}) | size(WIDTH, EQUAL, 0),
             statsVisible ? statsComponent->Render() : vbox({}) | size(WIDTH, EQUAL, 0),
             hbox({
                 settingsComponent->Render() | flex | size(WIDTH, EQUAL, 40),

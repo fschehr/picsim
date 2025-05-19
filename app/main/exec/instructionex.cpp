@@ -72,7 +72,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 return programCounter;
             }
 
-            std::cout << "Program counter is: " << programCounter << std::endl;
+            Logger::info("Program counter is: " + std::to_string(programCounter));
 
             // Fetch and decode instruction
             setInstructionRegister(programMemory.get(programCounter));
@@ -118,14 +118,120 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                     jumpExecutionUnit.executeGOTO(instruction);
                     updateRuntimeCounter(2);
                     break;
-                // Add other cases for byte and bit operations
+                //byte.cpp
+                case Instruction::OperationCode::ADDWF:
+                    byteAndControlExecutionUnit.executeADDWF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::ANDWF:
+                    byteAndControlExecutionUnit.executeANDWF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::XORWF:
+                    byteAndControlExecutionUnit.executeXORWF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::SUBWF:
+                    byteAndControlExecutionUnit.executeSUBWF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::CLRW:
+                    byteAndControlExecutionUnit.executeCLRW(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::MOVWF:
+                    byteAndControlExecutionUnit.executeMOVWF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::SWAPF:
+                    byteAndControlExecutionUnit.executeSWAPF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::RETURN:
+                    jumpExecutionUnit.executeRETURN(instruction);
+                    updateRuntimeCounter(2);
+                    break;
+                case Instruction::OperationCode::CLRF:
+                    byteAndControlExecutionUnit.executeCLRF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::COMF:
+                    byteAndControlExecutionUnit.executeCOMF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::DECF:
+                    byteAndControlExecutionUnit.executeDECF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::INCF:
+                    byteAndControlExecutionUnit.executeINCF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::MOVF:
+                    byteAndControlExecutionUnit.executeMOVF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::IORWF:
+                    byteAndControlExecutionUnit.executeIORWF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::IORWF:
+                    byteAndControlExecutionUnit.executeIORWF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::DECFSZ:
+                    byteAndControlExecutionUnit.executeDECFSZ(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::INCFSZ:
+                    byteAndControlExecutionUnit.executeINCFSZ(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::RLF:
+                    byteAndControlExecutionUnit.executeRLF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::RRF:
+                    byteAndControlExecutionUnit.executeRRF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::NOP:
+                    byteAndControlExecutionUnit.executeNOP(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::SWAPF:
+                    byteAndControlExecutionUnit.executeSWAPF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::RETFIE:
+                    jumpExecutionUnit.executeRETFIE(instruction);
+                    updateRuntimeCounter(2);
+                    break;
+                //bit.cpp
+                case Instruction::OperationCode::BCF:
+                    bitExecutionUnit.executeBCF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::BSF:
+                    bitExecutionUnit.executeBSF(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::BTFSC:
+                    bitExecutionUnit.executeBTFSC(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::BTFSS:
+                    bitExecutionUnit.executeBTFSS(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                
                 default:
                     throw std::runtime_error("Unsupported instruction code");
             }
         } catch (const std::out_of_range& e) {
-            std::cerr << e.what() << std::endl;
+            Logger::warning(std::string("Out of range error during execution: ") + e.what());
         } catch (const std::runtime_error& e) {
-            std::cerr << e.what() << std::endl;
+            Logger::warning(std::string("Runtime error during execution: ") + e.what());
         }
 
         updateTimer();
@@ -158,6 +264,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         ram.set(TRISB, 255);
         ram.set(EECON1, 0x00);
         ram.set(EECON2, 0x00);
+        Logger::info("Simulator reset");
     }
     int InstructionExecution::getWorkingRegister() {
         return workingRegister;
@@ -223,8 +330,13 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     }
 
     void InstructionExecution::updateRuntimeCounter(int cycles) {
-        double timePerCycle = 4000000.0 / frequency;
-        runtimeCounter += timePerCycle * cycles;
+        // Interne Zählung für die Laufzeit
+        runtimeCounter += cycles;
+        
+        // Callback aufrufen, wenn verfügbar
+        if (cycleUpdateCallback) {
+            cycleUpdateCallback(cycles);
+        }
     }
 
     void InstructionExecution::updateTimer() {
