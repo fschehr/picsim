@@ -3,8 +3,14 @@
 #include <sstream>
 #include "instruction.h"
 
-Instruction::Instruction(OperationCode opc, int arguments, int argument2)
-    : opc_(opc), arguments_{arguments, argument2} {}
+Instruction::Instruction() = default;
+Instruction::~Instruction() = default;
+
+Instruction::Instruction(OperationCode opc, std::initializer_list<int> args)
+    : opc_(opc), arguments_(args) {}
+
+Instruction::Instruction(OperationCode opc, const std::vector<int>& args)
+    : opc_(opc), arguments_(args) {}
 
 Instruction::OperationCode Instruction::getOpc() const {
     return opc_;

@@ -2,6 +2,7 @@
 #define LITERALEX_H
 
 #include "../instruction.h"
+#include "../logger.h"
 
 class InstructionExecution;
 

@@ -10,7 +10,9 @@ set(CMAKE_EXECUTABLE_SUFFIX ".out")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#add_subdirectory(third_party/ftxui)
+add_subdirectory(third_party/ftxui)
+
+add_subdirectory(grid-container-ftxui)
 
 # Add source files
 set(SOURCES
@@ -25,6 +27,10 @@ set(SOURCES
     app/main/fileReader.h
     app/main/instruction.cpp
     app/main/instruction.h
+    app/main/logger.cpp
+    app/main/logger.h
+    app/main/utils.cpp
+    app/main/utils.hpp
     app/main/memory/eeprom.cpp
     app/main/memory/eeprom.h
     app/main/memory/program.cpp
@@ -50,8 +56,10 @@ set(SOURCES
 add_executable(picsim ${SOURCES})
 
 # Add needed ftxui library stuff
-#target_link_libraries(picsim
-#    PRIVATE ftxui::screen # screen buffer, where elements (UI) are drawn on
-#    PRIVATE ftxui::dom # defines Elements that are drawn on the screen
-#    PRIVATE ftxui::component # components allowing user interaction
-#)
+target_link_libraries(picsim
+    PRIVATE
+    ftxui::screen # screen buffer, where elements (UI) are drawn on
+    ftxui::dom # defines Elements that are drawn on the screen
+    ftxui::component # components allowing user interaction
+    ftxui-grid-container
+)

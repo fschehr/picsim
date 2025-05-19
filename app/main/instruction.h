@@ -4,7 +4,9 @@
 #include <vector>
 #include <string>
 #include <ostream>
+#include <initializer_list>
 #include "memory/ram.h"
+#include "logger.h"
 
 class Instruction {
 public:
@@ -14,7 +16,10 @@ public:
         ADDLW, ANDLW, CALL, CLRWDT, GOTO, IORLW, MOVLW, RETFIE, RETLW, RETURN, SLEEP, SUBLW, XORLW
     };
 
-    Instruction(OperationCode opc, int arguments = 0, int argument2 = 0);
+    Instruction();
+    ~Instruction();
+    Instruction(OperationCode opc, std::initializer_list<int> args);
+    Instruction(OperationCode opc, const std::vector<int>& args);
     OperationCode getOpc() const;
     std::vector<int> getArguments() const;
     std::string getArgumentsAsString() const;
