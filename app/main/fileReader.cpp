@@ -14,7 +14,10 @@ void Logger::warning(const std::string& message) {
 
 std::vector<std::string> FileReader::read(const std::string& filePath) {
     try {
-        Logger::info("Reading file");
+        Logger::info("Reading file" + filePath);
+        if (filePath.empty()) {
+            throw std::invalid_argument("kein Filepath");
+        }
         std::ifstream file(filePath);
         if (!file.is_open()) {
             throw std::runtime_error("Datei kann nicht geffnet werden");
