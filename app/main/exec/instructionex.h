@@ -25,11 +25,7 @@ class BitExecution;
 
 class InstructionExecution {
 private:
-    uint8_t workingRegister;
-    uint16_t instructionRegister;
-    int programCounter;
-    double runtimeCounter;
-    double frequency;
+    
 
     ProgramMemory<uint16_t>& programMemory;
     RamMemory<uint8_t>& ram;
@@ -62,6 +58,11 @@ public:
     int execute();
     void reset();
     
+    uint8_t workingRegister;
+    uint16_t instructionRegister;
+    int programCounter;
+    int runtimeCounter;
+
     // Setter für die Callback-Funktion
     void setCycleUpdateCallback(std::function<void(int)> callback) {
         cycleUpdateCallback = callback;
@@ -70,7 +71,7 @@ public:
     void setInstructionRegister(uint16_t value);
     void setProgramCounter(int value);
     void setWorkingRegister(uint8_t value);
-    void setRuntimeCounter(double value);
+    void setRuntimeCounter(int value);
 
     void setZeroFlag();
 

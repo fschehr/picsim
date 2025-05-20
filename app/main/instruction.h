@@ -24,6 +24,7 @@ public:
     std::vector<int> getArguments() const;
     std::string getArgumentsAsString() const;
     RamMemory<uint8_t>::Bank getBank() const;
+    std::string toString() const;
 private:
     OperationCode opc_;
     std::vector<int> arguments_;

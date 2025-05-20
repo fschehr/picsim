@@ -26,7 +26,7 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
     auto GoButton = Button("Go", [&vm] { vm.execute(); });
     auto ResetButton = Button("Reset", [&vm] { vm.reset(); });
     auto IgnoreButton = Button("Ignore", [] { 1 + 1; }); // TODO:
-    auto StepInButton = Button("Step In", [] { 1 + 1; }); // TODO:
+    auto StepInButton = Button("Step In", [&vm] { vm.executeStep(); });
     auto StepOutButton = Button("Step Out", [] { 1 + 1; }); // TODO:
     auto StepOverButton = Button("Step Over", [] { 1 + 1; }); // TODO:
     

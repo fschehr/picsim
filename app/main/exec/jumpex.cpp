@@ -2,11 +2,13 @@
 #include "instructionex.h"
 #include "../instruction.h"
 #include "../memory/ram.h"
+#include "../logger.h"
 #include <cstdint>
 
     JumpExecution::JumpExecution(InstructionExecution& executor) : executor(executor) {}
 
     void JumpExecution::executeCALL(const Instruction& instruction) {
+        Logger::info("executing " + instruction.toString());
         // Save address of next instruction to stack memory
         executor.pushStack(executor.getProgramCounter());
 
@@ -26,6 +28,7 @@
      * @param instruction Instruction consisting of OPC and arguments
      */
     void JumpExecution::executeGOTO(const Instruction& instruction) {
+        Logger::info("executing " + instruction.toString());
         int pclathBits = (executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[9].address) & 0b00011000) << 8;
 
         int address = instruction.getArguments()[0]; // Load jump address

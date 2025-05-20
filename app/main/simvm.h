@@ -40,6 +40,8 @@ public:
     short microseconds = 100;
     short cycles;
     int runtime;
+    InstructionExecution executor;
+    int currentLine = 0;
 private:
     int ramBankSize = 128;
     int programMemorySize = 1024;
@@ -52,7 +54,7 @@ private:
     StackMemory<int> stack;
     EepromMemory<uint8_t> eeprom;
     Decoder decoder;
-    InstructionExecution executor;
+    
 
     bool running = false;
     bool loaded = false;

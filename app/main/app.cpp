@@ -48,9 +48,10 @@ int main(int argc, char* argv[]) {
         int lineCount = 0;
         short* parsedLines = parser.parseToShort(filePath, lineCount);
         std::vector<short> lines(parsedLines, parsedLines + lineCount);
-        for (const auto& line : lines) {
-            Logger::info("Parsed line: " + std::to_string(line));
+        for (int i = 0; i < lines.size(); i++){
+            Logger::info(parsedLines);
         }
+        
 
         vm.initialize(lines);
     } catch (const std::exception& e) {

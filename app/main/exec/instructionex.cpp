@@ -39,10 +39,8 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
           workingRegister(0), 
           instructionRegister(0), 
           programCounter(0),
-          runtimeCounter(0.0), 
-          frequency(4000000.0) 
-    {
-    }
+          runtimeCounter(0)
+    { }
 
     void InstructionExecution::init() {
         // Observe RAM memory for detecting reading/writing the EEPROM
@@ -240,7 +238,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         setInstructionRegister(0x00);
 
         // Initialize runtime counter
-        setRuntimeCounter(0.0);
+        setRuntimeCounter(0);
 
         // Initialize special function registers
         std::vector<RamMemory<uint8_t>::SFR> sfrEntries = RamMemory<uint8_t>::SFR::entries();
@@ -376,7 +374,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         workingRegister = value;
     }
 
-    void InstructionExecution::setRuntimeCounter(double value) {
+    void InstructionExecution::setRuntimeCounter(int value) {
         runtimeCounter = value;
     }
 

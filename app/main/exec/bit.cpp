@@ -1,11 +1,13 @@
 #include "instructionex.h"
 #include "../instruction.h"
 #include "../memory/ram.h"
+#include "../logger.h"
 #include <cstdint>
 
     BitExecution::BitExecution(InstructionExecution& executor) : executor(executor) {}
 
     void BitExecution::executeBCF(const Instruction& instruction) {
+        Logger::info("executing " + instruction.toString());
         int address = executor.getFileAddress(instruction);
         RamMemory<uint8_t>::Bank bank = executor.getSelectedBank(instruction);
 
@@ -23,6 +25,7 @@
      * @param instruction Instruction consisting of OPC and arguments.
      */
     void BitExecution::executeBSF(const Instruction& instruction) {
+        Logger::info("executing " + instruction.toString());
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -41,6 +44,7 @@
      * @param instruction Instruction consisting of OPC and arguments.
      */
     void BitExecution::executeBTFSC(const Instruction& instruction) {
+        Logger::info("executing " + instruction.toString());
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 
@@ -60,6 +64,7 @@
      * @param instruction Instruction consisting of OPC and arguments.
      */
     void BitExecution::executeBTFSS(const Instruction& instruction) {
+        Logger::info("executing " + instruction.toString());
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
 

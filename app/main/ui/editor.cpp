@@ -6,6 +6,7 @@
 #include <string>
 #include <memory>
 #include <iostream>
+#include "../logger.h"
 
 /**
  * @brief Creates the editor component for displaying lines of code.

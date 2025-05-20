@@ -20,6 +20,16 @@ std::vector<int> Instruction::getArguments() const {
     return arguments_;
 }
 
+std::string Instruction::toString() const {
+    std::ostringstream oss;
+    oss << opc_;
+    if (!arguments_.empty()) {
+        oss << " " << getArgumentsAsString();
+    }
+    return oss.str();
+}
+
+
 std::string Instruction::getArgumentsAsString() const {
     std::ostringstream oss;
     oss << "[";
@@ -42,6 +52,8 @@ RamMemory<uint8_t>::Bank Instruction::getBank() const {
     }
     return RamMemory<uint8_t>::Bank::BANK_0; // Default case
 }
+
+
 
 std::ostream& operator<<(std::ostream& os, Instruction::OperationCode opc) {
     switch (opc) {
