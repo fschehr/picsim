@@ -12,6 +12,7 @@
 #include <thread>
 #include <chrono>
 #include <sstream>
+#include <functional>
 
 template class RamMemory<uint8_t>;
 template class ProgramMemory<uint16_t>;
@@ -33,7 +34,7 @@ std::string ConcreteInstruction::getConcArguments() {
 }
 
 PicSimulatorVM::PicSimulatorVM()
-    : ram(ramBankSize), program(programMemorySize), stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {
+    : ram(ramBankSize), program(programMemorySize), stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {   
     // Logger auf Dateiausgabe umstellen
     Logger::setOutputToFile();
     Logger::info("Simulator constructed");

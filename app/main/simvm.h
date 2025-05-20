@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <thread>
+#include <functional>
 #include "instruction.h"
 #include "memory/program.h"
 #include "memory/stack.h"
@@ -42,7 +43,10 @@ public:
     int runtime;
     InstructionExecution executor;
     int currentLine = 0;
-    StackMemory<int> stack;
+
+    // Add getter for stack
+    StackMemory<int>& getStack() { return stack; }
+
 private:
     int ramBankSize = 128;
     int programMemorySize = 1024;
@@ -52,10 +56,9 @@ private:
     RamMemory<uint8_t> ram;
     ProgramMemory<uint16_t> program;
     std::vector<Instruction*> programMemory;
-    
+    StackMemory<int> stack;
     EepromMemory<uint8_t> eeprom;
     Decoder decoder;
-    
 
     bool running = false;
     bool loaded = false;

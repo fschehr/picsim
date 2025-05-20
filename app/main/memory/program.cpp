@@ -1,6 +1,7 @@
 #include "program.h"
 #include <stdexcept>
 #include <mutex>
+#include <iostream>
 
 // Constructor
 template <typename T>

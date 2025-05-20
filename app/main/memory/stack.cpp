@@ -4,7 +4,9 @@
 #include <mutex>
 
 template <typename T>
-StackMemory<T>::StackMemory(size_t size) : memory(size), top(-1), initial_size(size) {}
+StackMemory<T>::StackMemory(size_t size) : memory(size), top(-1), initial_size(size) {
+    
+}
 
 template <typename T>
 void StackMemory<T>::push(const T& value) {

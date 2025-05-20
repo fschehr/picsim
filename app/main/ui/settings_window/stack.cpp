@@ -22,10 +22,8 @@ ftxui::Component Stack(PicSimulatorVM &vm) {
 
     auto container = Container::Vertical({
 
-    });
-
-    auto registers_renderer = Renderer(container, [&vm] {
-        auto stackCopy = vm.stack.getStackContents();
+    });    auto registers_renderer = Renderer(container, [&vm] {
+        auto stackCopy = vm.getStack().getStackContents();
         std::vector<std::wstring> stackDisplay(8, L"0000");
         for (size_t i = 0; i < 8; ++i) {
             if (i < stackCopy.size()) {

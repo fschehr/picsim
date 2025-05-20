@@ -39,10 +39,10 @@ int main(int argc, char* argv[]) {
     // }
 
     std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> fileLines = parser.parseToPair(filePath);
-    
+
     // Initialize the simulator
     PicSimulatorVM vm;
-    
+
     try {
         
         int lineCount = 0;
