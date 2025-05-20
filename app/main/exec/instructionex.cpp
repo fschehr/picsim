@@ -80,10 +80,14 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
 
             Instruction instruction = decoder.decode(instructionRegister);
 
-            // Execute instruction
+            //literalex.cpp
             switch (instruction.getOpc()) {
                 case Instruction::OperationCode::ADDLW:
                     literalExecutionUnit.executeADDLW(instruction);
+                    updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::SUBLW:
+                    literalExecutionUnit.executeSUBLW(instruction);
                     updateRuntimeCounter(1);
                     break;
                 case Instruction::OperationCode::ANDLW:
@@ -92,10 +96,6 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                     break;
                 case Instruction::OperationCode::MOVLW:
                     literalExecutionUnit.executeMOVLW(instruction);
-                    updateRuntimeCounter(1);
-                    break;
-                case Instruction::OperationCode::SUBLW:
-                    literalExecutionUnit.executeSUBLW(instruction);
                     updateRuntimeCounter(1);
                     break;
                 case Instruction::OperationCode::IORLW:
@@ -110,6 +110,8 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                     literalExecutionUnit.executeRETLW(instruction);
                     updateRuntimeCounter(2);
                     break;
+
+                //jumpex.cpp
                 case Instruction::OperationCode::CALL:
                     jumpExecutionUnit.executeCALL(instruction);
                     updateRuntimeCounter(2);
@@ -118,6 +120,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                     jumpExecutionUnit.executeGOTO(instruction);
                     updateRuntimeCounter(2);
                     break;
+
                 //byte.cpp
                 case Instruction::OperationCode::ADDWF:
                     byteAndControlExecutionUnit.executeADDWF(instruction);
@@ -136,20 +139,16 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                     updateRuntimeCounter(1);
                     break;
                 case Instruction::OperationCode::CLRW:
-                    byteAndControlExecutionUnit.executeCLRW(instruction);
+                    byteAndControlExecutionUnit.executeCLRW();
                     updateRuntimeCounter(1);
+                    break;
+                case Instruction::OperationCode::RETURN:
+                    byteAndControlExecutionUnit.executeRETURN();
+                    updateRuntimeCounter(2);
                     break;
                 case Instruction::OperationCode::MOVWF:
                     byteAndControlExecutionUnit.executeMOVWF(instruction);
                     updateRuntimeCounter(1);
-                    break;
-                case Instruction::OperationCode::SWAPF:
-                    byteAndControlExecutionUnit.executeSWAPF(instruction);
-                    updateRuntimeCounter(1);
-                    break;
-                case Instruction::OperationCode::RETURN:
-                    jumpExecutionUnit.executeRETURN(instruction);
-                    updateRuntimeCounter(2);
                     break;
                 case Instruction::OperationCode::CLRF:
                     byteAndControlExecutionUnit.executeCLRF(instruction);
@@ -175,10 +174,6 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                     byteAndControlExecutionUnit.executeIORWF(instruction);
                     updateRuntimeCounter(1);
                     break;
-                case Instruction::OperationCode::IORWF:
-                    byteAndControlExecutionUnit.executeIORWF(instruction);
-                    updateRuntimeCounter(1);
-                    break;
                 case Instruction::OperationCode::DECFSZ:
                     byteAndControlExecutionUnit.executeDECFSZ(instruction);
                     updateRuntimeCounter(1);
@@ -196,7 +191,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                     updateRuntimeCounter(1);
                     break;
                 case Instruction::OperationCode::NOP:
-                    byteAndControlExecutionUnit.executeNOP(instruction);
+                    byteAndControlExecutionUnit.executeNOP();
                     updateRuntimeCounter(1);
                     break;
                 case Instruction::OperationCode::SWAPF:
@@ -204,9 +199,10 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                     updateRuntimeCounter(1);
                     break;
                 case Instruction::OperationCode::RETFIE:
-                    jumpExecutionUnit.executeRETFIE(instruction);
+                    byteAndControlExecutionUnit.executeRETFIE(instruction);
                     updateRuntimeCounter(2);
                     break;
+
                 //bit.cpp
                 case Instruction::OperationCode::BCF:
                     bitExecutionUnit.executeBCF(instruction);
