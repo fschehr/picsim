@@ -39,17 +39,17 @@ int main(int argc, char* argv[]) {
     // }
 
     std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> fileLines = parser.parseToPair(filePath);
-
+    
     // Initialize the simulator
     PicSimulatorVM vm;
-
+    
     try {
         
         int lineCount = 0;
         short* parsedLines = parser.parseToShort(filePath, lineCount);
         std::vector<short> lines(parsedLines, parsedLines + lineCount);
-        for (int i = 0; i < lines.size(); i++){
-            Logger::info(parsedLines);
+        for(int i = 0; i < lineCount; ++i) {
+            std::cout << lines[i] << std::endl;
         }
         
 

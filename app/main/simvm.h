@@ -42,6 +42,7 @@ public:
     int runtime;
     InstructionExecution executor;
     int currentLine = 0;
+    StackMemory<int> stack;
 private:
     int ramBankSize = 128;
     int programMemorySize = 1024;
@@ -51,7 +52,7 @@ private:
     RamMemory<uint8_t> ram;
     ProgramMemory<uint16_t> program;
     std::vector<Instruction*> programMemory;
-    StackMemory<int> stack;
+    
     EepromMemory<uint8_t> eeprom;
     Decoder decoder;
     

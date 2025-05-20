@@ -96,6 +96,7 @@ void PicSimulatorVM::reset() {
     Logger::info("Resetting simulator");
     stop(); // Das beendet den Thread und setzt running auf false
     executor.reset();
+    stack.clear(); // Leert den Stack
     start(); // Setzt running wieder auf true
 }
 

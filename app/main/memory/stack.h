@@ -15,11 +15,13 @@ public:
     T peek() const;
     bool isEmpty() const;
     bool isFull() const;
-
+    void clear();
+    std::vector<T> getStackContents() const ;
 private:
     std::vector<T> memory;
     int top;
     mutable std::mutex mutex;
+    const size_t initial_size; // Make initial_size const
 };
 
 #endif // STACK_H

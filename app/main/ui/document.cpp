@@ -56,7 +56,8 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
         registerValues[0][5], // Port A Pins
         registerValues[0][6], // Port B Pins
         registerValues[16][5], // TRISA
-        registerValues[16][6]  // TRISB
+        registerValues[16][6],  // TRISB
+        vm
     );
     auto logsComponent = Logs();
     auto statsComponent = Stats(

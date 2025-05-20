@@ -17,7 +17,8 @@ ftxui::Component Settings(
     std::string &portAHex,
     std::string &portBHex,
     std::string &trisAHex,
-    std::string &trisBHex
+    std::string &trisBHex,
+    PicSimulatorVM &vm
 ) {
     using namespace ftxui;
 
@@ -31,7 +32,7 @@ ftxui::Component Settings(
         trisBHex
     );
     auto flagsComponent = Flags();
-    auto stackComponent = Stack();
+    auto stackComponent = Stack(vm);
 
     auto container = Container::Vertical({
         flagsComponent,
