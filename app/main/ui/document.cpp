@@ -34,18 +34,6 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
     // Sim Variables
     static std::string registerValues[32][8] = {};
 
-    // Initialize all registers to "00"
-    for (int i = 0; i < 32; ++i) {
-        for (int j = 0; j < 8; ++j) {
-            registerValues[i][j] = "00";
-        }
-    }
-
-    // Overwrite registers with their initial values
-    registerValues[16][5] = "1F"; // TRISA
-    registerValues[16][6] = "FF"; // TRISB
-    registerValues[0][3] = "18"; // STATUS
-
     auto controlsComponent = Controls(&statsVisible, &logsVisible, vm);
     auto runtimeComponent = Runtime(vm);
     auto ledArrayComponent = LedArray(registerValues[0][6], registerValues[16][6]);
@@ -92,6 +80,7 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
     });
 
     auto document_renderer = Renderer(appLayout, [
+        &vm,
         controlsComponent,
         logsComponent,
         statsComponent,
@@ -100,6 +89,26 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
         runtimeComponent,
         ledArrayComponent
     ] {
+        for (int i = 0; i < 32; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                // Berechne die korrekte RAM-Adresse (8 Bytes pro Bank-Zeile)
+                uint8_t value = vm.executor.getRamContent(i * 8 + j);
+                Logger::info("Register " + std::to_string(i * 8 + j) + ": " + std::to_string(value));
+                std::stringstream ss;
+                ss << std::hex << std::uppercase << static_cast<int>(value);
+                registerValues[i][j] = ss.str();
+                Logger::info("Register " + std::to_string(i * 8 + j) + ": " + registerValues[i][j]);
+                
+                // Stelle sicher, dass der Wert immer zwei Stellen hat
+                if (registerValues[i][j].length() == 1) {
+                    registerValues[i][j] = "0" + registerValues[i][j];
+                }
+                if (registerValues[i][j].length() == 0) {
+                    registerValues[i][j] = "00";
+                }
+            }
+        }
+
         return vbox({
             controlsComponent->Render(),
             logsVisible ? logsComponent->Render() : vbox({}) | size(WIDTH, EQUAL, 0),

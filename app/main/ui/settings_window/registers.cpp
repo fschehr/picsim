@@ -82,13 +82,29 @@ ftxui::Component StatusRegister(std::string &statusHex) {
     return statusRegisters_renderer;
 }
 
-ftxui::Component WRegister() {
+ftxui::Component WRegister(PicSimulatorVM &vm) {
     using namespace ftxui;
 
     static bool wRegBits[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    // std::wstring wRegBits(L"00000000");
     static std::string wRegHex = "00";
 
-    auto wRegister_renderer = Renderer([] {
+    auto wRegister_renderer = Renderer([&vm] {
+        uint8_t wRegCopy = vm.executor.getWorkingRegister();
+        Logger::info("W-Register: " + std::to_string(wRegCopy));
+
+        for (int i = 0; i < 8; i++) {
+            wRegBits[7 - i] = (wRegCopy >> i) & 1;
+        }
+
+        // Update the hex value
+        std::stringstream ss;
+        ss << std::hex << static_cast<int>(wRegCopy);
+        wRegHex = ss.str();
+        if (wRegHex.length() < 2) {
+            wRegHex = "0" + wRegHex;
+        }
+
         return vbox({
             text("W-Register") | center | bgcolor(Color::SeaGreen1) | color(Color::Black),
             text(" ") | center,
@@ -111,11 +127,11 @@ ftxui::Component WRegister() {
     return wRegister_renderer;
 }
 
-ftxui::Component Registers(std::string &statusHex) {
+ftxui::Component Registers(PicSimulatorVM &vm, std::string &statusHex) {
     using namespace ftxui;
 
     auto StatusRegisterComponent = StatusRegister(statusHex);
-    auto WRegisterComponent = WRegister();
+    auto WRegisterComponent = WRegister(vm);
 
     auto container = Container::Vertical({
         StatusRegisterComponent,

@@ -23,6 +23,7 @@ ftxui::Component Settings(
     using namespace ftxui;
 
     auto registersComponent = Registers(
+        vm,
         statusHex
     );
     auto ioPinsComponent = IoPins(
@@ -31,7 +32,9 @@ ftxui::Component Settings(
         trisAHex,
         trisBHex
     );
-    auto flagsComponent = Flags();
+    auto flagsComponent = Flags(
+        vm
+    );
     auto stackComponent = Stack(vm);
 
     auto container = Container::Vertical({

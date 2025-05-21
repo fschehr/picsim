@@ -9,7 +9,7 @@
  * 
  * @return A ftxui::Component presenting the values set in the flags.
  */
-ftxui::Component Flags() {
+ftxui::Component Flags(PicSimulatorVM &vm) {
     using namespace ftxui;
 
     static bool zFlagSet = false;
@@ -17,6 +17,10 @@ ftxui::Component Flags() {
     static bool cFlagSet = false;
     
     auto flags_renderer = Renderer([&] {
+        auto zFlagCopy = vm.executor.checkZeroFlag(vm.executor.getWorkingRegister());
+        auto dcFlagCopy = vm.executor.checkDigitCarryFlag(vm.executor.isCarryFlag());
+        auto cFlagCopy = vm.executor.isCarryFlag();
+
         auto table = Table({
             {
                 text("Z") | center | flex,

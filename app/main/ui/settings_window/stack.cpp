@@ -9,20 +9,9 @@
 ftxui::Component Stack(PicSimulatorVM &vm) {
     using namespace ftxui;
 
-    std::vector<std::string> stackValues = {
-        "0000",
-        "0000",
-        "0000",
-        "0000",
-        "0000",
-        "0000",
-        "0000",
-        "0000"
-    };
-
-    auto container = Container::Vertical({
-
-    });    auto registers_renderer = Renderer(container, [&vm] {
+    auto container = Container::Vertical({});
+    
+    auto registers_renderer = Renderer(container, [&vm] {
         auto stackCopy = vm.getStack().getStackContents();
         std::vector<std::wstring> stackDisplay(8, L"0000");
         for (size_t i = 0; i < 8; ++i) {
