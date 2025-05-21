@@ -1,8 +1,6 @@
 #include <ftxui/dom/elements.hpp>
-#include <ftxui/dom/table.hpp>
 #include <ftxui/component/component.hpp>
 #include "../../utils.hpp"
-#include "../../memory/ram.h"
 
 /**
  * @brief Creates the Status Register component.

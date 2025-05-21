@@ -12,9 +12,9 @@
 ftxui::Component Flags(PicSimulatorVM &vm) {
     using namespace ftxui;
 
-    static bool zFlagSet = false;
-    static bool dcFlagSet = false;
-    static bool cFlagSet = false;
+//    static bool zFlagSet = false;
+//    static bool dcFlagSet = false;
+//    static bool cFlagSet = false;
     
     auto flags_renderer = Renderer([&] {
         // auto zFlagCopy = vm.executor.checkZeroFlag(vm.executor.getWorkingRegister());
@@ -30,9 +30,9 @@ ftxui::Component Flags(PicSimulatorVM &vm) {
                 text("C") | center | flex,
             },
             {
-                text(zFlagSet ? "1" : "0") | flex,
-                text(dcFlagSet ? "1" : "0") | flex,
-                text(cFlagSet ? "1" : "0") | flex,
+                text(zFlagCopy ? "1" : "0") | flex,
+                text(dcFlagCopy ? "1" : "0") | flex,
+                text(cFlagCopy ? "1" : "0") | flex,
             }
         });
         
