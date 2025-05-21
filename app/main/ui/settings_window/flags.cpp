@@ -17,8 +17,10 @@ ftxui::Component Flags(PicSimulatorVM &vm) {
     static bool cFlagSet = false;
     
     auto flags_renderer = Renderer([&] {
-        auto zFlagCopy = vm.executor.checkZeroFlag(vm.executor.getWorkingRegister());
-        auto dcFlagCopy = vm.executor.checkDigitCarryFlag(vm.executor.isCarryFlag());
+        // auto zFlagCopy = vm.executor.checkZeroFlag(vm.executor.getWorkingRegister());
+        // auto dcFlagCopy = vm.executor.checkDigitCarryFlag(vm.executor.isCarryFlag());
+        auto zFlagCopy = vm.executor.isZeroFlag();
+        auto dcFlagCopy = vm.executor.isDigitCarryFlag();
         auto cFlagCopy = vm.executor.isCarryFlag();
 
         auto table = Table({

@@ -47,151 +47,133 @@ cmake_ninja_workdir = C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmie
 #############################################
 # Order-only phony target for picsim
 
-build cmake_object_order_depends_target_picsim: phony || cmake_object_order_depends_target_component cmake_object_order_depends_target_dom cmake_object_order_depends_target_screen
+build cmake_object_order_depends_target_picsim: phony || cmake_object_order_depends_target_component cmake_object_order_depends_target_dom cmake_object_order_depends_target_ftxui-grid-container cmake_object_order_depends_target_screen
 
 build CMakeFiles/picsim.dir/app/main/app.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/app.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\app.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/simvm.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/simvm.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\simvm.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/decode.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/decode.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\decode.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/pars.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/pars.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\pars.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/fileReader.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/fileReader.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\fileReader.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/instruction.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/instruction.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\instruction.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
+
+build CMakeFiles/picsim.dir/app/main/logger.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/logger.cpp || cmake_object_order_depends_target_picsim
+  DEP_FILE = CMakeFiles\picsim.dir\app\main\logger.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  OBJECT_DIR = CMakeFiles\picsim.dir
+  OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main
+
+build CMakeFiles/picsim.dir/app/main/utils.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/utils.cpp || cmake_object_order_depends_target_picsim
+  DEP_FILE = CMakeFiles\picsim.dir\app\main\utils.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  OBJECT_DIR = CMakeFiles\picsim.dir
+  OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main
 
 build CMakeFiles/picsim.dir/app/main/memory/eeprom.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/memory/eeprom.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\memory\eeprom.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\memory
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/memory/program.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/memory/program.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\memory\program.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\memory
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/memory/ram.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/memory/ram.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\memory\ram.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\memory
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/memory/stack.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/memory/stack.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\memory\stack.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\memory
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/memory/watcher.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/memory/watcher.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\memory\watcher.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\memory
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/exec/bit.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/exec/bit.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\exec\bit.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\exec
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/exec/byte.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/exec/byte.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\exec\byte.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\exec
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/exec/instructionex.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/exec/instructionex.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\exec\instructionex.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\exec
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/exec/jumpex.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/exec/jumpex.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\exec\jumpex.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\exec
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 build CMakeFiles/picsim.dir/app/main/exec/literalex.cpp.obj: CXX_COMPILER__picsim_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/app/main/exec/literalex.cpp || cmake_object_order_depends_target_picsim
   DEP_FILE = CMakeFiles\picsim.dir\app\main\exec\literalex.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = CMakeFiles\picsim.dir
   OBJECT_FILE_DIR = CMakeFiles\picsim.dir\app\main\exec
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
-  TARGET_PDB = picsim.pdb
 
 
 # =============================================================================
@@ -201,16 +183,15 @@ build CMakeFiles/picsim.dir/app/main/exec/literalex.cpp.obj: CXX_COMPILER__picsi
 #############################################
 # Link the executable picsim.exe
 
-build picsim.exe: CXX_EXECUTABLE_LINKER__picsim_Debug CMakeFiles/picsim.dir/app/main/app.cpp.obj CMakeFiles/picsim.dir/app/main/simvm.cpp.obj CMakeFiles/picsim.dir/app/main/decode.cpp.obj CMakeFiles/picsim.dir/app/main/pars.cpp.obj CMakeFiles/picsim.dir/app/main/fileReader.cpp.obj CMakeFiles/picsim.dir/app/main/instruction.cpp.obj CMakeFiles/picsim.dir/app/main/memory/eeprom.cpp.obj CMakeFiles/picsim.dir/app/main/memory/program.cpp.obj CMakeFiles/picsim.dir/app/main/memory/ram.cpp.obj CMakeFiles/picsim.dir/app/main/memory/stack.cpp.obj CMakeFiles/picsim.dir/app/main/memory/watcher.cpp.obj CMakeFiles/picsim.dir/app/main/exec/bit.cpp.obj CMakeFiles/picsim.dir/app/main/exec/byte.cpp.obj CMakeFiles/picsim.dir/app/main/exec/instructionex.cpp.obj CMakeFiles/picsim.dir/app/main/exec/jumpex.cpp.obj CMakeFiles/picsim.dir/app/main/exec/literalex.cpp.obj | third_party/ftxui/libftxui-screen.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-component.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-screen.a || third_party/ftxui/libftxui-component.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-screen.a
+build picsim.exe: CXX_EXECUTABLE_LINKER__picsim_Debug CMakeFiles/picsim.dir/app/main/app.cpp.obj CMakeFiles/picsim.dir/app/main/simvm.cpp.obj CMakeFiles/picsim.dir/app/main/decode.cpp.obj CMakeFiles/picsim.dir/app/main/pars.cpp.obj CMakeFiles/picsim.dir/app/main/fileReader.cpp.obj CMakeFiles/picsim.dir/app/main/instruction.cpp.obj CMakeFiles/picsim.dir/app/main/logger.cpp.obj CMakeFiles/picsim.dir/app/main/utils.cpp.obj CMakeFiles/picsim.dir/app/main/memory/eeprom.cpp.obj CMakeFiles/picsim.dir/app/main/memory/program.cpp.obj CMakeFiles/picsim.dir/app/main/memory/ram.cpp.obj CMakeFiles/picsim.dir/app/main/memory/stack.cpp.obj CMakeFiles/picsim.dir/app/main/memory/watcher.cpp.obj CMakeFiles/picsim.dir/app/main/exec/bit.cpp.obj CMakeFiles/picsim.dir/app/main/exec/byte.cpp.obj CMakeFiles/picsim.dir/app/main/exec/instructionex.cpp.obj CMakeFiles/picsim.dir/app/main/exec/jumpex.cpp.obj CMakeFiles/picsim.dir/app/main/exec/literalex.cpp.obj | third_party/ftxui/libftxui-screen.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-component.a grid-container-ftxui/libftxui-grid-container.a third_party/ftxui/libftxui-component.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-screen.a || grid-container-ftxui/libftxui-grid-container.a third_party/ftxui/libftxui-component.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-screen.a
   FLAGS = -g
-  LINK_LIBRARIES = third_party/ftxui/libftxui-screen.a  third_party/ftxui/libftxui-dom.a  third_party/ftxui/libftxui-component.a  third_party/ftxui/libftxui-dom.a  third_party/ftxui/libftxui-screen.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = third_party/ftxui/libftxui-screen.a  third_party/ftxui/libftxui-dom.a  third_party/ftxui/libftxui-component.a  grid-container-ftxui/libftxui-grid-container.a  third_party/ftxui/libftxui-component.a  third_party/ftxui/libftxui-dom.a  third_party/ftxui/libftxui-screen.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\picsim.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\picsim.dir\
   TARGET_FILE = picsim.exe
   TARGET_IMPLIB = libpicsim.dll.a
-  TARGET_PDB = picsim.pdb
+  TARGET_PDB = picsim.exe.dbg
 
 
 #############################################
@@ -322,8 +303,6 @@ build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/box.cpp.obj: CXX_
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\screen.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\screen.dir\src\ftxui\screen
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\screen.dir\screen.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-screen.pdb
 
 build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/color.cpp.obj: CXX_COMPILER__screen_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/screen/color.cpp || cmake_object_order_depends_target_screen
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -332,8 +311,6 @@ build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/color.cpp.obj: CX
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\screen.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\screen.dir\src\ftxui\screen
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\screen.dir\screen.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-screen.pdb
 
 build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/color_info.cpp.obj: CXX_COMPILER__screen_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/screen/color_info.cpp || cmake_object_order_depends_target_screen
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -342,8 +319,6 @@ build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/color_info.cpp.ob
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\screen.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\screen.dir\src\ftxui\screen
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\screen.dir\screen.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-screen.pdb
 
 build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/image.cpp.obj: CXX_COMPILER__screen_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/screen/image.cpp || cmake_object_order_depends_target_screen
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -352,8 +327,6 @@ build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/image.cpp.obj: CX
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\screen.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\screen.dir\src\ftxui\screen
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\screen.dir\screen.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-screen.pdb
 
 build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/screen.cpp.obj: CXX_COMPILER__screen_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/screen/screen.cpp || cmake_object_order_depends_target_screen
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -362,8 +335,6 @@ build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/screen.cpp.obj: C
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\screen.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\screen.dir\src\ftxui\screen
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\screen.dir\screen.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-screen.pdb
 
 build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/string.cpp.obj: CXX_COMPILER__screen_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/screen/string.cpp || cmake_object_order_depends_target_screen
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -372,8 +343,6 @@ build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/string.cpp.obj: C
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\screen.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\screen.dir\src\ftxui\screen
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\screen.dir\screen.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-screen.pdb
 
 build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/terminal.cpp.obj: CXX_COMPILER__screen_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/screen/terminal.cpp || cmake_object_order_depends_target_screen
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -382,8 +351,6 @@ build third_party/ftxui/CMakeFiles/screen.dir/src/ftxui/screen/terminal.cpp.obj:
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\screen.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\screen.dir\src\ftxui\screen
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\screen.dir\screen.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-screen.pdb
 
 
 # =============================================================================
@@ -398,9 +365,8 @@ build third_party/ftxui/libftxui-screen.a: CXX_STATIC_LIBRARY_LINKER__screen_Deb
   OBJECT_DIR = third_party\ftxui\CMakeFiles\screen.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\screen.dir\screen.pdb
   TARGET_FILE = third_party\ftxui\libftxui-screen.a
-  TARGET_PDB = third_party\ftxui\libftxui-screen.pdb
+  TARGET_PDB = ftxui-screen.a.dbg
 
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target dom
@@ -418,8 +384,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/automerge.cpp.obj: CXX_
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/selection_style.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/selection_style.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -428,8 +392,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/selection_style.cpp.obj
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/blink.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/blink.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -438,8 +400,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/blink.cpp.obj: CXX_COMP
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/bold.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/bold.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -448,8 +408,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/bold.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/border.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/border.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -458,8 +416,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/border.cpp.obj: CXX_COM
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/box_helper.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/box_helper.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -468,8 +424,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/box_helper.cpp.obj: CXX
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/canvas.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/canvas.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -478,8 +432,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/canvas.cpp.obj: CXX_COM
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/clear_under.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/clear_under.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -488,8 +440,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/clear_under.cpp.obj: CX
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/color.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/color.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -498,8 +448,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/color.cpp.obj: CXX_COMP
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/composite_decorator.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/composite_decorator.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -508,8 +456,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/composite_decorator.cpp
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/dbox.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/dbox.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -518,8 +464,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/dbox.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/dim.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/dim.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -528,8 +472,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/dim.cpp.obj: CXX_COMPIL
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/flex.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/flex.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -538,8 +480,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/flex.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/flexbox.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/flexbox.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -548,8 +488,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/flexbox.cpp.obj: CXX_CO
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/flexbox_config.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/flexbox_config.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -558,8 +496,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/flexbox_config.cpp.obj:
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/flexbox_helper.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/flexbox_helper.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -568,8 +504,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/flexbox_helper.cpp.obj:
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/focus.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/focus.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -578,8 +512,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/focus.cpp.obj: CXX_COMP
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/frame.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/frame.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -588,8 +520,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/frame.cpp.obj: CXX_COMP
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/gauge.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/gauge.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -598,8 +528,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/gauge.cpp.obj: CXX_COMP
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/graph.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/graph.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -608,8 +536,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/graph.cpp.obj: CXX_COMP
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/gridbox.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/gridbox.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -618,8 +544,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/gridbox.cpp.obj: CXX_CO
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/hbox.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/hbox.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -628,8 +552,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/hbox.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/hyperlink.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/hyperlink.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -638,8 +560,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/hyperlink.cpp.obj: CXX_
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/inverted.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/inverted.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -648,8 +568,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/inverted.cpp.obj: CXX_C
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/italic.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/italic.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -658,8 +576,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/italic.cpp.obj: CXX_COM
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/linear_gradient.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/linear_gradient.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -668,8 +584,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/linear_gradient.cpp.obj
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/node.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/node.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -678,8 +592,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/node.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/node_decorator.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/node_decorator.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -688,8 +600,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/node_decorator.cpp.obj:
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/paragraph.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/paragraph.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -698,8 +608,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/paragraph.cpp.obj: CXX_
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/reflect.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/reflect.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -708,8 +616,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/reflect.cpp.obj: CXX_CO
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/scroll_indicator.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/scroll_indicator.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -718,8 +624,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/scroll_indicator.cpp.ob
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/selection.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/selection.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -728,8 +632,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/selection.cpp.obj: CXX_
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/separator.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/separator.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -738,8 +640,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/separator.cpp.obj: CXX_
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/size.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/size.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -748,8 +648,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/size.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/spinner.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/spinner.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -758,8 +656,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/spinner.cpp.obj: CXX_CO
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/strikethrough.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/strikethrough.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -768,8 +664,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/strikethrough.cpp.obj: 
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/table.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/table.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -778,8 +672,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/table.cpp.obj: CXX_COMP
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/text.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/text.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -788,8 +680,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/text.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/underlined.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/underlined.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -798,8 +688,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/underlined.cpp.obj: CXX
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/underlined_double.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/underlined_double.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -808,8 +696,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/underlined_double.cpp.o
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/util.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/util.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -818,8 +704,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/util.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/vbox.cpp.obj: CXX_COMPILER__dom_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/dom/vbox.cpp || cmake_object_order_depends_target_dom
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -828,8 +712,6 @@ build third_party/ftxui/CMakeFiles/dom.dir/src/ftxui/dom/vbox.cpp.obj: CXX_COMPI
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\dom.dir\src\ftxui\dom
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
 
 
 # =============================================================================
@@ -844,9 +726,8 @@ build third_party/ftxui/libftxui-dom.a: CXX_STATIC_LIBRARY_LINKER__dom_Debug thi
   OBJECT_DIR = third_party\ftxui\CMakeFiles\dom.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\dom.dir\dom.pdb
   TARGET_FILE = third_party\ftxui\libftxui-dom.a
-  TARGET_PDB = third_party\ftxui\libftxui-dom.pdb
+  TARGET_PDB = ftxui-dom.a.dbg
 
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target component
@@ -864,8 +745,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/animation.c
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/button.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/button.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -874,8 +753,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/button.cpp.
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/catch_event.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/catch_event.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -884,8 +761,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/catch_event
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/checkbox.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/checkbox.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -894,8 +769,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/checkbox.cp
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/collapsible.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/collapsible.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -904,8 +777,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/collapsible
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/component.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/component.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -914,8 +785,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/component.c
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/component_options.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/component_options.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -924,8 +793,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/component_o
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/container.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/container.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -934,8 +801,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/container.c
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/dropdown.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/dropdown.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -944,8 +809,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/dropdown.cp
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/event.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/event.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -954,8 +817,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/event.cpp.o
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/hoverable.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/hoverable.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -964,8 +825,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/hoverable.c
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/input.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/input.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -974,8 +833,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/input.cpp.o
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/loop.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/loop.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -984,8 +841,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/loop.cpp.ob
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/maybe.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/maybe.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -994,8 +849,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/maybe.cpp.o
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/menu.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/menu.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1004,8 +857,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/menu.cpp.ob
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/modal.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/modal.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1014,8 +865,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/modal.cpp.o
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/radiobox.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/radiobox.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1024,8 +873,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/radiobox.cp
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/renderer.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/renderer.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1034,8 +881,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/renderer.cp
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/resizable_split.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/resizable_split.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1044,8 +889,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/resizable_s
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/screen_interactive.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/screen_interactive.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1054,8 +897,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/screen_inte
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/slider.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/slider.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1064,8 +905,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/slider.cpp.
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/terminal_input_parser.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/terminal_input_parser.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1074,8 +913,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/terminal_in
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/util.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/util.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1084,8 +921,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/util.cpp.ob
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/window.cpp.obj: CXX_COMPILER__component_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/src/ftxui/component/window.cpp || cmake_object_order_depends_target_component
   DEFINES = -DFTXUI_MICROSOFT_TERMINAL_FALLBACK -DUNICODE -D_UNICODE
@@ -1094,8 +929,6 @@ build third_party/ftxui/CMakeFiles/component.dir/src/ftxui/component/window.cpp.
   INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/src" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   OBJECT_FILE_DIR = third_party\ftxui\CMakeFiles\component.dir\src\ftxui\component
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
 
 
 # =============================================================================
@@ -1110,9 +943,8 @@ build third_party/ftxui/libftxui-component.a: CXX_STATIC_LIBRARY_LINKER__compone
   OBJECT_DIR = third_party\ftxui\CMakeFiles\component.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = third_party\ftxui\CMakeFiles\component.dir\component.pdb
   TARGET_FILE = third_party\ftxui\libftxui-component.a
-  TARGET_PDB = third_party\ftxui\libftxui-component.pdb
+  TARGET_PDB = ftxui-component.a.dbg
 
 
 #############################################
@@ -1392,15 +1224,277 @@ build third_party/ftxui/doc/CMakeFiles/install/strip.util: CUSTOM_COMMAND third_
 build third_party/ftxui/doc/install/strip: phony third_party/ftxui/doc/CMakeFiles/install/strip.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target ftxui-grid-container
+
+
+#############################################
+# Order-only phony target for ftxui-grid-container
+
+build cmake_object_order_depends_target_ftxui-grid-container: phony || cmake_object_order_depends_target_component cmake_object_order_depends_target_dom cmake_object_order_depends_target_screen
+
+build grid-container-ftxui/CMakeFiles/ftxui-grid-container.dir/src/ftxui-grid-container/grid-container.cpp.obj: CXX_COMPILER__ftxui-grid-container_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/grid-container-ftxui/src/ftxui-grid-container/grid-container.cpp || cmake_object_order_depends_target_ftxui-grid-container
+  DEP_FILE = grid-container-ftxui\CMakeFiles\ftxui-grid-container.dir\src\ftxui-grid-container\grid-container.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  OBJECT_DIR = grid-container-ftxui\CMakeFiles\ftxui-grid-container.dir
+  OBJECT_FILE_DIR = grid-container-ftxui\CMakeFiles\ftxui-grid-container.dir\src\ftxui-grid-container
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target ftxui-grid-container
+
+
+#############################################
+# Link the static library grid-container-ftxui\libftxui-grid-container.a
+
+build grid-container-ftxui/libftxui-grid-container.a: CXX_STATIC_LIBRARY_LINKER__ftxui-grid-container_Debug grid-container-ftxui/CMakeFiles/ftxui-grid-container.dir/src/ftxui-grid-container/grid-container.cpp.obj || third_party/ftxui/libftxui-component.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-screen.a
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = grid-container-ftxui\CMakeFiles\ftxui-grid-container.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = grid-container-ftxui\libftxui-grid-container.a
+  TARGET_PDB = ftxui-grid-container.a.dbg
+
+
+#############################################
+# Utility command for package
+
+build grid-container-ftxui/CMakeFiles/package.util: CUSTOM_COMMAND grid-container-ftxui/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
+  DESC = Run CPack packaging tool...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/package: phony grid-container-ftxui/CMakeFiles/package.util
+
+
+#############################################
+# Utility command for package_source
+
+build grid-container-ftxui/CMakeFiles/package_source.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/cmake-build-debug/CPackSourceConfig.cmake""
+  DESC = Run CPack packaging tool for source...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/package_source: phony grid-container-ftxui/CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build grid-container-ftxui/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build grid-container-ftxui/edit_cache: phony grid-container-ftxui/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build grid-container-ftxui/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S"C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim" -B"C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug""
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/rebuild_cache: phony grid-container-ftxui/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build grid-container-ftxui/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build grid-container-ftxui/CMakeFiles/install.util: CUSTOM_COMMAND grid-container-ftxui/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/install: phony grid-container-ftxui/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build grid-container-ftxui/CMakeFiles/install/local.util: CUSTOM_COMMAND grid-container-ftxui/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/install/local: phony grid-container-ftxui/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build grid-container-ftxui/CMakeFiles/install/strip.util: CUSTOM_COMMAND grid-container-ftxui/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/install/strip: phony grid-container-ftxui/CMakeFiles/install/strip.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target ftxui-grid-container-example
+
+
+#############################################
+# Order-only phony target for ftxui-grid-container-example
+
+build cmake_object_order_depends_target_ftxui-grid-container-example: phony || cmake_object_order_depends_target_component cmake_object_order_depends_target_dom cmake_object_order_depends_target_ftxui-grid-container cmake_object_order_depends_target_screen
+
+build grid-container-ftxui/example/CMakeFiles/ftxui-grid-container-example.dir/main.cpp.obj: CXX_COMPILER__ftxui-grid-container-example_unscanned_Debug C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/grid-container-ftxui/example/main.cpp || cmake_object_order_depends_target_ftxui-grid-container-example
+  DEP_FILE = grid-container-ftxui\example\CMakeFiles\ftxui-grid-container-example.dir\main.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include" -isystem "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+  OBJECT_DIR = grid-container-ftxui\example\CMakeFiles\ftxui-grid-container-example.dir
+  OBJECT_FILE_DIR = grid-container-ftxui\example\CMakeFiles\ftxui-grid-container-example.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target ftxui-grid-container-example
+
+
+#############################################
+# Link the executable grid-container-ftxui\example\ftxui-grid-container-example.exe
+
+build grid-container-ftxui/example/ftxui-grid-container-example.exe: CXX_EXECUTABLE_LINKER__ftxui-grid-container-example_Debug grid-container-ftxui/example/CMakeFiles/ftxui-grid-container-example.dir/main.cpp.obj | grid-container-ftxui/libftxui-grid-container.a third_party/ftxui/libftxui-component.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-screen.a || grid-container-ftxui/libftxui-grid-container.a third_party/ftxui/libftxui-component.a third_party/ftxui/libftxui-dom.a third_party/ftxui/libftxui-screen.a
+  FLAGS = -g
+  LINK_LIBRARIES = grid-container-ftxui/libftxui-grid-container.a  third_party/ftxui/libftxui-component.a  third_party/ftxui/libftxui-dom.a  third_party/ftxui/libftxui-screen.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = grid-container-ftxui\example\CMakeFiles\ftxui-grid-container-example.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = grid-container-ftxui\example\ftxui-grid-container-example.exe
+  TARGET_IMPLIB = grid-container-ftxui\example\libftxui-grid-container-example.dll.a
+  TARGET_PDB = ftxui-grid-container-example.exe.dbg
+
+
+#############################################
+# Utility command for package
+
+build grid-container-ftxui/example/CMakeFiles/package.util: CUSTOM_COMMAND grid-container-ftxui/example/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
+  DESC = Run CPack packaging tool...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/example/package: phony grid-container-ftxui/example/CMakeFiles/package.util
+
+
+#############################################
+# Utility command for package_source
+
+build grid-container-ftxui/example/CMakeFiles/package_source.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/cmake-build-debug/CPackSourceConfig.cmake""
+  DESC = Run CPack packaging tool for source...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/example/package_source: phony grid-container-ftxui/example/CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build grid-container-ftxui/example/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui\example" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build grid-container-ftxui/example/edit_cache: phony grid-container-ftxui/example/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build grid-container-ftxui/example/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui\example" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S"C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim" -B"C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug""
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/example/rebuild_cache: phony grid-container-ftxui/example/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build grid-container-ftxui/example/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build grid-container-ftxui/example/CMakeFiles/install.util: CUSTOM_COMMAND grid-container-ftxui/example/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui\example" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/example/install: phony grid-container-ftxui/example/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build grid-container-ftxui/example/CMakeFiles/install/local.util: CUSTOM_COMMAND grid-container-ftxui/example/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui\example" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/example/install/local: phony grid-container-ftxui/example/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build grid-container-ftxui/example/CMakeFiles/install/strip.util: CUSTOM_COMMAND grid-container-ftxui/example/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Hanno\OneDrive\Code\DHBW Systemnahe Programmierung\picsim\cmake-build-debug\grid-container-ftxui\example" && "C:\Program Files (x86)\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build grid-container-ftxui/example/install/strip: phony grid-container-ftxui/example/CMakeFiles/install/strip.util
+
+# =============================================================================
 # Target aliases.
 
 build component: phony third_party/ftxui/libftxui-component.a
 
 build dom: phony third_party/ftxui/libftxui-dom.a
 
+build ftxui-grid-container: phony grid-container-ftxui/libftxui-grid-container.a
+
+build ftxui-grid-container-example: phony grid-container-ftxui/example/ftxui-grid-container-example.exe
+
+build ftxui-grid-container-example.exe: phony grid-container-ftxui/example/ftxui-grid-container-example.exe
+
 build libftxui-component.a: phony third_party/ftxui/libftxui-component.a
 
 build libftxui-dom.a: phony third_party/ftxui/libftxui-dom.a
+
+build libftxui-grid-container.a: phony grid-container-ftxui/libftxui-grid-container.a
 
 build libftxui-screen.a: phony third_party/ftxui/libftxui-screen.a
 
@@ -1416,7 +1510,21 @@ build screen: phony third_party/ftxui/libftxui-screen.a
 #############################################
 # Folder: C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/cmake-build-debug
 
-build all: phony picsim.exe third_party/ftxui/all
+build all: phony picsim.exe third_party/ftxui/all grid-container-ftxui/all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/cmake-build-debug/grid-container-ftxui
+
+build grid-container-ftxui/all: phony grid-container-ftxui/libftxui-grid-container.a grid-container-ftxui/example/all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/cmake-build-debug/grid-container-ftxui/example
+
+build grid-container-ftxui/example/all: phony grid-container-ftxui/example/ftxui-grid-container-example.exe
 
 # =============================================================================
 
@@ -1446,14 +1554,14 @@ build third_party/ftxui/examples/all: phony
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCCompiler.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCCompilerABI.c C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineRCCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeRCCompiler.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeRCInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystem.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestRCCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CPack.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CPackComponent.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckIncludeFile.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckLibraryExists.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Bruce-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Compaq-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-FindBinUtils.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/HP-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/LCC-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/SDCC-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/SunPro-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/XL-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/XLClang-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/zOS-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindThreads.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-Determine-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/WriteBasicConfigVersionFile.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Templates/CPackConfig.cmake.in C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui-config.cmake.in C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_benchmark.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_coverage.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_export.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_fuzzer.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_install.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_message.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_package.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_set_options.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_test.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/iwyu.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/doc/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/examples/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/ftxui.pc.in CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeCXXCompiler.cmake CMakeFiles/3.30.5/CMakeRCCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeRCInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CPack.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CPackComponent.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckIncludeFile.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckLibraryExists.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindThreads.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/WriteBasicConfigVersionFile.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Templates/CPackConfig.cmake.in C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/grid-container-ftxui/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/grid-container-ftxui/cmake/ftxui.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/grid-container-ftxui/example/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui-config.cmake.in C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_benchmark.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_coverage.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_export.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_fuzzer.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_install.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_message.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_package.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_set_options.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_test.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/iwyu.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/doc/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/examples/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/ftxui.pc.in CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeCXXCompiler.cmake CMakeFiles/3.30.5/CMakeRCCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCCompiler.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCCompilerABI.c C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineRCCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeRCCompiler.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeRCInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystem.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestRCCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CPack.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CPackComponent.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckIncludeFile.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckLibraryExists.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Bruce-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Compaq-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-FindBinUtils.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/HP-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/LCC-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/SDCC-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/SunPro-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/XL-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/XLClang-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/zOS-C-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindThreads.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-Determine-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/WriteBasicConfigVersionFile.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Templates/CPackConfig.cmake.in C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui-config.cmake.in C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_benchmark.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_coverage.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_export.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_fuzzer.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_install.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_message.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_package.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_set_options.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_test.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/iwyu.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/doc/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/examples/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/ftxui.pc.in CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeCXXCompiler.cmake CMakeFiles/3.30.5/CMakeRCCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake: phony
+build C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeRCInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CPack.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CPackComponent.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckIncludeFile.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CheckLibraryExists.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Compiler/GNU.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/FindThreads.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/WriteBasicConfigVersionFile.cmake C$:/Program$ Files$ (x86)/JetBrains/CLion$ 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Templates/CPackConfig.cmake.in C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/grid-container-ftxui/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/grid-container-ftxui/cmake/ftxui.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/grid-container-ftxui/example/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui-config.cmake.in C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_benchmark.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_coverage.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_export.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_fuzzer.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_install.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_message.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_package.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_set_options.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/ftxui_test.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/cmake/iwyu.cmake C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/doc/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/examples/CMakeLists.txt C$:/Users/Hanno/OneDrive/Code/DHBW$ Systemnahe$ Programmierung/picsim/third_party/ftxui/ftxui.pc.in CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeCXXCompiler.cmake CMakeFiles/3.30.5/CMakeRCCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake: phony
 
 
 #############################################

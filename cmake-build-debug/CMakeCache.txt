@@ -347,6 +347,15 @@ FTXUI_MICROSOFT_TERMINAL_FALLBACK:BOOL=ON
 FTXUI_QUIET:BOOL=OFF
 
 //Value Computed by CMake
+ftxui-grid-container_BINARY_DIR:STATIC=C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/cmake-build-debug/grid-container-ftxui
+
+//Value Computed by CMake
+ftxui-grid-container_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+ftxui-grid-container_SOURCE_DIR:STATIC=C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui
+
+//Value Computed by CMake
 ftxui_BINARY_DIR:STATIC=C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/cmake-build-debug/third_party/ftxui
 
 //Value Computed by CMake
@@ -504,7 +513,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

@@ -1,0 +1,215 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						4
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.11"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "third_party/ftxui",
+					"childIndexes" : 
+					[
+						2,
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-third_party.ftxui-Debug-fd1785683ebc60bb5769.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "third_party/ftxui",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						5
+					]
+				},
+				{
+					"build" : "third_party/ftxui/examples",
+					"jsonFile" : "directory-third_party.ftxui.examples-Debug-54c292ed4bcc46b5143c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "third_party/ftxui/examples"
+				},
+				{
+					"build" : "third_party/ftxui/doc",
+					"jsonFile" : "directory-third_party.ftxui.doc-Debug-d76790322a7cb3047329.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "third_party/ftxui/doc"
+				},
+				{
+					"build" : "grid-container-ftxui",
+					"childIndexes" : 
+					[
+						5
+					],
+					"jsonFile" : "directory-grid-container-ftxui-Debug-43fa6723d48694cb054e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "grid-container-ftxui",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "grid-container-ftxui/example",
+					"jsonFile" : "directory-grid-container-ftxui.example-Debug-2a2cc5b03061c6fefbca.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 2,
+					"source" : "grid-container-ftxui/example",
+					"targetIndexes" : 
+					[
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "picsim",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"name" : "ftxui",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4,
+						5
+					],
+					"name" : "ftxui-grid-container",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "component::@ecbb787d4704034fc351",
+					"jsonFile" : "target-component-Debug-3249b0ada1315331f141.json",
+					"name" : "component",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "dom::@ecbb787d4704034fc351",
+					"jsonFile" : "target-dom-Debug-2aa25009b04eec419f90.json",
+					"name" : "dom",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "ftxui-grid-container::@84ee8a8eaed9a9d45a1e",
+					"jsonFile" : "target-ftxui-grid-container-Debug-2d6f7181a5d5fee95fde.json",
+					"name" : "ftxui-grid-container",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "ftxui-grid-container-example::@9a9f52826ea7587e220d",
+					"jsonFile" : "target-ftxui-grid-container-example-Debug-35008d3ed5c48e0c4c9e.json",
+					"name" : "ftxui-grid-container-example",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "picsim::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-picsim-Debug-d49ffa24dd557f7fbcd7.json",
+					"name" : "picsim",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "screen::@ecbb787d4704034fc351",
+					"jsonFile" : "target-screen-Debug-f68cc3c8f84022a1fc8c.json",
+					"name" : "screen",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/cmake-build-debug",
+		"source" : "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

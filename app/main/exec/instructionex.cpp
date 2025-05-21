@@ -281,6 +281,12 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     bool InstructionExecution::isCarryFlag() const {
         return (ram.get(STATUS) & 0x01) != 0;
     }
+    bool InstructionExecution::isZeroFlag() const {
+        return (ram.get(STATUS) & 0x04) != 0;
+    }
+    bool InstructionExecution::isDigitCarryFlag() const {
+        return (ram.get(STATUS) & 0x02) != 0;
+    }
     StackMemory<int>& InstructionExecution::getStack(){
         return stack;
     }

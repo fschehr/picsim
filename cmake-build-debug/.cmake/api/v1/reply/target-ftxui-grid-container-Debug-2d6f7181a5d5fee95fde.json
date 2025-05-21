@@ -1,0 +1,138 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "grid-container-ftxui/libftxui-grid-container.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"grid-container-ftxui/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 5,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 9,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 11,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++17 -fdiagnostics-color=always"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					2
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "screen::@ecbb787d4704034fc351"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "dom::@ecbb787d4704034fc351"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "component::@ecbb787d4704034fc351"
+		}
+	],
+	"id" : "ftxui-grid-container::@84ee8a8eaed9a9d45a1e",
+	"name" : "ftxui-grid-container",
+	"nameOnDisk" : "libftxui-grid-container.a",
+	"paths" : 
+	{
+		"build" : "grid-container-ftxui",
+		"source" : "grid-container-ftxui"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "grid-container-ftxui/include/ftxui-grid-container/grid-container.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "grid-container-ftxui/src/ftxui-grid-container/grid-container.cpp",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

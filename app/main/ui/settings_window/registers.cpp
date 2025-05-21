@@ -2,13 +2,14 @@
 #include <ftxui/dom/table.hpp>
 #include <ftxui/component/component.hpp>
 #include "../../utils.hpp"
+#include "../../memory/ram.h"
 
 /**
  * @brief Creates the Status Register component.
  * 
  * @return ftxui::Component The Status Register component.
  */
-ftxui::Component StatusRegister(std::string &statusHex) {
+ftxui::Component StatusRegister(PicSimulatorVM &vm, std::string &statusHex) {
     using namespace ftxui;
     
     ftxui::Component columns[8] = {};
@@ -21,10 +22,18 @@ ftxui::Component StatusRegister(std::string &statusHex) {
     ftxui::Component buttons[8] = {};
 
     for (int i = 0; i < 8; ++i) {
-        buttons[i] = Button(&status_labels[i], [&statusHex, i] {
+        buttons[i] = Button(&status_labels[i], [&vm, i] {
             statusBits[i] = !statusBits[i];
-            updateHexValue(statusBits, statusHex);
-            status_labels[i] = (statusBits[i]) ? "1" : "0";
+            // Convert statusBits to a hex value
+            uint8_t statusValue = 0;
+            for (int j = 0; j < 8; ++j) {
+                if (statusBits[j]) {
+                    statusValue |= (1 << j);
+                }
+            }
+            vm.executor.setRamContent(RamMemory<uint8_t>::Bank::BANK_0, 0x03, statusValue);
+            // updateHexValue(statusBits, statusHex);
+            // status_labels[i] = (statusBits[i]) ? "1" : "0";
         });
     };
 
@@ -130,7 +139,10 @@ ftxui::Component WRegister(PicSimulatorVM &vm) {
 ftxui::Component Registers(PicSimulatorVM &vm, std::string &statusHex) {
     using namespace ftxui;
 
-    auto StatusRegisterComponent = StatusRegister(statusHex);
+    auto StatusRegisterComponent = StatusRegister(
+        vm,
+        statusHex
+    );
     auto WRegisterComponent = WRegister(vm);
 
     auto container = Container::Vertical({

@@ -94,6 +94,8 @@ public:
     int getFileAddress(const Instruction& instruction) const;
     RamMemory<uint8_t>::Bank getSelectedBank(const Instruction& instruction) ;
     bool isCarryFlag() const;
+    bool isDigitCarryFlag() const;
+    bool isZeroFlag() const;
 };
 
 #endif // INSTRUCTIONEX_H

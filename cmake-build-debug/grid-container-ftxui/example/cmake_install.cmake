@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/third_party/ftxui/doc
+# Install script for directory: C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/grid-container-ftxui/example
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
