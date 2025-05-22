@@ -18,6 +18,7 @@
  */
 ftxui::Component Editor(const std::string &filePath, std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> &fileLines, int &currentLine) {
     using namespace ftxui;
+    currentLine = fileLines[0].first.first;
 
     int lineCount  = fileLines.size();
     int digitsCount = std::to_string(lineCount).length();
@@ -43,14 +44,14 @@ ftxui::Component Editor(const std::string &filePath, std::vector<std::pair<std::
         // Renders the line with the checkbox and the code.
         auto line = Renderer(checkbox, [i, checkbox, &fileLines, currentLine, digitsCount] {
             return hbox({
-                text(" ") | ( currentLine == i ? bgcolor(Color::Orange1) : bgcolor(Color::Black)),
+                text(" ") | ( fileLines[i].first.first ? bgcolor(Color::Orange1) : bgcolor(Color::Black)),
                 text(std::string(digitsCount - std::to_string(i + 1).length(), ' ') + std::to_string(i + 1))
-                    | ( currentLine == i ? bgcolor(Color::Orange1)  | color(Color::Black) : bgcolor(Color::Black) | color(Color::GrayDark))
+                    | ( fileLines[i].first.first ? bgcolor(Color::Orange1)  | color(Color::Black) : bgcolor(Color::Black) | color(Color::GrayDark))
                     | align_right
                     | size(WIDTH, EQUAL, digitsCount),
-                text(" ") | ( currentLine == i ? bgcolor(Color::Orange1) : bgcolor(Color::Black)),
-                checkbox->Render() | ( currentLine == i ? bgcolor(Color::Orange1) | color(Color::Black) : bgcolor(Color::Black) | color(Color::White)),
-                (text(fileLines[i].second.second) | ( currentLine == i ? bgcolor(Color::Orange1) | color(Color::Black) : *fileLines[i].first.second ? bgcolor(Color::IndianRed1) | color(Color::Black) : bgcolor(Color::Black)) | xflex_grow) 
+                text(" ") | ( fileLines[i].first.first ? bgcolor(Color::Orange1) : bgcolor(Color::Black)),
+                checkbox->Render() | ( fileLines[i].first.first ? bgcolor(Color::Orange1) | color(Color::Black) : bgcolor(Color::Black) | color(Color::White)),
+                (text(fileLines[i].second.second) | ( fileLines[i].first.first ? bgcolor(Color::Orange1) | color(Color::Black) : *fileLines[i].first.second ? bgcolor(Color::IndianRed1) | color(Color::Black) : bgcolor(Color::Black)) | xflex_grow) 
             }) | xflex;
         });
 

@@ -99,7 +99,7 @@ ftxui::Component WRegister(PicSimulatorVM &vm) {
 
     auto wRegister_renderer = Renderer([&vm] {
         uint8_t wRegCopy = vm.executor.getWorkingRegister();
-        Logger::info("W-Register: " + std::to_string(wRegCopy));
+        //Logger::info("W-Register: " + std::to_string(wRegCopy));
 
         for (int i = 0; i < 8; i++) {
             wRegBits[7 - i] = (wRegCopy >> i) & 1;

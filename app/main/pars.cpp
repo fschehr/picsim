@@ -34,7 +34,7 @@ short* Parser::parseToShort(const std::string& filename, int& size) {
     }
 }
 std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> Parser::parseToPair(const std::string& filename) {
-    // vector of pairs of pairs. first pair is (bool (says if its relevant), bool*(empty for now, will be true if a breakpoint is added)), second pair is (short(line number), string(actual line content))
+    // vector of pairs of pairs. first pair is (bool (says if its the next instruction), bool*(empty for now, will be true if a breakpoint is added)), second pair is (short(line number), string(actual line content))
     Logger::info("Parsing file: " + filename);
     try {
         FileReader fileReader;
@@ -46,8 +46,34 @@ std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> Pars
         std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> output;
         for (int i = 0; i < lines.size(); i++) {
             //if (!lines[i].empty() && lines[i][0] != ' ') {
-                output.push_back({{true, nullptr}, {static_cast<short>(i), lines[i]}});
+                output.push_back({{false, nullptr}, {static_cast<short>(i), lines[i]}});
             //}
+        }
+        Logger::info("Parsing complete, size: " + std::to_string(output.size()));
+        return output;
+    } catch (const std::exception& e) {
+        Logger::warning(std::string("Parsing error: ") + e.what());
+        return {};
+    }
+}
+std::vector<std::pair<short, short>> Parser::parseToShortWithLines(const std::string& filename) {
+    //first short in pair is the line number, second short is the converted Instruction
+    Logger::info("Parsing file: " + filename);
+    try {
+        FileReader fileReader;
+        std::vector<std::string> lines = fileReader.read(filename);
+        if (lines.empty()) {
+            throw std::runtime_error("File is empty or could not be read");
+        }
+
+        std::vector<std::pair<short, short>> output;
+        for (int i = 0; i < lines.size(); i++) {
+            if (!lines[i].empty() && lines[i][0] != ' ') {
+                std::istringstream iss("0x" + lines[i].substr(5, 4));
+                short instruction;
+                iss >> std::hex >> instruction;
+                output.push_back({static_cast<short>(i), instruction});
+            }
         }
         Logger::info("Parsing complete, size: " + std::to_string(output.size()));
         return output;

@@ -33,12 +33,25 @@ std::string ConcreteInstruction::getConcArguments() {
     return arguments;
 }
 
-PicSimulatorVM::PicSimulatorVM()
-    : ram(ramBankSize), program(programMemorySize), stack(stackSize), eeprom(eepromSize), executor(program, ram, stack, eeprom) {   
+PicSimulatorVM::PicSimulatorVM(const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog)
+    : ram(ramBankSize),
+    program(programMemorySize),
+    stack(stackSize),
+    eeprom(eepromSize),
+    fileLines(fileLines),
+    prog(prog),
+    executor(program, ram, stack, eeprom, fileLines, prog),
+    running(false),
+    loaded(false),
+    cycles(0),
+    runtime(0),
+    microseconds(500000),
+    programMemory(programMemorySize, nullptr)
+{
     // Logger auf Dateiausgabe umstellen
     Logger::setOutputToFile();
     Logger::info("Simulator constructed");
-    programMemory.resize(programMemorySize, nullptr);
+    // programMemory.resize(programMemorySize, nullptr); // Already initialized in initializer list
     
     // Setze den Callback für Zyklusaktualisierungen
     executor.setCycleUpdateCallback([this](int cycles) {
@@ -56,20 +69,21 @@ PicSimulatorVM::~PicSimulatorVM() {
     }
 }
 
-void PicSimulatorVM::initialize(const std::vector<short>& prog) {
-    programDecode(prog);
-    load(prog);
+void PicSimulatorVM::initialize() {
+    programDecode();
+    load();
     // execute(); //is called in ui
 }
 
-void PicSimulatorVM::programDecode(const std::vector<short>& prog) {
+void PicSimulatorVM::programDecode() {
     if (prog.size() > programMemory.size()) {
         throw std::runtime_error("Program size exceeds program memory capacity");
     }
     for (size_t i = 0; i < prog.size(); i++) {
-        Instruction* instruction = new ConcreteInstruction(decoder.decode(prog[i]));
+        Instruction* instruction = new ConcreteInstruction(decoder.decode(prog[i].second));
         programMemory[i] = instruction;
     }
+    //following is simply for logging
     for (size_t i = 0; i < programMemory.size(); i++) {
         if (programMemory[i] != nullptr) {
             std::stringstream ss;
@@ -120,11 +134,11 @@ void PicSimulatorVM::executeStep() {
     }
 }
 
-void PicSimulatorVM::load(const std::vector<short>& file) {
+void PicSimulatorVM::load() {
     stop();
 
-    for (size_t address = 0; address < file.size(); address++) {
-        program.set(address, file[address]);
+    for (size_t address = 0; address < prog.size(); address++) {
+        program.set(address, prog[address].second);
     }
     loaded = true;
     start();

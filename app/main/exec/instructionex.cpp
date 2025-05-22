@@ -27,19 +27,19 @@ RamMemory<uint8_t>::SFR TRISA = RamMemory<uint8_t>::SFR::entries()[12];
 RamMemory<uint8_t>::SFR TRISB = RamMemory<uint8_t>::SFR::entries()[13];
 RamMemory<uint8_t>::SFR EECON1 = RamMemory<uint8_t>::SFR::entries()[14];
 RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
-
-
     InstructionExecution::InstructionExecution(ProgramMemory<uint16_t>& programMemory, RamMemory<uint8_t>& ram,
-                                               StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom)
+                                               StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog)
         : programMemory(programMemory), ram(ram), stack(stack), eeprom(eeprom),
-          literalExecutionUnit(*this), 
-          jumpExecutionUnit(*this),
-          byteAndControlExecutionUnit(*this), 
-          bitExecutionUnit(*this),
+          literalExecutionUnit(*this, fileLines, prog), 
+          jumpExecutionUnit(*this, fileLines, prog),
+          byteAndControlExecutionUnit(*this, fileLines, prog), 
+          bitExecutionUnit(*this, fileLines, prog),
           workingRegister(0), 
           instructionRegister(0), 
           programCounter(0),
-          runtimeCounter(0)
+          runtimeCounter(0),
+          fileLines(fileLines),
+          prog(prog)
     { }
 
     void InstructionExecution::init() {
@@ -69,14 +69,19 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 updateTimer();
                 return programCounter;
             }
-
             Logger::info("Program counter is: " + std::to_string(programCounter));
 
             // Fetch and decode instruction
             setInstructionRegister(programMemory.get(programCounter));
             setProgramCounter(programCounter + 1);
-
             Instruction instruction = decoder.decode(instructionRegister);
+            if(*fileLines[prog[programCounter].first].first.second){
+                Logger::info("reached Breakpoint");
+                
+            }
+            const_cast<std::pair<bool,bool*>&>(fileLines[prog[prevProgCounter].first].first).first = false;
+            const_cast<std::pair<bool,bool*>&>(fileLines[prog[programCounter].first].first).first = true;
+            prevProgCounter = programCounter;
 
             //literalex.cpp
             switch (instruction.getOpc()) {

@@ -11,7 +11,7 @@ private:
     InstructionExecution& executor;
 
 public:
-    LiteralExecution(InstructionExecution& executor);
+    LiteralExecution(InstructionExecution& executor, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog);
 
     void executeADDLW(const Instruction& instruction);
     void executeSUBLW(const Instruction& instruction);
@@ -20,6 +20,9 @@ public:
     void executeIORLW(const Instruction& instruction);
     void executeXORLW(const Instruction& instruction);
     void executeRETLW(const Instruction& instruction);
+
+    const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines;
+    const std::vector<std::pair<short,short>>& prog;
 };
 
 #endif // LITERALEX_H

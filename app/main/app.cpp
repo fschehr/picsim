@@ -2,7 +2,10 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
-#include <fstream> // Hinzugefügt für Dateieingabe
+#include <fstream>
+#include <thread>
+#include <atomic>
+#include <chrono>
 #include "pars.h"
 #include "simvm.h"
 #include "logger.h"
@@ -25,35 +28,15 @@ int main(int argc, char* argv[]) {
     }
 
     std::string filePath = fileName; 
-  
-    // std::vector<std::string> fileLines;
-    // std::ifstream fileStream(filePath);
-    // if (fileStream.is_open()) {
-    //     std::string line;
-    //     while (std::getline(fileStream, line)) {
-    //         fileLines.push_back(line);
-    //     }
-    //     fileStream.close();
-    // } else {
-    //     fileLines.push_back("Fehler: Datei konnte nicht geöffnet werden: " + filePath);
-    // }
-
+    
     std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>> fileLines = parser.parseToPair(filePath);
+    std::vector<std::pair<short, short>> fileLinesShort = parser.parseToShortWithLines(filePath);
 
     // Initialize the simulator
-    PicSimulatorVM vm;
+    PicSimulatorVM vm(fileLines, fileLinesShort);
 
     try {
-        
-        int lineCount = 0;
-        short* parsedLines = parser.parseToShort(filePath, lineCount);
-        std::vector<short> lines(parsedLines, parsedLines + lineCount);
-        for(int i = 0; i < lineCount; ++i) {
-            std::cout << lines[i] << std::endl;
-        }
-        
-
-        vm.initialize(lines);
+        vm.initialize();
     } catch (const std::exception& e) {
         Logger::warning(std::string("Error during initialization: ") + e.what());
         std::cin.get();
@@ -62,10 +45,26 @@ int main(int argc, char* argv[]) {
     
     // ui
     auto screen = ScreenInteractive::Fullscreen();
+    
+    // Create a flag for controlling the refresh thread
+    std::atomic<bool> refresh_ui_continue = true;
+    
+    // Create background refresh thread
+    std::thread refresh_ui([&] {
+        while (refresh_ui_continue) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(16)); // ~60 FPS
+            screen.Post(Event::Custom);
+        }
+    });
+    
     auto document = Document(filePath, fileLines, vm);
     screen.Loop(document);
 
+    // Clean up the refresh thread
+    refresh_ui_continue = false;
+    if (refresh_ui.joinable()) {
+        refresh_ui.join();
+    }
 
-    std::cin.get(); // Wait for user input before closing
     return 0;
 }

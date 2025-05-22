@@ -12,7 +12,7 @@ private:
     InstructionExecution& executor;
 
 public:
-    ByteExecution(InstructionExecution& executor);
+    ByteExecution(InstructionExecution& executor, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog);
 
     void executeADDWF(const Instruction& instruction);
     void executeANDWF(const Instruction& instruction);
@@ -34,6 +34,9 @@ public:
     void executeNOP();
     void executeSWAPF(const Instruction& instruction);
     void executeRETFIE(const Instruction& instruction);
+
+    const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines;
+    const std::vector<std::pair<short,short>>& prog;
 };
 
 #endif // BYTE_H

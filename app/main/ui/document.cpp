@@ -89,25 +89,29 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
         runtimeComponent,
         ledArrayComponent
     ] {
+        static auto lastUpdateTime = std::chrono::steady_clock::now();
+        static std::array<std::array<uint8_t, 8>, 32> lastValues = {};
+        static bool firstRun = true;
+        
+        auto now = std::chrono::steady_clock::now();
+        // Update registers every frame to ensure smooth updates
+        bool changed = false;
         for (int i = 0; i < 32; ++i) {
             for (int j = 0; j < 8; ++j) {
-                // Berechne die korrekte RAM-Adresse (8 Bytes pro Bank-Zeile)
                 uint8_t value = vm.executor.getRamContent(i * 8 + j);
-                Logger::info("Register " + std::to_string(i * 8 + j) + ": " + std::to_string(value));
-                std::stringstream ss;
-                ss << std::hex << std::uppercase << static_cast<int>(value);
-                registerValues[i][j] = ss.str();
-                Logger::info("Register " + std::to_string(i * 8 + j) + ": " + registerValues[i][j]);
-                
-                // Stelle sicher, dass der Wert immer zwei Stellen hat
-                if (registerValues[i][j].length() == 1) {
-                    registerValues[i][j] = "0" + registerValues[i][j];
-                }
-                if (registerValues[i][j].length() == 0) {
-                    registerValues[i][j] = "00";
+                if (firstRun || value != lastValues[i][j]) {
+                    lastValues[i][j] = value;
+                    std::stringstream ss;
+                    ss << std::hex << std::uppercase << std::setfill('0') << std::setw(2) << static_cast<int>(value);
+                    registerValues[i][j] = ss.str();
+                    changed = true;
                 }
             }
         }
+        firstRun = false;
+
+        // Force UI refresh every frame
+        lastUpdateTime = now;
 
         return vbox({
             controlsComponent->Render(),

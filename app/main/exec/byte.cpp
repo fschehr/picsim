@@ -5,7 +5,7 @@
 #include "../logger.h"
 #include <cstdint>
 
-    ByteExecution::ByteExecution(InstructionExecution& executor) : executor(executor) {}
+    ByteExecution::ByteExecution(InstructionExecution& executor, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog) : executor(executor), fileLines(fileLines), prog(prog) {}
 
     void ByteExecution::executeADDWF(const Instruction& instruction) {
         Logger::info("executing " + instruction.toString());
@@ -24,6 +24,7 @@
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeANDWF(const Instruction& instruction) {
@@ -41,6 +42,7 @@
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeXORWF(const Instruction& instruction) {
@@ -58,6 +60,7 @@
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeSUBWF(const Instruction& instruction) {
@@ -77,16 +80,19 @@
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeCLRW() {
         Logger::info("executing CLRW");
         executor.setWorkingRegister(0x00);
         executor.setZeroFlag();
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeRETURN() {
         Logger::info("executing RETURN");
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
         executor.setProgramCounter(executor.popStack());
     }
 
@@ -96,6 +102,7 @@
         auto bank = executor.getSelectedBank(instruction);
 
         executor.setRamContent(bank, address, executor.getWorkingRegister());
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeCLRF(const Instruction& instruction) {
@@ -105,6 +112,7 @@
 
         executor.setRamContent(bank, address, 0x00);
         executor.setZeroFlag();
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeCOMF(const Instruction& instruction) {
@@ -122,6 +130,7 @@
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeDECF(const Instruction& instruction) {
@@ -139,6 +148,7 @@
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeINCF(const Instruction& instruction) {
@@ -156,6 +166,7 @@
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeMOVF(const Instruction& instruction) {
@@ -172,6 +183,7 @@
         } else {
             executor.setRamContent(bank, address, value);
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeIORWF(const Instruction& instruction) {
@@ -189,6 +201,7 @@
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeDECFSZ(const Instruction& instruction) {
@@ -198,6 +211,7 @@
 
         uint8_t value = executor.getRamContent(bank, address);
         int result = value - 1;
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
 
         if (result == 0) {
             executor.setProgramCounter(executor.getProgramCounter() + 1);
@@ -217,6 +231,7 @@
 
         uint8_t value = executor.getRamContent(bank, address);
         int result = value + 1;
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
 
         if (result == 0) {
             executor.setProgramCounter(executor.getProgramCounter() + 1);
@@ -245,6 +260,7 @@
         } else {
             executor.setRamContent(bank, address, value);
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeRRF(const Instruction& instruction) {
@@ -263,11 +279,13 @@
         } else {
             executor.setRamContent(bank, address, value);
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeNOP() {
         Logger::info("executing NOP");
         // No operation
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeSWAPF(const Instruction& instruction) {
@@ -283,10 +301,12 @@
         } else {
             executor.setRamContent(bank, address, result);
         }
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
     void ByteExecution::executeRETFIE(const Instruction& instruction) {
         Logger::info("executing RETFIE");
         executor.setRamContent(RamMemory<uint8_t>::SFR::entries()[10], executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[10]) | 0x80);
+        //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
         executor.setProgramCounter(executor.popStack());
     }

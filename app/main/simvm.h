@@ -26,19 +26,19 @@ private:
 
 class PicSimulatorVM {
 public:
-    PicSimulatorVM();
+    PicSimulatorVM(const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLine, const std::vector<std::pair<short,short>>& prog);
     ~PicSimulatorVM();
-    void initialize(const std::vector<short>& prog);
+    void initialize();
     void stop();
-    void load(const std::vector<short>& file);
+    void load();
     void execute();
     void executeStep(); // Führt einen einzelnen Schritt aus
-    void programDecode(const std::vector<short>& prog);
+    void programDecode();
     void start();
     void reset(); // Neue Methode zum Zurücksetzen der VM
     void updateCyclesCounter(int cycles);
     void updateRuntimeCounter();
-    short microseconds = 100;
+    int microseconds = 500000;
     short cycles;
     int runtime;
     InstructionExecution executor;
@@ -59,7 +59,8 @@ private:
     StackMemory<int> stack;
     EepromMemory<uint8_t> eeprom;
     Decoder decoder;
-
+    const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines;
+    const std::vector<std::pair<short,short>>& prog;
     bool running = false;
     bool loaded = false;
     std::thread executionThread;

@@ -36,6 +36,7 @@ private:
     JumpExecution jumpExecutionUnit;
     ByteExecution byteAndControlExecutionUnit;
     BitExecution bitExecutionUnit;
+    short prevProgCounter = 0;
 
     std::mutex lock;
     Decoder decoder;
@@ -52,7 +53,7 @@ private:
 
 public:
     InstructionExecution(ProgramMemory<uint16_t>& programMemory, RamMemory<uint8_t>& ram,
-                         StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom);
+                         StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog);
 
     void init();
     int execute();
@@ -96,6 +97,8 @@ public:
     bool isCarryFlag() const;
     bool isDigitCarryFlag() const;
     bool isZeroFlag() const;
+    const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines;
+    const std::vector<std::pair<short,short>>& prog;
 };
 
 #endif // INSTRUCTIONEX_H
