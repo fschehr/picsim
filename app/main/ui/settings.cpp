@@ -27,6 +27,7 @@ ftxui::Component Settings(
         statusHex
     );
     auto ioPinsComponent = IoPins(
+        vm,
         portAHex,
         portBHex,
         trisAHex,

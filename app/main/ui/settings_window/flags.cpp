@@ -3,6 +3,7 @@
 #include <ftxui/dom/table.hpp>
 #include <string>
 #include <vector>
+#include "../../simvm.h"
 
 /**
  * @brief Creates a component that represents the flags of the CPU.

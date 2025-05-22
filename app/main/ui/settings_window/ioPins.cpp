@@ -7,12 +7,13 @@
 
 /**
  * @brief Creates the Port A section of the I/O Pins component.
- * 
+ *
+ * @param vm The PicSimulatorVM instance.
  * @param portAHex The hex value of Port A, stored in the register Array in document.cpp
- * 
+ *
  * @return ftxui::Component The Port A component.
  */
-ftxui::Component PortA(std::string &portAHex, std::string &trisAHex) {
+ftxui::Component PortA(PicSimulatorVM &vm, std::string &portAHex, std::string &trisAHex) {
     using namespace ftxui;
 
     ftxui::Component columns[8] = {};
@@ -27,11 +28,17 @@ ftxui::Component PortA(std::string &portAHex, std::string &trisAHex) {
 
     for (int i = 0; i < 8; i++) {
         if (i < 5) {
-            buttons[i] = Button(&button_labels[i], [&portAHex, i] {
+            buttons[i] = Button(&button_labels[i], [&vm, i] {
                 if (tris_labels[i] == "o") return;
                 portABits[i] = !portABits[i];
-                updateHexValue(portABits, portAHex);
-                button_labels[i] = (portABits[i]) ? "1" : "0";
+                uint8_t portAValue = 0;
+                for (int j = 0; j < 8; j++) {
+                    if (portABits[j]) {
+                        portAValue |= (1 << j);
+                    }
+                }
+                vm.executor.setRamContent(RamMemory<uint8_t>::Bank::BANK_0, 0x05, portAValue);
+
             });
         } else if (i < 8) {
             buttons[i] = Button(&button_labels[i], [] {});
@@ -151,7 +158,7 @@ ftxui::Component PortA(std::string &portAHex, std::string &trisAHex) {
  * 
  * @return ftxui::Component The Port B component.
  */
-ftxui::Component PortB(std::string &portBHex, std::string &trisBHex) {
+ftxui::Component PortB(PicSimulatorVM &vm, std::string &portBHex, std::string &trisBHex) {
     using namespace ftxui;
 
     ftxui::Component columns[8] = {};
@@ -164,11 +171,18 @@ ftxui::Component PortB(std::string &portBHex, std::string &trisBHex) {
 
     ftxui::Component buttons[8] = {};
     for (int i = 0; i < 8; i++) {
-        buttons[i] = Button(&button_labels[i], [&portBHex, i] {
+        buttons[i] = Button(&button_labels[i], [&vm, i] {
             if (tris_labels[i] == "o") return;
             portBBits[i] = !portBBits[i];
-            updateHexValue(portBBits, portBHex);
-            button_labels[i] = (portBBits[i]) ? "1" : "0";
+            uint8_t portBValue = 0;
+            for (int j = 0; j < 8; j++) {
+                if (portBBits[j]) {
+                    portBValue |= (1 << j);
+                }
+            }
+            vm.executor.setRamContent(RamMemory<uint8_t>::Bank::BANK_1, 0x06, portBValue);
+//            updateHexValue(portBBits, portBHex);
+//            button_labels[i] = (portBBits[i]) ? "1" : "0";
         });
     }
     
@@ -248,6 +262,7 @@ ftxui::Component PortB(std::string &portBHex, std::string &trisBHex) {
  * @brief Creates the I/O Pins component.
  */
 ftxui::Component IoPins(
+    PicSimulatorVM &vm,
     std::string &portAHex,
     std::string &portBHex,
     std::string &trisAHex,
@@ -255,8 +270,14 @@ ftxui::Component IoPins(
 ) {
     using namespace ftxui;
 
-    auto portAComponent = PortA(portAHex, trisAHex);
-    auto portBComponent = PortB(portBHex, trisBHex);
+    auto portAComponent = PortA(
+        vm,
+        portAHex,
+        trisAHex);
+    auto portBComponent = PortB(
+        vm,
+        portBHex,
+        trisBHex);
 
     auto container = Container::Vertical({
         portAComponent,

@@ -1,6 +1,7 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/component/component.hpp>
 #include "../../utils.hpp"
+#include "../../simvm.h"
 
 /**
  * @brief Creates the Status Register component.
