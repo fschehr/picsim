@@ -79,6 +79,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 Logger::info("reached Breakpoint");
                 
             }
+            Logger::info("Executing instruction: " + instruction.toString());
             const_cast<std::pair<bool,bool*>&>(fileLines[prog[prevProgCounter].first].first).first = false;
             const_cast<std::pair<bool,bool*>&>(fileLines[prog[programCounter].first].first).first = true;
             prevProgCounter = programCounter;

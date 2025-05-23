@@ -25,10 +25,11 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
 
     auto GoButton = Button("Go", [&vm] { vm.execute(); });
     auto ResetButton = Button("Reset", [&vm] { vm.reset(); });
-    auto IgnoreButton = Button("Ignore", [] { 1 + 1; }); // TODO:
-    auto StepInButton = Button("Step In", [&vm] { vm.executeStep(); });
-    auto StepOutButton = Button("Step Out", [] { 1 + 1; }); // TODO:
-    auto StepOverButton = Button("Step Over", [] { 1 + 1; }); // TODO:
+    auto HaltButton = Button("Halt", [&vm] { vm.halt(); });
+    // auto IgnoreButton = Button("Ignore", [] { 1 + 1; }); // TODO:
+    auto StepButton = Button("Step", [&vm] { vm.executeStep(); });
+    // auto StepOutButton = Button("Step Out", [] { 1 + 1; }); // TODO:
+    // auto StepOverButton = Button("Step Over", [] { 1 + 1; }); // TODO:
     
     static std::string stats_label = "Show Stats";
     auto StatsButton = Button(&stats_label, [statsVisible] { 
@@ -45,10 +46,11 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
         OpenDocumentationButton,
         GoButton,
         ResetButton,
-        IgnoreButton,
-        StepInButton,
-        StepOutButton,
-        StepOverButton,
+        HaltButton,
+        // IgnoreButton,
+        StepButton,
+        // StepOutButton,
+        // StepOverButton,
         LogsButton,
         StatsButton
     });
@@ -63,10 +65,11 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
                 hbox({
                     GoButton->Render(),
                     ResetButton->Render(),
-                    IgnoreButton->Render(),
-                    StepInButton->Render(),
-                    StepOutButton->Render(),
-                    StepOverButton->Render()
+                    HaltButton->Render(),
+                    // IgnoreButton->Render(),
+                    StepButton->Render(),
+                    // StepOutButton->Render(),
+                    // StepOverButton->Render()
                 }) | xflex,
                 hbox({
                     LogsButton->Render(),

@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
     // Create background refresh thread
     std::thread refresh_ui([&] {
         while (refresh_ui_continue) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(16)); // ~60 FPS
+            std::this_thread::sleep_for(std::chrono::milliseconds(18)); // ~60 FPS
             screen.Post(Event::Custom);
         }
     });

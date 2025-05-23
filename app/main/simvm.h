@@ -38,6 +38,11 @@ public:
     void reset(); // Neue Methode zum Zurücksetzen der VM
     void updateCyclesCounter(int cycles);
     void updateRuntimeCounter();
+    void halt();
+    void resume();
+    std::condition_variable cv;
+    std::mutex mtx;
+    bool halted = false;
     int microseconds = 500000;
     short cycles;
     int runtime;

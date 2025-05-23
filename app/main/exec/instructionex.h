@@ -36,7 +36,6 @@ private:
     JumpExecution jumpExecutionUnit;
     ByteExecution byteAndControlExecutionUnit;
     BitExecution bitExecutionUnit;
-    short prevProgCounter = 0;
 
     std::mutex lock;
     Decoder decoder;
@@ -63,6 +62,7 @@ public:
     uint16_t instructionRegister;
     int programCounter;
     int runtimeCounter;
+    short prevProgCounter = 0;
 
     // Setter für die Callback-Funktion
     void setCycleUpdateCallback(std::function<void(int)> callback) {

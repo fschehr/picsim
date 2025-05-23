@@ -109,6 +109,7 @@
         Logger::info("executing " + instruction.toString());
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
+        Logger::warning(std::to_string(executor.getFileAddress(instruction)));
 
         executor.setRamContent(bank, address, 0x00);
         executor.setZeroFlag();

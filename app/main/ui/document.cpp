@@ -12,6 +12,10 @@
 #include <ftxui/component/component.hpp>
 #include <vector>
 #include <string>
+#include <sstream>
+#include <iomanip>
+#include <chrono>
+#include <array>
 #include "../simvm.h"
 /**
  * @brief The main UI component

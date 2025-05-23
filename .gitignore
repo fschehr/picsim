@@ -4,4 +4,9 @@
 /out
 /external
 /build
+/cmake-build-debug
+/cmake-build-release
+/cmake-build
+/picsim.zip
+/.VSCodeCounter
 /.idea

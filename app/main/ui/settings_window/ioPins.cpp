@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <string>
 #include "../../utils.hpp"
+#include "../../logger.h"
+#include "../../simvm.h"
 
 /**
  * @brief Creates the Port A section of the I/O Pins component.
@@ -38,7 +40,6 @@ ftxui::Component PortA(PicSimulatorVM &vm, std::string &portAHex, std::string &t
                     }
                 }
                 vm.executor.setRamContent(RamMemory<uint8_t>::Bank::BANK_0, 0x05, portAValue);
-
             });
         } else if (i < 8) {
             buttons[i] = Button(&button_labels[i], [] {});
@@ -180,7 +181,7 @@ ftxui::Component PortB(PicSimulatorVM &vm, std::string &portBHex, std::string &t
                     portBValue |= (1 << j);
                 }
             }
-            vm.executor.setRamContent(RamMemory<uint8_t>::Bank::BANK_1, 0x06, portBValue);
+            vm.executor.setRamContent(RamMemory<uint8_t>::Bank::BANK_0, 0x06, portBValue);
 //            updateHexValue(portBBits, portBHex);
 //            button_labels[i] = (portBBits[i]) ? "1" : "0";
         });

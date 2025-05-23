@@ -13,6 +13,8 @@ ftxui::Component Stack(PicSimulatorVM &vm) {
     
     auto registers_renderer = Renderer(container, [&vm] {
         auto stackCopy = vm.getStack().getStackContents();
+        int stackPointer = stackCopy.size() - 1;
+
         std::vector<std::wstring> stackDisplay(8, L"0000");
         for (size_t i = 0; i < 8; ++i) {
             if (i < stackCopy.size()) {
@@ -28,14 +30,38 @@ ftxui::Component Stack(PicSimulatorVM &vm) {
             text(" Stack "),
             center(
                 vbox({
-                    text(stackDisplay[0]),
-                    text(stackDisplay[1]),
-                    text(stackDisplay[2]),
-                    text(stackDisplay[3]),
-                    text(stackDisplay[4]),
-                    text(stackDisplay[5]),
-                    text(stackDisplay[6]),
-                    text(stackDisplay[7])
+                    hbox({
+                        (stackPointer == 0 ? text("* ") : text("  ")),
+                        text(stackDisplay[0]),
+                    }),
+                    hbox({
+                        (stackPointer == 1 ? text("* ") : text("  ")),
+                        text(stackDisplay[1]),
+                    }),
+                    hbox({
+                        (stackPointer == 2 ? text("* ") : text("  ")),
+                        text(stackDisplay[2]),
+                    }),
+                    hbox({
+                        (stackPointer == 3 ? text("* ") : text("  ")),
+                        text(stackDisplay[3]),
+                    }),
+                    hbox({
+                        (stackPointer == 4 ? text("* ") : text("  ")),
+                        text(stackDisplay[4]),
+                    }),
+                    hbox({
+                        (stackPointer == 5 ? text("* ") : text("  ")),
+                        text(stackDisplay[5]),
+                    }),
+                    hbox({
+                        (stackPointer == 6 ? text("* ") : text("  ")),
+                        text(stackDisplay[6]),
+                    }),
+                    hbox({
+                        (stackPointer == 7 ? text("* ") : text("  ")),
+                        text(stackDisplay[7]),
+                    })
                 })
             )
         );

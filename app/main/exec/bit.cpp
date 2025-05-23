@@ -31,8 +31,8 @@
 
         uint8_t value = executor.getRamContent(bank, address); // Fetch value from given file register
         uint8_t mask = static_cast<uint8_t>(0x01 << instruction.getArguments()[0]);        
-        value = static_cast<uint8_t>(value | mask); // Set bit using the mask
-
+        value = static_cast<uint8_t>(mask | value); // Set bit using the mask
+        Logger::info("value: " + std::to_string(value));
         executor.setRamContent(bank, address, value);
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }

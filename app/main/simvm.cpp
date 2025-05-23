@@ -105,14 +105,17 @@ void PicSimulatorVM::stop() {
 
 void PicSimulatorVM::start() {
     running = true;
+    
 }
 
 void PicSimulatorVM::reset() {
     Logger::info("Resetting simulator");
     stop(); // Das beendet den Thread und setzt running auf false
+    const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.programCounter].first].first).first = false;
     executor.reset();
     stack.clear(); // Leert den Stack
-    start(); // Setzt running wieder auf true
+    const_cast<std::pair<bool,bool*>&>(fileLines[prog[0].first].first).first = true;
+    // start(); // Setzt running wieder auf true
 }
 
 // Neue Methode für die Ausführung eines einzelnen Schritts
@@ -124,6 +127,7 @@ void PicSimulatorVM::executeStep() {
     if (!running) {
         running = true;
         executor.reset();
+        const_cast<std::pair<bool,bool*>&>(fileLines[prog[0].first].first).first = false;
     }
     
     // Nur einen einzigen Befehl ausführen
@@ -143,6 +147,12 @@ void PicSimulatorVM::load() {
     loaded = true;
     start();
     executor.reset();
+    
+    // Markiere die erste auszuführende Zeile direkt nach dem Laden des Programms
+    if (prog.size() > 0) {
+        const_cast<std::pair<bool,bool*>&>(fileLines[prog[0].first].first).first = true;
+        executor.prevProgCounter = 0;
+    }
 }
 
 void PicSimulatorVM::execute() {
@@ -154,10 +164,13 @@ void PicSimulatorVM::execute() {
     if (executionThread.joinable()) {
         return;
     }
-    
+    if(halted){
+        halted = false;
+    }
     if (!running) {
         running = true;
         executor.reset();
+        const_cast<std::pair<bool,bool*>&>(fileLines[prog[0].first].first).first = false;
     }
     
     // Thread starten, der kontinuierlich Instruktionen ausführt
@@ -169,6 +182,11 @@ void PicSimulatorVM::execute() {
                 
                 // Kleine Pause für CPU-Entlastung und um UI-Thread Zeit zu geben
                 std::this_thread::sleep_for(std::chrono::microseconds(microseconds));
+                // Überprüfe, ob der Thread angehalten werden soll
+                std::unique_lock<std::mutex> lock(mtx);
+                while (halted) {
+                    cv.wait(lock);
+                }
             }
         } catch (const std::exception& e) {
             Logger::warning(std::string("Fehler bei der Ausführung: ") + e.what());
@@ -178,6 +196,17 @@ void PicSimulatorVM::execute() {
     
     // Thread im Hintergrund laufen lassen
     executionThread.detach();
+}
+
+void PicSimulatorVM::halt() {
+    std::lock_guard<std::mutex> lock(mtx);
+    halted = true;
+}
+
+void PicSimulatorVM::resume() {
+    std::lock_guard<std::mutex> lock(mtx);
+    halted = false;
+    cv.notify_one();
 }
 void PicSimulatorVM::updateCyclesCounter(int i) {
     cycles += i;
