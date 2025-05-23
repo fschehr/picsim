@@ -55,7 +55,21 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
         StatsButton
     });
 
-    auto controls_renderer = Renderer(container, [=] {
+    auto controls_renderer = Renderer(container, [
+        &vm,
+        OpenDocumentationButton,
+        GoButton,
+        ResetButton,
+        HaltButton,
+        // IgnoreButton,
+        StepButton,
+        // StepOutButton,
+        // StepOverButton,
+        LogsButton,
+        StatsButton
+    ] {
+        bool running = vm.getRunning();
+
         return window(
             text(" Controls "),
             hbox({
@@ -63,6 +77,7 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
                     OpenDocumentationButton->Render(),
                 }) | xflex,
                 hbox({
+                    text("  ") | (running ? bgcolor(Color::Green1) : bgcolor(Color::Black)),
                     GoButton->Render(),
                     ResetButton->Render(),
                     HaltButton->Render(),

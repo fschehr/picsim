@@ -29,6 +29,7 @@ public:
     void set(Bank bank, int address, const T& value);
     void set(const SFR& sfr, const T& value);
     T get(const SFR& sfr) const;
+    void clear();
 
 private:
     std::vector<T> bank0;

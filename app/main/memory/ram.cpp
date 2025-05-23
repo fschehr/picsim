@@ -141,6 +141,13 @@ T RamMemory<T>::get(const SFR &sfr) const
 {
     return get(sfr.bank, sfr.address);
 }
+
+// template <typename T>
+// void RamMemory<T>::clear() {
+//     *this = RamMemory<uint8_t> (bank0.size);
+// }
+
+
 template <typename T>
 void RamMemory<T>::firePropertyChange(const std::string& propertyName, int index, T oldValue, T newValue) {
     if (propertyChangeListeners.find(propertyName) != propertyChangeListeners.end()) {

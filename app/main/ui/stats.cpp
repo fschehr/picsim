@@ -1,30 +1,30 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/component/component.hpp>
 #include <string>
+#include "../simvm.h"
 
 ftxui::Component Stats(
+    PicSimulatorVM &vm,
+    std::string &status,
     std::string &pcl,
     std::string &pclath,
-    std::string &status,
     std::string &fsr
 ) {
     using namespace ftxui;
 
-    // static std::string pc = pclath + pcl; // program counter: PCL && PCLATH
-    // static std::string pcl = "00"; // program counter low: PC<7:0> - 0x02 (Bank 0) && 0x82 (Bank 1)
-    // static std::string pclath = "00"; // program counter high latch: PC<12:8> - 0x0A (Bank 0) && 0x8A (Bank 1)
-    // static std::string fsr = "00"; // file select register: FSR<7:0> - 0x04 (Bank 0) && 0x84 (Bank 1)
-    static std::string stackPointer = "00"; // not in the register array
-    // static std::string status = "00"; // status register: STATUS<7:0> - 0x03 (Bank 0) && 0x83 (Bank 1)
-    static std::string vt = "00"; // ?
-    static std::string wdt = "00"; // watchdog timer: inside the status register
-
     auto stats_renderer = Renderer([
+        &vm,
+        &status,
         &pcl,
         &pclath,
-        &status,
         &fsr
     ] {
+        // read the pc value from the vm and turn it into a string that shows the 4 bits
+        // read the pclath value from the vm/register and show the bits as string
+
+        std::string pc = std::to_string(vm.executor.getProgramCounter() & 0xFF);
+        std::string stackPointer = std::to_string(vm.getStack().peek());
+
         return window(
             text(" Stats "),
             hbox({
@@ -59,16 +59,6 @@ ftxui::Component Stats(
                 hbox({
                     text(" SP ") | bgcolor(Color::White) | color(Color::Black) | bold,
                     text(" " + stackPointer + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
-                }),
-                text("   "),
-                hbox({
-                    text(" VT ") | bgcolor(Color::White) | color(Color::Black) | bold,
-                    text(" " + vt + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
-                }),
-                text("   "),
-                hbox({
-                    text(" WDT ") | bgcolor(Color::White) | color(Color::Black) | bold,
-                    text(" " + wdt + " ") | bgcolor(Color::GrayLight) | color(Color::Black)
                 })
             }) | center
         );

@@ -40,6 +40,7 @@ public:
     void updateRuntimeCounter();
     void halt();
     void resume();
+    bool getRunning();
     std::condition_variable cv;
     std::mutex mtx;
     bool halted = false;
@@ -51,13 +52,13 @@ public:
 
     // Add getter for stack
     StackMemory<int>& getStack() { return stack; }
-
-private:
+    
+    private:
     int ramBankSize = 128;
     int programMemorySize = 1024;
     int stackSize = 8;
     int eepromSize = 64;
-
+    
     RamMemory<uint8_t> ram;
     ProgramMemory<uint16_t> program;
     std::vector<Instruction*> programMemory;
@@ -66,8 +67,8 @@ private:
     Decoder decoder;
     const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines;
     const std::vector<std::pair<short,short>>& prog;
-    bool running = false;
     bool loaded = false;
+    bool running = false;
     std::thread executionThread;
 };
 

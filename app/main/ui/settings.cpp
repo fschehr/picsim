@@ -52,7 +52,7 @@ ftxui::Component Settings(
         ioPinsComponent
     ] {
         return window(
-            text(" Settings "),
+            text(" Special File Registers "),
             vbox({
                 filler(),
                 vbox({

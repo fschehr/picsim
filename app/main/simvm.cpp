@@ -107,13 +107,18 @@ void PicSimulatorVM::start() {
     running = true;
     
 }
+bool PicSimulatorVM::getRunning(){
+    return running;
+}
 
 void PicSimulatorVM::reset() {
+    const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.prevProgCounter].first].first).first = false;
+    const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.programCounter].first].first).first = false;
     Logger::info("Resetting simulator");
     stop(); // Das beendet den Thread und setzt running auf false
-    const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.programCounter].first].first).first = false;
     executor.reset();
     stack.clear(); // Leert den Stack
+    //ram.clear();  TODO
     const_cast<std::pair<bool,bool*>&>(fileLines[prog[0].first].first).first = true;
     // start(); // Setzt running wieder auf true
 }
@@ -178,6 +183,9 @@ void PicSimulatorVM::execute() {
         try {
             while (running && loaded) {
                 // Führe eine Instruktion aus
+                if((*fileLines[prog[executor.programCounter].first+1].first.second)==true){
+                    halt();
+                }
                 executor.execute();
                 
                 // Kleine Pause für CPU-Entlastung und um UI-Thread Zeit zu geben

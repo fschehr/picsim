@@ -53,12 +53,13 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
     );
     auto logsComponent = Logs();
     auto statsComponent = Stats(
-        registerValues[0][2], // program counter low
-        registerValues[1][2], // program counter high latch
+        vm,
         registerValues[0][3], // status register
+        registerValues[0][2], // program counter low
+        registerValues[1][2], // program counter high latch;
         registerValues[0][4] // file select register
     );
-
+    
     auto runtimeLedContainer = Container::Horizontal({
         runtimeComponent | xflex,
         ledArrayComponent | xflex
