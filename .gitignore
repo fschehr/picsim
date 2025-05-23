@@ -1,5 +1,12 @@
 /.git
 /.vs
+/.vscode
+/build
+/cmake-build-debug
+/cmake-build-release
+/cmake-build
+/picsim.zip
+/.VSCodeCounter
 /out
 /external
 /.idea
