@@ -1,0 +1,12 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/build/cmake_install.cmake",
+		"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/build/third_party/ftxui/cmake_install.cmake",
+		"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/build/third_party/ftxui/examples/cmake_install.cmake",
+		"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/build/third_party/ftxui/doc/cmake_install.cmake",
+		"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/build/grid-container-ftxui/cmake_install.cmake",
+		"C:/Users/Hanno/OneDrive/Code/DHBW Systemnahe Programmierung/picsim/build/grid-container-ftxui/example/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

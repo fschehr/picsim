@@ -1,0 +1,1 @@
+ "../libftxui-grid-container.a" "../../third_party/ftxui/libftxui-component.a" "../../third_party/ftxui/libftxui-dom.a" "../../third_party/ftxui/libftxui-screen.a" -lpthread -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
