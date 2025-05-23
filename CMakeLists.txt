@@ -12,8 +12,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(third_party/ftxui)
 
-add_subdirectory(grid-container-ftxui)
-
 # Add source files
 set(SOURCES
     app/main/app.cpp
@@ -61,5 +59,4 @@ target_link_libraries(picsim
     ftxui::screen # screen buffer, where elements (UI) are drawn on
     ftxui::dom # defines Elements that are drawn on the screen
     ftxui::component # components allowing user interaction
-    ftxui-grid-container
 )

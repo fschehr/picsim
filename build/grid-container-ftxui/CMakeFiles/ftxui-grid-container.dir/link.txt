@@ -1,2 +1,0 @@
-C:\mingw64\bin\ar.exe qc libftxui-grid-container.a "CMakeFiles/ftxui-grid-container.dir/src/ftxui-grid-container/grid-container.cpp.obj"
-C:\mingw64\bin\ranlib.exe libftxui-grid-container.a
