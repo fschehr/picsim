@@ -35,7 +35,7 @@ public:
     void executeStep(); // Führt einen einzelnen Schritt aus
     void programDecode();
     void start();
-    void reset(); // Neue Methode zum Zurücksetzen der VM
+    void reset();
     void updateCyclesCounter(int cycles);
     void updateRuntimeCounter();
     void halt();

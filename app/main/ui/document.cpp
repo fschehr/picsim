@@ -5,6 +5,7 @@
 #include "settings.cpp"
 #include "stats.cpp"
 #include "logs.cpp"
+#include "resets.cpp"
 #include "runtime.cpp"
 #include "ledArray.cpp"
 
@@ -32,17 +33,23 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
     // UI Variables
     static bool statsVisible = false;
     static bool logsVisible = false;
+    static bool resetsVisible = false;
     static int editorRegistersWidth = 33;
     static int currentLine = 0;
     
     // Sim Variables
     static std::string registerValues[32][8] = {};
 
-    auto controlsComponent = Controls(&statsVisible, &logsVisible, vm);
+    auto controlsComponent = Controls(&statsVisible, &logsVisible, &resetsVisible, vm);
     auto runtimeComponent = Runtime(vm);
     auto ledArrayComponent = LedArray(registerValues[0][6], registerValues[16][6]);
     auto editorComponent = Editor(filePath, fileLines, currentLine);
-    auto registerTableComponent = RegisterTable(registerValues);
+    // Callback für Registeränderungen, der die VM aktualisiert
+    auto registerChangeCallback = [&vm](int address, uint8_t value) {
+        // Setze den RAM-Wert in der VM
+        vm.executor.setRamContent(address, value);
+    };
+    auto registerTableComponent = RegisterTable(registerValues, registerChangeCallback);
     auto settingsComponent = Settings(
         registerValues[0][3], // Status Register
         registerValues[0][5], // Port A Pins
@@ -59,6 +66,7 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
         registerValues[1][2], // program counter high latch;
         registerValues[0][4] // file select register
     );
+    auto resetsComponent = Resets(vm);
     
     auto runtimeLedContainer = Container::Horizontal({
         runtimeComponent | xflex,
@@ -79,6 +87,7 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
     auto appLayout = Container::Vertical({
         controlsComponent,
         logsComponent,
+        resetsComponent,
         statsComponent,
         settingsComponent,
         editorRegistersSplitter
@@ -88,6 +97,7 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
         &vm,
         controlsComponent,
         logsComponent,
+        resetsComponent,
         statsComponent,
         settingsComponent,
         editorRegistersSplitter,
@@ -121,6 +131,7 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
         return vbox({
             controlsComponent->Render(),
             logsVisible ? logsComponent->Render() : vbox({}) | size(WIDTH, EQUAL, 0),
+            resetsVisible ? resetsComponent->Render() : vbox({}) | size(WIDTH, EQUAL, 0),
             statsVisible ? statsComponent->Render() : vbox({}) | size(WIDTH, EQUAL, 0),
             hbox({
                 settingsComponent->Render() | flex | size(WIDTH, EQUAL, 40),

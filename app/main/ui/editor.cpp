@@ -57,6 +57,9 @@ ftxui::Component Editor(const std::string &filePath, std::vector<std::pair<std::
                 checkbox->Render() | ( *fileLines[i].first.second ? bgcolor(Color::IndianRed1) | color(Color::Black) 
                                        : fileLines[i].first.first ? bgcolor(Color::Orange1) | color(Color::Black)
                                        : bgcolor(Color::Black) | color(Color::White)),
+                text(" ") | ( fileLines[i].first.first ? bgcolor(Color::Orange1) | color(Color::Black)
+                              : *fileLines[i].first.second ? bgcolor(Color::IndianRed1) | color(Color::Black)
+                              : bgcolor(Color::Black) | color(Color::White)),
                 (text(fileLines[i].second.second) | ( fileLines[i].first.first ? bgcolor(Color::Orange1) | color(Color::Black) : *fileLines[i].first.second ? bgcolor(Color::IndianRed1) | color(Color::Black) : bgcolor(Color::Black)) | xflex_grow) 
             }) | xflex;
         });

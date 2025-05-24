@@ -10,7 +10,7 @@
  * 
  * @return ftxui::Component The component containing the control buttons.
  */
-ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM &vm) {
+ftxui::Component Controls(bool *statsVisible, bool *logsVisible, bool *resetsVisible, PicSimulatorVM &vm) {
     using namespace ftxui;
 
     auto OpenDocumentationButton = Button("Docs", [] {
@@ -26,20 +26,22 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
     auto GoButton = Button("Go", [&vm] { vm.execute(); });
     auto ResetButton = Button("Reset", [&vm] { vm.reset(); });
     auto HaltButton = Button("Halt", [&vm] { vm.halt(); });
-    // auto IgnoreButton = Button("Ignore", [] { 1 + 1; }); // TODO:
     auto StepButton = Button("Step", [&vm] { vm.executeStep(); });
-    // auto StepOutButton = Button("Step Out", [] { 1 + 1; }); // TODO:
-    // auto StepOverButton = Button("Step Over", [] { 1 + 1; }); // TODO:
     
     static std::string stats_label = "Show Stats";
     auto StatsButton = Button(&stats_label, [statsVisible] { 
         *statsVisible = !(*statsVisible);
         stats_label = *statsVisible ? "Hide Stats" : "Show Stats";
     });
-    static std::string logs_label = "Hide Logs";  // Angepasst, da Logs standardmäßig angezeigt werden
+    static std::string logs_label = "Show Logs";
     auto LogsButton = Button(&logs_label, [logsVisible] {
         *logsVisible = !(*logsVisible);
         logs_label = *logsVisible ? "Hide Logs" : "Show Logs";
+    });
+    static std::string resets_label = "Show Resets";
+    auto ResetsButton = Button(&resets_label, [resetsVisible] {
+        *resetsVisible = !(*resetsVisible);
+        resets_label = *resetsVisible ? "Hide Resets" : "Show Resets";
     });
 
     auto container = Container::Horizontal({
@@ -47,11 +49,9 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
         GoButton,
         ResetButton,
         HaltButton,
-        // IgnoreButton,
         StepButton,
-        // StepOutButton,
-        // StepOverButton,
         LogsButton,
+        ResetsButton,
         StatsButton
     });
 
@@ -61,14 +61,13 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
         GoButton,
         ResetButton,
         HaltButton,
-        // IgnoreButton,
         StepButton,
-        // StepOutButton,
-        // StepOverButton,
+        ResetsButton,
         LogsButton,
         StatsButton
     ] {
         bool running = vm.getRunning();
+        bool halted = vm.halted;
 
         return window(
             text(" Controls "),
@@ -77,7 +76,13 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
                     OpenDocumentationButton->Render(),
                 }) | xflex,
                 hbox({
-                    text("  ") | (running ? bgcolor(Color::Green1) : bgcolor(Color::Black)),
+                    // Statusindikator mit begrenzter Höhe
+                    vbox({
+                        filler(),
+                        text("  ") | (running && !halted ? bgcolor(Color::SeaGreen2) : bgcolor(Color::DarkGreen)),
+                        filler()
+                    }) | size(HEIGHT, LESS_THAN, 1),
+                    text("  "),
                     GoButton->Render(),
                     ResetButton->Render(),
                     HaltButton->Render(),
@@ -88,6 +93,7 @@ ftxui::Component Controls(bool *statsVisible, bool *logsVisible, PicSimulatorVM 
                 }) | xflex,
                 hbox({
                     LogsButton->Render(),
+                    ResetsButton->Render(),
                     StatsButton->Render(),
                 }) | align_right
             }) | xflex

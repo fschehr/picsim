@@ -310,9 +310,34 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
             return ram.get(actualAddress);
         }
     //set ram content
+    void InstructionExecution::setRamContent(int address, uint8_t value) {
+        // Speichere den Wert direkt im RAM an der angegebenen Adresse
+        // Wähle die Bank basierend auf dem höchsten Bit der Adresse (0x80)
+        RamMemory<uint8_t>::Bank bank = (address < 0x80) ? RamMemory<uint8_t>::Bank::BANK_0 : RamMemory<uint8_t>::Bank::BANK_1;
+        
+        // Maskiere die niedrigeren 7 Bits (0x7F = 0b01111111), um die tatsächliche Adresse innerhalb der Bank zu erhalten
+        int bankAddress = address & 0x7F;
+        
+        // Für Spezialregister in Bank 1 prüfen, ob sie in der SFR-Liste vorhanden sind
+        if (bank == RamMemory<uint8_t>::Bank::BANK_1) {
+            // Option Register, TRISA, TRISB, etc. sind Spezialfälle
+            try {
+                // Versuche, ein SFR für diese Adresse zu finden
+                RamMemory<uint8_t>::SFR sfr = RamMemory<uint8_t>::SFR::valueOf(bank, bankAddress);
+                ram.set(sfr, value);
+                return;
+            } catch (const std::invalid_argument&) {
+                // Kein SFR gefunden, setze normal fort
+            }
+        }
+        
+        ram.set(bank, bankAddress, value);
+    }
+    
     void InstructionExecution::setRamContent(RamMemory<uint8_t>::SFR sfr, uint8_t value) {
         ram.set(sfr, value);
     }
+    
     void InstructionExecution::setRamContent(RamMemory<uint8_t>::Bank bank, int address, uint8_t value) {
         // Assuming bank switching is handled externally, calculate the actual address
         int actualAddress = (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address

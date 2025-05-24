@@ -4,6 +4,7 @@
 #include "settings_window/ioPins.cpp"
 #include "settings_window/flags.cpp"
 #include "settings_window/stack.cpp"
+// #include "settings_window/reset.cpp"
 
 /**
  * @brief Creates the Settings component.
@@ -42,7 +43,7 @@ ftxui::Component Settings(
         flagsComponent,
         stackComponent,
         registersComponent,
-        ioPinsComponent,
+        ioPinsComponent
     });
 
     auto settings_renderer = Renderer(container, [

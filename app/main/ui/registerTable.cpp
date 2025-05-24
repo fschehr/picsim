@@ -1,8 +1,12 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/component/component.hpp>
 #include <sstream>
+#include <functional> // Für std::function
 
-ftxui::Component RegisterTable(std::string (&registerValues)[32][8]) {
+// Callback-Typ für Registeränderungen
+using RegisterChangeCallback = std::function<void(int, uint8_t)>;
+
+ftxui::Component RegisterTable(std::string (&registerValues)[32][8], RegisterChangeCallback on_register_change = nullptr) {
     using namespace ftxui;
 
     auto container = Container::Vertical({});
@@ -18,7 +22,7 @@ ftxui::Component RegisterTable(std::string (&registerValues)[32][8]) {
             registerInputOption.placeholder = hexPos.str(); // No° des Registers
             registerInputOption.multiline = false;
             
-            registerInputOption.on_change = [i, j, &registerValues]() {
+            registerInputOption.on_change = [i, j, &registerValues, on_register_change]() {
                 if (registerValues[i][j].length() > 2) {
                     registerValues[i][j] = registerValues[i][j].substr(0, 2);
                 }
@@ -30,6 +34,21 @@ ftxui::Component RegisterTable(std::string (&registerValues)[32][8]) {
                     }
                 }
                 registerValues[i][j] = validInput;
+                
+                // Konvertiere den HEX-String in einen uint8_t Wert und aktualisiere den RAM
+                if (!validInput.empty()) {
+                    try {
+                        uint8_t value = static_cast<uint8_t>(std::stoi(validInput, nullptr, 16));
+                        // Berechne die RAM-Adresse basierend auf i und j
+                        int address = i * 8 + j;
+                        // Externe Funktion aufrufen, um den RAM zu aktualisieren
+                        if (on_register_change) {
+                            on_register_change(address, value);
+                        }
+                    } catch (const std::exception& e) {
+                        // Fehlerbehandlung bei ungültiger Konvertierung
+                    }
+                }
             };
             
             row->Add(Input(&registerValues[i][j], registerInputOption));

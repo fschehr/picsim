@@ -23,7 +23,19 @@ ftxui::Component Stats(
         // read the pclath value from the vm/register and show the bits as string
 
         std::string pc = std::to_string(vm.executor.getProgramCounter() & 0xFF);
-        std::string stackPointer = std::to_string(vm.getStack().peek());
+        
+        static bool stackErrorLogged = false;
+        std::string stackPointer = "00";
+        try {
+            int stackValue = vm.getStack().peek();
+            stackPointer = std::to_string(stackValue).length() == 1 ? "0" + std::to_string(stackValue) : std::to_string(stackValue);
+            stackErrorLogged = false;
+        } catch (const std::out_of_range& e) {
+            if (!stackErrorLogged) {
+                Logger::error("Stack ist leer: " + std::string(e.what()));
+                stackErrorLogged = true;
+            }
+        }
 
         return window(
             text(" Stats "),
