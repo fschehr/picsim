@@ -33,8 +33,122 @@ Ebenfalls können Simulationen oft nicht alle unvorhersehbaren Ereignisse, Umwel
 Obwohl Simulatoren sehr realistisch sein können, fehlt oft die tatsächliche sensorische und emotionale Erfahrung, die bei der Interaktion mit einem realen System entsteht. Dies kann insbesondere in Trainingsanwendungen relevant sein, wo das "Gefühl" für eine Situation wichtig ist.
 
 
-## Programmoberfläche und deren Handhabung
+## <img src="./Desktop Computer.png" style="height:25px;"/> Programmoberfläche und deren Handhabung
+Dieser Simulator des PIC16F84 wurde als Terminal User Interface (kurz TUI) implementiert. Dies bedeutet, dass die Anwendung vollständig innerhalb eines Terminal-Emulators angezeigt und ausgeführt wird. Der Nutzer ist hierbei nicht auf die Wahl des Terminal-Emulators beschränkt. Dieser kann unter Windows frei zwischen unterschiedlichen Emulatoren, wie dem Windows Terminal, Alacritty und weiteren wählen. Zudem kann der Simulator in den ausgewählten Terminal-Emulatoren über die klassiche Windows Eingabeaufforderung, die ältere Windows PowerShell oder moderne Microsoft PowerShell 7 gestartet werden. Aber auch hier ist der Nutzer nicht auf die drei genannten Optionen beschränkt, solange die gewählten Kombinationen die Ausführung einer Windows Executable (.exe) mit zusätzlichen Argumenten unterstützen.
 
+### Starten des Simulators
+Wie bereits im Einführungstext dieses Abschnittes angeschnitten, wird der Simulator primär über ein Terminal Interface gestartet. Damit der Simulator erfolgreich starten kann, muss dem Ausführungsbefehl der Pfad zu einer Programmdatei für den PIC16F84 als Argument übergeben werden.
+
+**Befehl zur Ausführung für die Windows Eingabeaufforderung:**
+```bash
+picsim.exe <Pfad_zur_Programmdatei>
+```
+**Befehl zur Ausführung für PowerShell 7:**
+```bash
+.\picsim.exe <Pfad_zur_Programmdatei>
+```
+
+Nach Ausführen des Befehls öffnet sich in der aktuellen Sitzung das TUI des Simulators. Sollte beim Start des Simulators ein Fehler aufgetreten sein, wird dieser stattdessen in der Ausgabe des Terminal Emulators angezeigt.
+
+### Layout des Simulators
+Das Interface des Simulators ist in mehrere Sektionen unterteilt. Die Sektionen sind:
+- Controls
+- Logs (standardmäßig ausgeblendet)
+- Reset SFRs (standardmäßig ausgeblendet)
+- Stats (standardmäßig ausgeblendet)
+- Special File Registers
+- Register Table
+- Runtime
+- LED-Array
+- "Editor Window" (zeigt den Pfad zur Programmdatei)
+
+#### Controls
+
+<img src="./control_window.png">
+
+Das Controls-Fenster befindet sich zu jedem Zeitpunkt am oberen Rand des Programmfensters. Dieses Fenster wird grundlegend dafür verwendet die Hauptfunktionen des Simulators zu steuern. In dieser Sektionen befinden sich daher ein Link zum öffnen der Dokumentation, Schaltflächen zur Interaktion des simulierten Programmes, sowie Schaltflächen zum Anzeigen und Ausblenden der Fenster [Logs](#logs), [Reset SFRs](#reset-sfrs) und [Stats](#stats). Ebenfalls in diesem Fenster befindet sich eine Status-LED die den Nutzer über den Zustand running/not running des ausgewählten Programmes informiert.
+
+Bei den Schaltflächen zur Interaktion mit dem simulierten Programm handelt es sich um Go, Reset, Halt und Stop. Die Schaltfläche Go kann zum Starten und Fortfahren eines Programmdurchgangs verwendet werden. Ein Klick auf diese Schaltfläche schaltet die Status-LED an. Die Schaltfläche Reset unterbricht den aktuellen Programmdurchgang und setzt sämtliche Speicher und Einstellungen auf ihren Standardwert zurück. Die Status-LED erlischt dabei. Ebenfalls erlischt die Status-LED bei einem Klick auf die Schaltfläche Halt. Dabei wird der aktuelle Programmdurchlauf unterbrochen, aber nicht abgebrochen. Sämtliche Einstellungen bleiben erhalten. Nach einem Klick auf Halt kann der unterbrochene Programmablauf mit einem Klick auf Go oder Step fortgeführt werden.
+Die Schaltfläche Step kann verwendet werden, um das geladene Programm schrittweise auszuführen. Bei einem Klick auf Step verändert sich der Zustand der Status-LED nicht. 
+
+#### Logs
+
+<img src="./logs_window.png">
+
+Das Logs-Fenster ist beim Start des Simulators standardmäßig eingeklappt, da dieses keine für den Programmablauf des Simulators relevanten Daten anzeigt. Es kann jedoch über die Schaltfläche Show Logs im Controls-Fenster eingeblendet werden. Daraufhin wird dieses direkt unterhalb des Controls-Fenster angezeigt und zeigt die letzten 5 Log-Ausgaben des Simulators. Ein gesamter Verlauf der Log-Ausgaben kann über die picsim.log-Datei, welche im Verzeichnis der Ausführungsdatei generiert wird, eingesehen werden.
+
+Das Log-Fenster codiert sämtliche Ausgaben farbig abhängig von der Bedeutung des Inhaltes. Dabei wird zwischen folgenden Ausgabetypen unterschieden:
+
+- Info (Blau)
+- Warning (Orange)
+- Error (Rot)
+
+Diese Farben werden jedoch nicht in der Log-Datei widergespiegelt.
+
+Mit einem Klick auf die "Hide Logs"-Schaltfläche kann das Logs-Fenster wieder ausgeblendet werden.
+
+#### Reset SFRs
+
+<img src="./resets_window.png">
+
+Ebenfalls initial ausgeblendet ist das "Reset SFRs"-Fenster, welches Schaltflächen zum Zurücksetzen sämtlicher Special Function Register zur Verfügung stellt. 
+
+Bei diesen handelt es sich um:
+
+- TMR0
+- PCL
+- STATUS
+- FSR
+- PORTA
+- PORTB
+- EEDATA
+- EEADR
+- PCLATH
+- INTCON
+- OPTION
+- TRISA
+- TRISB
+- EECON1
+- EECON2
+- W-REG
+
+Das Zurücksetzen der SFRs unterbricht keinen zu dem Zeitpunkt laufenden Programmdurchlauf. Das Zurücksetzen während eines Programmdurchlaufes kann demnach zu unerwartetem Verhalten führen. Alternativ können sämtliche Register über die Schaltfläche Reset im Controls-Fenster zurückgesetzt werden. Dabei wird ein zu dem Zeitpunkt laufender Programmdurchlauf jedoch abgebrochen.
+
+Dargestellt wird dieses unterhalb des Controls- und Logs-Fenster (falls eingeblendet).
+
+#### Stats
+
+<img src="./stats_window.png">
+
+Innerhalb des Stats-Fensters werden Informationen zu speziellen Registern angezeigt, die für den aktuellen Programmablauf relevant sein könnten. Dieses Fenster wird jedoch nicht bei Start des Simulators angezeigt, da einige der hier sichtbaren Informationen auch an anderer Stelle in der TUI eingesehen werden können. Das Stats-Fenster bietet in seiner Darstellung jedoch eine einfache und schnelle Einsicht in die wichtigsten Informationen.
+
+Darunter fallen:
+
+- PC (Program Counter)
+- PCLATH (Program Counter High Latch)
+- PCL (Program Counter Low)
+- FSR (File Select Register)
+- Status
+- SP (Stack Pointer)
+
+#### Special File Registers
+
+<img src="./sfr_window.png">
+
+
+#### Register Table
+
+<img src="./register_table_window.png">
+
+#### Runtime
+
+<img src="./runtime_window.png">
+
+#### LED-Array
+
+<img src="./led-array-window.png">
+
+#### Editor
 
 
 ## Realisierung des Simulator
