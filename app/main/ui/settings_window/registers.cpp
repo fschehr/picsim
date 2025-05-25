@@ -10,7 +10,7 @@
  */
 ftxui::Component StatusRegister(PicSimulatorVM &vm, std::string &statusHex) {
     using namespace ftxui;
-    
+
     ftxui::Component columns[8] = {};
     static std::string column_labels[8] = {
         "IRP", "RP1", "RP0", "TO", "PD", "Z", "DC", "C"
@@ -22,6 +22,7 @@ ftxui::Component StatusRegister(PicSimulatorVM &vm, std::string &statusHex) {
 
     for (int i = 0; i < 8; ++i) {
         buttons[i] = Button(&status_labels[i], [&vm, i] {
+            if (i == 7) return;
             statusBits[i] = !statusBits[i];
             // Convert statusBits to a hex value
             uint8_t statusValue = 0;
@@ -61,7 +62,7 @@ ftxui::Component StatusRegister(PicSimulatorVM &vm, std::string &statusHex) {
             
             return vbox({
                 text(column_labels[7 - i]) | center | flex,
-                buttons[i]->Render() | center | flex,
+                buttons[i]->Render() | (i == 7 ? color(Color::GrayDark) : color(Color::White)) | center | flex,
             });
         });
     }
