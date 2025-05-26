@@ -209,7 +209,7 @@ Außerdem wird in dem Editor-Fenster die Zeile, welche im Programmzähler als n�
 
 ### Auswahl der Programmiersprache
 
-Die Auswahl der Programmiersprache basiert im Falle der Entwicklung dieses Simulators nicht maßgeblich auf den konkreten Vor- und Nachteilen von C++. Hier könnte nun ein langer Abschnitt darüber verfasst werden, welche Vor- und Nachteile C++ bietet. Jedoch fiel die Entscheidung für C++ grundlegend durch den Wunsch und das Interesse ein TUI für den Simulator zu entwickeln. Da sich FTXUI als eine solide Wahl angeboten hat, fiel die Entscheidung, C++ zu verwenden zwangsläufig durch die Wahl des Frontend-Frameworks.
+Die Auswahl der Programmiersprache basiert im Falle der Entwicklung dieses Simulators nicht maßgeblich auf den konkreten Vor- und Nachteilen von C++. Für eine Simulatorprogrammierung eignet sich jedoch C++ sehr gut aufgrund der effizienten und kontrollierten Speicherverwaltung, die dem Programmierer überlassen wird. Im Vergleich zu der Sprache C, welche ebenfalls in Betracht gezogen wurde, bietet C++ die möglichkeit der Objektorientierung, welche die Programmierarbeit um einiges vereinfacht und den Code übersichtlicher macht. Jedoch fiel die Entscheidung für C++ grundlegend einerseits durch den Wunsch und das Interesse ein TUI für den Simulator zu entwickeln und andererseits durch die persönliche Vorkenntnisse mit der Sprache. Da sich FTXUI als eine solide Wahl für eine Terminalbasierte Benutzeroberfläche angeboten hat, fiel die Entscheidung, C++ zu verwenden zwangsläufig durch die Wahl des Frontend-Frameworks.
 
 ### Grundkonzept des Simulators
 
@@ -256,17 +256,23 @@ Dieser Zyklus wird für jede Instruktion wiederholt. Zwischen den Zyklen werden 
 Diese Befehle testen ein bestimmtes Bit in einem Registerinhalt und überspringen die nächste Instruktion, falls das getestete Bit 0 (bei BTFSC) oder 1 (bei BTFSS) ist.
 
 ```cpp
-void BitExecution::executeBTFSC(const Instruction& instruction) {
+void BitExecution::executeBTFSS(const Instruction& instruction) {
     Logger::info("executing " + instruction.toString());
-    int address = executor.getFileAddress(instruction);
+    int address = instruction.getArguments()[0];  // file register Addresse
+    int bit = instruction.getArguments()[1];      // bit Position
     auto bank = executor.getSelectedBank(instruction);
-    int bit = instruction.getArguments()[1];
-
+    
     uint8_t value = executor.getRamContent(bank, address);
     
-    // Wenn das Bit 0 ist, überspringe die nächste Instruktion
-    if (((value >> bit) & 1) == 0) {
+    // den zu Überprüfenden Wert loggen
+    Logger::info("BTFSS checking bit " + std::to_string(bit) + " of value " + std::to_string(value));
+    
+    if ((value & (1 << bit)) != 0) {  // ist das bit gesetzt...
+        // ...Überspringen
         executor.setProgramCounter(executor.getProgramCounter() + 1);
+        Logger::info("BTFSS: Bit is set, skipping next instruction");
+    } else {
+        Logger::info("BTFSS: Bit is not set, continuing");
     }
 }
 ```

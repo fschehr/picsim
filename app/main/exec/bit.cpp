@@ -62,7 +62,7 @@
      * execute it.
      *
      * @param instruction Instruction consisting of OPC and arguments.
-     */    void BitExecution::executeBTFSS(const Instruction& instruction) {
+*/      void BitExecution::executeBTFSS(const Instruction& instruction) {
         Logger::info("executing " + instruction.toString());
         int address = instruction.getArguments()[0];  // file register address
         int bit = instruction.getArguments()[1];      // bit position
