@@ -13,18 +13,17 @@ ftxui::Component Stack(PicSimulatorVM &vm) {
     
     auto registers_renderer = Renderer(container, [&vm] {
         auto stackCopy = vm.getStack().getStackContents();
-        int stackPointer = stackCopy.size() - 1;
+        int stackPointer = vm.getStack().getCurrentTop();  // Get actual top pointer position
 
         std::vector<std::wstring> stackDisplay(8, L"0000");
+        // Show all values in memory, not just up to stackPointer
         for (size_t i = 0; i < 8; ++i) {
-            if (i < stackCopy.size()) {
-                unsigned int value = static_cast<unsigned int>(stackCopy[i]) & 0xF; // Only 4 bits
-                std::wstring bin;
-                for (int b = 3; b >= 0; --b) {
-                    bin += ((value >> b) & 1) ? L'1' : L'0';
-                }
-                stackDisplay[i] = bin;
+            unsigned int value = static_cast<unsigned int>(vm.getStack().getValueAt(i)) & 0xFFFF; // Get full value
+            std::wstring bin;
+            for (int b = 3; b >= 0; --b) {
+                bin += ((value >> b) & 1) ? L'1' : L'0';
             }
+            stackDisplay[i] = bin;
         }
         return window(
             text(" Stack "),

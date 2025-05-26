@@ -53,43 +53,43 @@
                     return Instruction(Instruction::OperationCode::NOP, {});
                 } else if ((code >> 7) == 3) { // CLRF
                     int address = code & FILE_ADDRESS_MASK;
-                    return Instruction(Instruction::OperationCode::CLRF, {0, address});
+                    return Instruction(Instruction::OperationCode::CLRF, {address, 0});
                 } else if ((code >> 7) == 1) { // MOVWF
                     int address = code & FILE_ADDRESS_MASK;
-                    return Instruction(Instruction::OperationCode::MOVWF, {0, address});
+                    return Instruction(Instruction::OperationCode::MOVWF, {address, 0});
                 } else {
                     int destination = (code & DESTINATION_BIT_MASK) >> DESTINATION_BIT_OFFSET;
                     int address = code & FILE_ADDRESS_MASK;
 
                     switch (code & BYTE_OPC_MASK) {
                         case 0x0700:
-                            return Instruction(Instruction::OperationCode::ADDWF, {destination, address});
+                            return Instruction(Instruction::OperationCode::ADDWF, {address, destination});
                         case 0x0500:
-                            return Instruction(Instruction::OperationCode::ANDWF, {destination, address});
+                            return Instruction(Instruction::OperationCode::ANDWF, {address, destination});
                         case 0x0900:
-                            return Instruction(Instruction::OperationCode::COMF, {destination, address});
+                            return Instruction(Instruction::OperationCode::COMF, {address, destination});
                         case 0x0300:
-                            return Instruction(Instruction::OperationCode::DECF, {destination, address});
+                            return Instruction(Instruction::OperationCode::DECF, {address, destination});
                         case 0x0B00:
-                            return Instruction(Instruction::OperationCode::DECFSZ, {destination, address});
+                            return Instruction(Instruction::OperationCode::DECFSZ, {address, destination});
                         case 0x0A00:
-                            return Instruction(Instruction::OperationCode::INCF, {destination, address});
+                            return Instruction(Instruction::OperationCode::INCF, {address, destination});
                         case 0x0F00:
-                            return Instruction(Instruction::OperationCode::INCFSZ, {destination, address});
+                            return Instruction(Instruction::OperationCode::INCFSZ, {address, destination});
                         case 0x0400:
-                            return Instruction(Instruction::OperationCode::IORWF, {destination, address});
+                            return Instruction(Instruction::OperationCode::IORWF, {address, destination});
                         case 0x0800:
-                            return Instruction(Instruction::OperationCode::MOVF, {destination, address});
+                            return Instruction(Instruction::OperationCode::MOVF, {address, destination});
                         case 0x0D00:
-                            return Instruction(Instruction::OperationCode::RLF, {destination, address});
+                            return Instruction(Instruction::OperationCode::RLF, {address, destination});
                         case 0x0C00:
-                            return Instruction(Instruction::OperationCode::RRF, {destination, address});
+                            return Instruction(Instruction::OperationCode::RRF, {address, destination});
                         case 0x0200:
-                            return Instruction(Instruction::OperationCode::SUBWF, {destination, address});
+                            return Instruction(Instruction::OperationCode::SUBWF, {address, destination});
                         case 0x0E00:
-                            return Instruction(Instruction::OperationCode::SWAPF, {destination, address});
+                            return Instruction(Instruction::OperationCode::SWAPF, {address, destination});
                         case 0x0600:
-                            return Instruction(Instruction::OperationCode::XORWF, {destination, address});
+                            return Instruction(Instruction::OperationCode::XORWF, {address, destination});
                     }
                 }
         }
@@ -97,18 +97,18 @@
     }
 
     Instruction Decoder::decodeBitOriented(int code) {
-        int bitAddress = (code & BIT_ADDRESS_MASK) >> BIT_ADDRESS_OFFSET;
+        int bit = (code & BIT_ADDRESS_MASK) >> BIT_ADDRESS_OFFSET;
         int fileAddress = code & FILE_ADDRESS_MASK;
 
         switch (code & BIT_OPC_MASK) {
             case 0x1000:
-                return Instruction(Instruction::OperationCode::BCF, {bitAddress, fileAddress});
+                return Instruction(Instruction::OperationCode::BCF, {fileAddress, bit});
             case 0x1400:
-                return Instruction(Instruction::OperationCode::BSF, {bitAddress, fileAddress});
+                return Instruction(Instruction::OperationCode::BSF, {fileAddress,bit});
             case 0x1800:
-                return Instruction(Instruction::OperationCode::BTFSC, {bitAddress, fileAddress});
+                return Instruction(Instruction::OperationCode::BTFSC, {fileAddress, bit});
             case 0x1C00:
-                return Instruction(Instruction::OperationCode::BTFSS, {bitAddress, fileAddress});
+                return Instruction(Instruction::OperationCode::BTFSS, {fileAddress, bit});
         }
         throw std::invalid_argument("Illegal operation type determined");
     }

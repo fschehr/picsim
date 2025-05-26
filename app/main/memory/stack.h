@@ -17,6 +17,18 @@ public:
     bool isFull() const;
     void clear();
     std::vector<T> getStackContents() const ;
+    T getValueAt(size_t index) const {
+        std::lock_guard<std::mutex> lock(mutex);
+        if (index >= memory.size()) {
+            throw std::out_of_range("Index out of range");
+        }
+        return memory[index];
+    }
+
+    int getCurrentTop() const {
+        std::lock_guard<std::mutex> lock(mutex);
+        return top;
+    }
 private:
     std::vector<T> memory;
     int top;

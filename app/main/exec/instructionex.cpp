@@ -10,6 +10,7 @@
 #include "byte.h"
 #include "bit.h"
 #include <iostream>
+#include <algorithm>
 
 RamMemory<uint8_t>::SFR INDF = RamMemory<uint8_t>::SFR::entries()[0];
 RamMemory<uint8_t>::SFR TMR0 = RamMemory<uint8_t>::SFR::entries()[1];
@@ -80,9 +81,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 
             }
             Logger::info("Executing instruction: " + instruction.toString());
-            const_cast<std::pair<bool,bool*>&>(fileLines[prog[prevProgCounter].first].first).first = false;
-            const_cast<std::pair<bool,bool*>&>(fileLines[prog[programCounter].first].first).first = true;
-            prevProgCounter = programCounter;
+            
 
             //literalex.cpp
             switch (instruction.getOpc()) {
@@ -233,7 +232,9 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         } catch (const std::runtime_error& e) {
             Logger::warning(std::string("Runtime error during execution: ") + e.what());
         }
-
+        const_cast<std::pair<bool,bool*>&>(fileLines[prog[prevProgCounter].first].first).first = false;
+        const_cast<std::pair<bool,bool*>&>(fileLines[prog[programCounter].first].first).first = true;
+        prevProgCounter = programCounter;
         updateTimer();
         return programCounter;
     }
@@ -308,7 +309,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
             // Assuming bank switching is handled externally, calculate the actual address
             int actualAddress = (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
             return ram.get(actualAddress);
-        }
+    }
     //set ram content
     void InstructionExecution::setRamContent(int address, uint8_t value) {
         // Speichere den Wert direkt im RAM an der angegebenen Adresse
@@ -339,9 +340,13 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     }
     
     void InstructionExecution::setRamContent(RamMemory<uint8_t>::Bank bank, int address, uint8_t value) {
-        // Assuming bank switching is handled externally, calculate the actual address
-        int actualAddress = (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
-        ram.set(bank, actualAddress, value);
+        // When setting a value to a mirrored register, we need to update both banks
+        if (address < 0x0C && shouldMirrorAddress(address)) {  // First 12 addresses might be mirrored
+            ram.set(RamMemory<uint8_t>::Bank::BANK_0, address, value);
+            ram.set(RamMemory<uint8_t>::Bank::BANK_1, address, value);
+            return;
+        }
+        ram.set(bank, address, value);
     }
 
     int InstructionExecution::getFileAddress(const Instruction& instruction) const {
@@ -350,7 +355,10 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         return (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
     }
     RamMemory<uint8_t>::Bank InstructionExecution::getSelectedBank(const Instruction& instruction) {
-        return instruction.getBank();
+        uint8_t status = ram.get(STATUS);  // Use STATUS SFR directly
+        bool rp0Set = ((status & (1 << 5)) != 0); // Check RP0 bit (bit 5 of STATUS)
+        Logger::info("Bank selection: RP0=" + std::to_string(rp0Set) + " STATUS=" + std::to_string(status));
+        return rp0Set ? RamMemory<uint8_t>::Bank::BANK_1 : RamMemory<uint8_t>::Bank::BANK_0;
     }
 
     void InstructionExecution::pushStack(int value) {
@@ -418,4 +426,17 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     void InstructionExecution::setZeroFlag() {
         uint8_t status = ram.get(STATUS);
         ram.set(STATUS, (status | 0x04));
+    }
+
+    bool InstructionExecution::shouldMirrorAddress(int address) {
+        // These addresses are mirrored between banks
+        static const std::vector<int> mirroredAddresses = {
+            0x00,  // INDF
+            0x02,  // PCL
+            0x03,  // STATUS
+            0x04,  // FSR
+            0x0A,  // PCLATH
+            0x0B   // INTCON
+        };
+        return std::find(mirroredAddresses.begin(), mirroredAddresses.end(), address) != mirroredAddresses.end();
     }

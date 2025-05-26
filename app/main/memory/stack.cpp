@@ -23,6 +23,7 @@ T StackMemory<T>::pop() {
     if (top < 0) {
         throw std::out_of_range("Stack underflow");
     }
+    // Just return the current value and decrement top, without modifying memory
     return memory[top--];
 }
 
@@ -51,7 +52,7 @@ template <typename T>
 void StackMemory<T>::clear() {
     std::lock_guard<std::mutex> lock(mutex);
     top = -1;
-    // Instead of clearing/resizing, just zero out the memory
+    // Only clear if we really want to reset the memory contents
     std::fill(memory.begin(), memory.end(), 0);
 }
 

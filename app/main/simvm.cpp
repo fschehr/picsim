@@ -96,11 +96,14 @@ void PicSimulatorVM::programDecode() {
 
 void PicSimulatorVM::stop() {
     running = false;
+    halted = false;
+    cv.notify_all();  // Wake up any waiting threads
     
     // Warten bis ein laufender Thread beendet ist, falls vorhanden und joinable
     if (executionThread.joinable()) {
         executionThread.join();
     }
+    threadRunning = false;
 }
 
 void PicSimulatorVM::start() {
@@ -161,50 +164,49 @@ void PicSimulatorVM::load() {
 }
 
 void PicSimulatorVM::execute() {
-    if (!loaded) {
-        throw std::runtime_error("No executable program loaded");
-    }
-    
-    // Wenn bereits ein Thread läuft, nichts tun
-    if (executionThread.joinable()) {
-        return;
-    }
-    if(halted){
-        halted = false;
-    }
-    if (!running) {
-        running = true;
-        executor.reset();
-        const_cast<std::pair<bool,bool*>&>(fileLines[prog[0].first].first).first = false;
-    }
-    
-    // Thread starten, der kontinuierlich Instruktionen ausführt
-    executionThread = std::thread([this]() {
-        try {
-            while (running && loaded) {
-                // Führe eine Instruktion aus
-                if((*fileLines[prog[executor.programCounter].first+1].first.second)==true){
-                    halt();
-                }
-                executor.execute();
-                
-                // Kleine Pause für CPU-Entlastung und um UI-Thread Zeit zu geben
-                std::this_thread::sleep_for(std::chrono::microseconds(microseconds));
-                // Überprüfe, ob der Thread angehalten werden soll
-                std::unique_lock<std::mutex> lock(mtx);
-                while (halted) {
-                    cv.wait(lock);
-                }
-            }
-        } catch (const std::exception& e) {
-            Logger::warning(std::string("Fehler bei der Ausführung: ") + e.what());
-            running = false; // Bei Fehler die Ausführung stoppen
+        if (!loaded) {
+            throw std::runtime_error("No executable program loaded");
         }
-    });
-    
-    // Thread im Hintergrund laufen lassen
-    executionThread.detach();
-}
+        
+        // Check if thread is already running
+        if (threadRunning) {
+            return;
+        }
+
+        if(halted) {
+            halted = false;
+        }
+        
+        if (!running) {
+            running = true;
+            executor.reset();
+            const_cast<std::pair<bool,bool*>&>(fileLines[prog[0].first].first).first = false;
+        }
+        
+        threadRunning = true;
+        executionThread = std::thread([this]() {
+            try {
+                while (running && loaded) {
+                    if((*fileLines[prog[executor.programCounter].first+1].first.second)==true){
+                        halt();
+                    }
+                    executor.execute();
+                    std::this_thread::sleep_for(std::chrono::microseconds(microseconds));
+                    
+                    std::unique_lock<std::mutex> lock(mtx);
+                    while (halted) {
+                        cv.wait(lock);
+                    }
+                }
+            } catch (const std::exception& e) {
+                Logger::warning(std::string("Fehler bei der Ausführung: ") + e.what());
+                running = false;
+            }
+            threadRunning = false;  // Reset thread running flag when done
+        });
+        
+        executionThread.detach();
+    }
 
 void PicSimulatorVM::halt() {
     std::lock_guard<std::mutex> lock(mtx);

@@ -109,8 +109,7 @@
         Logger::info("executing " + instruction.toString());
         int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
-        Logger::warning(std::to_string(executor.getFileAddress(instruction)));
-
+        Logger::info("Bank: " + std::to_string(static_cast<int>(bank)) + " Address: " + std::to_string(address));
         executor.setRamContent(bank, address, 0x00);
         executor.setZeroFlag();
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;

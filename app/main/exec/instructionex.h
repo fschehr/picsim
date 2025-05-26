@@ -68,7 +68,7 @@ public:
     void setCycleUpdateCallback(std::function<void(int)> callback) {
         cycleUpdateCallback = callback;
     }
-
+    bool shouldMirrorAddress(int address);
     void setInstructionRegister(uint16_t value);
     void setProgramCounter(int value);
     void setWorkingRegister(uint8_t value);

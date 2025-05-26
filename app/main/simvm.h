@@ -12,6 +12,8 @@
 #include "decode.h"
 #include "exec/instructionex.h"
 #include "logger.h"
+#include "condition_variable"
+#include <atomic>
 
 class ConcreteInstruction : public Instruction {
 public:
@@ -70,6 +72,7 @@ public:
     bool loaded = false;
     bool running = false;
     std::thread executionThread;
+    std::atomic<bool> threadRunning{false};  // Add this line
 };
 
 #endif // SIMVM_H
