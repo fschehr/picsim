@@ -71,15 +71,14 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 return programCounter;
             }
             Logger::info("Program counter is: " + std::to_string(programCounter));
-
+            Logger::info("is set by vm"+std::to_string(setByVM));
             // Fetch and decode instruction
             setInstructionRegister(programMemory.get(programCounter));
-            setProgramCounter(programCounter + 1);
-            Instruction instruction = decoder.decode(instructionRegister);
             if(*fileLines[prog[programCounter].first].first.second){
                 Logger::info("reached Breakpoint");
-                
             }
+            setProgramCounter(programCounter+1);
+            Instruction instruction = decoder.decode(instructionRegister);
             Logger::info("Executing instruction: " + instruction.toString());
             
 
@@ -234,7 +233,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         }
         const_cast<std::pair<bool,bool*>&>(fileLines[prog[prevProgCounter].first].first).first = false;
         const_cast<std::pair<bool,bool*>&>(fileLines[prog[programCounter].first].first).first = true;
-        prevProgCounter = programCounter;
+        prevProgCounter = programCounter; 
         updateTimer();
         return programCounter;
     }
@@ -412,6 +411,14 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     }
 
     void InstructionExecution::setProgramCounter(int value) {
+        if(ram.get(PCLATH) != 0x00){
+            //if pclath bit is set, add the bits from PCLATH to PCL. 1111 1111 1111 1111
+            //                                                          |----| |-------|
+            //                                                          pclath     pc
+            value = (value & 0x07FF) | ((ram.get(PCLATH) & 0x1C) << 8);
+        }
+        //PCL are the lower 8 bits of the program counter
+        ram.set(PCL, value & 0xFF);
         programCounter = value;
     }
 

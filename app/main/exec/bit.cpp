@@ -16,6 +16,7 @@
         value &= ~(1 << bit);  // Just clear the bit, nothing fancy
         
         executor.setRamContent(bank, address, value);
+        executor.setByVM = 1;
     }
 
     /**
@@ -33,6 +34,7 @@
         value = static_cast<uint8_t>(mask | value); // Set bit using the mask
         Logger::info("value: " + std::to_string(value));
         executor.setRamContent(bank, address, value);
+        executor.setByVM = 1;
     }
 
     /**

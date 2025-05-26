@@ -49,12 +49,13 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
         // Setze den RAM-Wert in der VM
         vm.executor.setRamContent(address, value);
     };
-    auto registerTableComponent = RegisterTable(registerValues, registerChangeCallback);
+    auto registerTableComponent = RegisterTable(vm, registerValues, registerChangeCallback);
     auto settingsComponent = Settings(
         registerValues[0][3], // Status Register
+        registerValues[16][1], // Option Register
         registerValues[0][5], // Port A Pins
         registerValues[0][6], // Port B Pins
-        registerValues[16][5], // TRISA
+        registerValues[16][5], // TR    ISA
         registerValues[16][6],  // TRISB
         vm
     );

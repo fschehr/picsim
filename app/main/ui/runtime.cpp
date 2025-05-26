@@ -52,7 +52,7 @@ ftxui::Component Runtime(PicSimulatorVM &vm) {
                     }) | flex,
                     text("  ⇒  ") | xflex,
                     text(" Runtime ") | bgcolor(Color::White) | color(Color::Black) | xflex,
-                    text(" " + std::to_string(vm.executor.runtimeCounter) + "µs ") | bgcolor(Color::GrayLight) | color(Color::Black) | xflex,
+                    text(" " + std::to_string(vm.executor.runtimeCounter) + "cy. ") | bgcolor(Color::GrayLight) | color(Color::Black) | xflex,
                 }) | center,
                 invalidInput ? text("Invalid input") | bgcolor(Color::IndianRed) | color(Color::White) | xflex : vbox({}) | size(WIDTH, EQUAL, 0),
             }) | xflex

@@ -91,6 +91,84 @@ ftxui::Component StatusRegister(PicSimulatorVM &vm, std::string &statusHex) {
     return statusRegisters_renderer;
 }
 
+ftxui::Component OptionRegister(PicSimulatorVM &vm, std::string &optionHex) {
+    using namespace ftxui;
+
+    ftxui::Component columns[8] = {};
+    static std::string column_labels[8] = {
+        "RBP", "IntEdg", "T0CS", "T0SE", "PSA", "PS2", "PS1", "PS0"
+    };
+
+    static bool optionBits[8] = {true, true, true, true, true, true, true, true};
+    static std::string option_labels[8] = {};
+
+    ftxui::Component buttons[8] = {};
+
+    for (int i = 0; i < 8; ++i) {
+        buttons[i] = Button(&option_labels[i], [&vm, i] {
+            optionBits[i] = !optionBits[i];
+            uint8_t optionValue = 0;
+            for (int j = 0; j < 8; ++j) {
+                if (optionBits[j]) {
+                    optionValue |= (1 << j);
+                }
+            }
+            vm.executor.setRamContent(RamMemory<uint8_t>::Bank::BANK_1, 0x01, optionValue);
+        });
+    };
+
+    auto allButtons = Container::Horizontal({
+        buttons[7] | xflex,
+        buttons[6] | xflex,
+        buttons[5] | xflex,
+        buttons[4] | xflex,
+        buttons[3] | xflex,
+        buttons[2] | xflex,
+        buttons[1] | xflex,
+        buttons[0] | xflex
+    });
+
+    for (int i = 0; i <= 7; ++i) {
+        columns[i] = Renderer(allButtons, [buttons, i, &optionHex] {
+            unsigned int statusValue = 0;
+            if (optionHex.length() > 0) {
+                std::stringstream ss;
+                ss << std::hex << optionHex;
+                ss >> statusValue;
+            }
+            
+            optionBits[i] = (statusValue & (1 << i)) != 0;
+            option_labels[i] = (optionBits[i]) ? "1" : "0";
+            
+            return vbox({
+                text(column_labels[7 - i]) | center | flex,
+                buttons[i]->Render() | center | flex,
+            });
+        });
+    }
+
+    auto all_columns = Container::Horizontal({
+        columns[7]| xflex,
+        columns[6]| xflex,
+        columns[5]| xflex,
+        columns[4]| xflex,
+        columns[3]| xflex,
+        columns[2]| xflex,
+        columns[1]| xflex,
+        columns[0]| xflex
+    });
+
+    auto statusRegisters_renderer = Renderer(all_columns, [all_columns] {
+        return vbox({
+            text("Option Register") | center | bgcolor(Color::Aquamarine1) | color(Color::Black),
+            text(" ") | center,
+            all_columns->Render() | xflex
+        }) | xflex;
+    });
+
+    return statusRegisters_renderer;
+}
+
 ftxui::Component WRegister(PicSimulatorVM &vm) {
     using namespace ftxui;
 
@@ -136,28 +214,36 @@ ftxui::Component WRegister(PicSimulatorVM &vm) {
     return wRegister_renderer;
 }
 
-ftxui::Component Registers(PicSimulatorVM &vm, std::string &statusHex) {
+ftxui::Component Registers(PicSimulatorVM &vm, std::string &statusHex, std::string &optionHex) {
     using namespace ftxui;
 
     auto StatusRegisterComponent = StatusRegister(
         vm,
         statusHex
     );
+    auto OptionRegisterComponent = OptionRegister(
+        vm,
+        optionHex
+    );
     auto WRegisterComponent = WRegister(vm);
 
     auto container = Container::Vertical({
         StatusRegisterComponent,
+        OptionRegisterComponent,
         WRegisterComponent,
     });
 
     auto registers_renderer = Renderer(container, [
         StatusRegisterComponent,
+        OptionRegisterComponent,
         WRegisterComponent
     ] {
         return window(
             text(" Registers "),
             vbox({
                 StatusRegisterComponent->Render() | flex,  // Entferne center, um volle Breite zu nutzen
+                separatorDashed(),
+                OptionRegisterComponent->Render() | flex,
                 separatorDashed(),
                 WRegisterComponent->Render() | flex,
             }) | xflex

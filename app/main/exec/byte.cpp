@@ -112,6 +112,7 @@
         Logger::info("Bank: " + std::to_string(static_cast<int>(bank)) + " Address: " + std::to_string(address));
         executor.setRamContent(bank, address, 0x00);
         executor.setZeroFlag();
+        executor.setByVM = 1;
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
 
@@ -129,6 +130,7 @@
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
+            executor.setByVM = 1;
         }
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
@@ -147,6 +149,7 @@
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
+            executor.setByVM = 1;
         }
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
@@ -165,6 +168,7 @@
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
+            executor.setByVM = 1;
         }
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
@@ -182,6 +186,7 @@
             executor.setWorkingRegister(value);
         } else {
             executor.setRamContent(bank, address, value);
+            executor.setByVM = 1;
         }
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
@@ -200,6 +205,7 @@
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
+            executor.setByVM = 1;
         }
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
@@ -221,6 +227,7 @@
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
+            executor.setByVM = 1;
         }
     }
 
@@ -241,6 +248,7 @@
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
+            executor.setByVM = 1;
         }
     }
 
@@ -259,6 +267,7 @@
             executor.setWorkingRegister(value);
         } else {
             executor.setRamContent(bank, address, value);
+            executor.setByVM = 1;
         }
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
@@ -278,6 +287,7 @@
             executor.setWorkingRegister(value);
         } else {
             executor.setRamContent(bank, address, value);
+            executor.setByVM = 1;
         }
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
@@ -300,6 +310,7 @@
             executor.setWorkingRegister(result);
         } else {
             executor.setRamContent(bank, address, result);
+            executor.setByVM = 1;
         }
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
     }
@@ -307,6 +318,7 @@
     void ByteExecution::executeRETFIE(const Instruction& instruction) {
         Logger::info("executing RETFIE");
         executor.setRamContent(RamMemory<uint8_t>::SFR::entries()[10], executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[10]) | 0x80);
+        executor.setByVM = 1;
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
         executor.setProgramCounter(executor.popStack());
     }

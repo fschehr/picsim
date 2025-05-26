@@ -59,7 +59,45 @@ ftxui::Component PortA(PicSimulatorVM &vm, std::string &portAHex, std::string &t
 
     for (int i = 7; i >= 0; --i) {
         if (i >= 5) {
-            columns[i] = Renderer(allButtons, [buttons, i, &portAHex, &trisAHex] {
+            columns[i] = Renderer(allButtons, [&vm, buttons, i, &portAHex, &trisAHex] {
+                unsigned int trisAValue = 0;
+                if (trisAHex.length() > 0) {
+                    std::stringstream ss;
+                    ss << std::hex << trisAHex;
+                    ss >> trisAValue;
+                }
+
+                trisABits[i] = (trisAValue & (1 << i)) != 0;
+                if (trisABits[i]) {
+                    tris_labels[i] = "i";
+                } else {
+                    tris_labels[i] = "o";
+                }
+
+                unsigned int portAValue = 0;
+                if (portAHex.length() > 0) {
+                    std::stringstream ss;
+                    ss << std::hex << portAHex;
+                    ss >> portAValue;
+                }
+
+                portABits[i] = (portAValue & (1 << i)) != 0;
+                if (!vm.executor.setByVM && tris_labels[i] == "i") {
+                    button_labels[i] = portABits[i] ? "1" : "0";
+                } else if (vm.executor.setByVM && tris_labels[i] == "o") {
+                    button_labels[i] = portABits[i] ? "1" : "0";
+                } else if (vm.executor.setByVM && tris_labels[i] == "i") {
+                    button_labels[i] = portABits[i] ? "0" : "1";  // Korrigiert von "1":"1" zu "1":"0"
+                }
+
+                return vbox({
+                    text(std::to_string(i)) | center | flex,
+                    text(tris_labels[i]) | center | flex,
+                    buttons[i]->Render() | (tris_labels[i] == "o" ? color(Color::GrayDark) : color(Color::White)) | center | flex,
+                });
+            });
+        } else if (i < 5) {
+            columns[i] = Renderer(allButtons, [&vm, buttons, i, &portAHex, &trisAHex] {
                 unsigned int trisAValue = 0;
                 if (trisAHex.length() > 0) {
                     std::stringstream ss;
@@ -85,38 +123,13 @@ ftxui::Component PortA(PicSimulatorVM &vm, std::string &portAHex, std::string &t
                 if (tris_labels[i] == "i") {
                     button_labels[i] = portABits[i] ? "1" : "0";
                 }
-
-                return vbox({
-                    text(std::to_string(i)) | center | flex,
-                    text(tris_labels[i]) | center | flex,
-                    buttons[i]->Render() | (tris_labels[i] == "o" ? color(Color::GrayDark) : color(Color::White)) | center | flex,
-                });
-            });
-        } else if (i < 5) {
-            columns[i] = Renderer(allButtons, [buttons, i, &portAHex, &trisAHex] {
-                unsigned int trisAValue = 0;
-                if (trisAHex.length() > 0) {
-                    std::stringstream ss;
-                    ss << std::hex << trisAHex;
-                    ss >> trisAValue;
-                }
-
-                trisABits[i] = (trisAValue & (1 << i)) != 0;
-                if (trisABits[i]) {
-                    tris_labels[i] = "i";
-                } else {
-                    tris_labels[i] = "o";
-                }
-
-                unsigned int portAValue = 0;
-                if (portAHex.length() > 0) {
-                    std::stringstream ss;
-                    ss << std::hex << portAHex;
-                    ss >> portAValue;
-                }
-
-                portABits[i] = (portAValue & (1 << i)) != 0;
-                if (tris_labels[i] == "i") {
+                
+                // Füge die gleiche Logik wie bei anderen Port A Bits hinzu
+                if (!vm.executor.setByVM && tris_labels[i] == "i" && tris_labels[i] != "o") {
+                    Logger::error("C++ ist ein idiot");
+                    button_labels[i] = portABits[i] ? "1" : "0";
+                } else if (vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") {
+                    Logger::error("C++ ist arsch");
                     button_labels[i] = portABits[i] ? "1" : "0";
                 }
 
@@ -199,7 +212,7 @@ ftxui::Component PortB(PicSimulatorVM &vm, std::string &portBHex, std::string &t
     });
 
     for (int i = 7; i >= 0; --i) {
-        columns[i] = Renderer(allButtons, [buttons, i, &portBHex, &trisBHex] {
+        columns[i] = Renderer(allButtons, [&vm, buttons, i, &portBHex, &trisBHex] {
             unsigned int trisBValue = 0;
             if (trisBHex.length() > 0) {
                 std::stringstream ss;
@@ -224,6 +237,14 @@ ftxui::Component PortB(PicSimulatorVM &vm, std::string &portBHex, std::string &t
             portBBits[i] = (portBValue & (1 << i)) != 0;
             if (tris_labels[i] == "i") {
                 button_labels[i] = portBBits[i] ? "1" : "0";
+            }
+            // Füge ähnliche Logik wie bei PortA hinzu
+            if (!vm.executor.setByVM && tris_labels[i] == "i") {
+                button_labels[i] = portBBits[i] ? "1" : "0";
+            } else if (vm.executor.setByVM && tris_labels[i] == "o") {
+                button_labels[i] = portBBits[i] ? "1" : "0";
+            } else if (vm.executor.setByVM && tris_labels[i] == "i") {
+                button_labels[i] = portBBits[i] ? "0" : "1";
             }
 
             return vbox({

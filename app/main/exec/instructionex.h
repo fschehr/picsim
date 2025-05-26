@@ -42,22 +42,24 @@ private:
     
     // Callback-Funktion für Zyklusaktualisierungen
     std::function<void(int)> cycleUpdateCallback;
-
+    
     void updateRuntimeCounter(int cycles);
     void updateTimer();
     bool checkTMR0Interrupt();
     bool checkRB0Interrupt();
     bool checkRBInterrupts();
     void callISR(int address);
-
+    
 public:
     InstructionExecution(ProgramMemory<uint16_t>& programMemory, RamMemory<uint8_t>& ram,
-                         StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog);
-
+        StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog);
+        
+    bool breakpointthing = true;
     void init();
     int execute();
     void reset();
     
+    bool setByVM = 0;
     uint8_t workingRegister;
     uint16_t instructionRegister;
     int programCounter;

@@ -2,11 +2,12 @@
 #include <ftxui/component/component.hpp>
 #include <sstream>
 #include <functional> // Für std::function
+#include "../simvm.h"
 
 // Callback-Typ für Registeränderungen
 using RegisterChangeCallback = std::function<void(int, uint8_t)>;
 
-ftxui::Component RegisterTable(std::string (&registerValues)[32][8], RegisterChangeCallback on_register_change = nullptr) {
+ftxui::Component RegisterTable(PicSimulatorVM &vm, std::string (&registerValues)[32][8], RegisterChangeCallback on_register_change = nullptr) {
     using namespace ftxui;
 
     auto container = Container::Vertical({});
@@ -22,7 +23,7 @@ ftxui::Component RegisterTable(std::string (&registerValues)[32][8], RegisterCha
             registerInputOption.placeholder = hexPos.str(); // No° des Registers
             registerInputOption.multiline = false;
             
-            registerInputOption.on_change = [i, j, &registerValues, on_register_change]() {
+            registerInputOption.on_change = [&vm, i, j, &registerValues, on_register_change]() {
                 if (registerValues[i][j].length() > 2) {
                     registerValues[i][j] = registerValues[i][j].substr(0, 2);
                 }
@@ -33,6 +34,7 @@ ftxui::Component RegisterTable(std::string (&registerValues)[32][8], RegisterCha
                         validInput.push_back(std::toupper(c));
                     }
                 }
+                vm.executor.setByVM = false;
                 registerValues[i][j] = validInput;
                 
                 // Konvertiere den HEX-String in einen uint8_t Wert und aktualisiere den RAM

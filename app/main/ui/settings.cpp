@@ -15,6 +15,7 @@
  */
 ftxui::Component Settings(
     std::string &statusHex,
+    std::string &optionHex,
     std::string &portAHex,
     std::string &portBHex,
     std::string &trisAHex,
@@ -25,7 +26,8 @@ ftxui::Component Settings(
 
     auto registersComponent = Registers(
         vm,
-        statusHex
+        statusHex,
+        optionHex
     );
     auto ioPinsComponent = IoPins(
         vm,

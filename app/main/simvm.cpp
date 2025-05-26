@@ -45,7 +45,7 @@ PicSimulatorVM::PicSimulatorVM(const std::vector<std::pair<std::pair<bool,bool*>
     loaded(false),
     cycles(0),
     runtime(0),
-    microseconds(500000),
+    microseconds(200000),
     programMemory(programMemorySize, nullptr)
 {
     // Logger auf Dateiausgabe umstellen
@@ -186,7 +186,7 @@ void PicSimulatorVM::execute() {
     executionThread = std::thread([this]() {
         try {
             while (running && loaded) {
-                if ((*fileLines[prog[executor.programCounter].first+1].first.second)) {
+                if ((*fileLines[prog[executor.programCounter].first].first.second)) {
                     halt();
                 }
                 executor.execute();
