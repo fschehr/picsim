@@ -120,9 +120,9 @@ ftxui::Component PortA(PicSimulatorVM &vm, std::string &portAHex, std::string &t
                 }
 
                 portABits[i] = (portAValue & (1 << i)) != 0;
-                if (tris_labels[i] == "i") {
-                    button_labels[i] = portABits[i] ? "1" : "0";
-                }
+                // if (tris_labels[i] == "i") {
+                //     button_labels[i] = portABits[i] ? "1" : "0";
+                // }
                 
                 // Füge die gleiche Logik wie bei anderen Port A Bits hinzu
                 if (!vm.executor.setByVM && tris_labels[i] == "i" && tris_labels[i] != "o") {
@@ -235,9 +235,6 @@ ftxui::Component PortB(PicSimulatorVM &vm, std::string &portBHex, std::string &t
             }
             
             portBBits[i] = (portBValue & (1 << i)) != 0;
-            if (tris_labels[i] == "i") {
-                button_labels[i] = portBBits[i] ? "1" : "0";
-            }
             // Füge ähnliche Logik wie bei PortA hinzu
             if (!vm.executor.setByVM && tris_labels[i] == "i") {
                 button_labels[i] = portBBits[i] ? "1" : "0";
