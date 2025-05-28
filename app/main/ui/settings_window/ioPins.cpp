@@ -120,16 +120,11 @@ ftxui::Component PortA(PicSimulatorVM &vm, std::string &portAHex, std::string &t
                 }
 
                 portABits[i] = (portAValue & (1 << i)) != 0;
-                // if (tris_labels[i] == "i") {
-                //     button_labels[i] = portABits[i] ? "1" : "0";
-                // }
-                
-                // Füge die gleiche Logik wie bei anderen Port A Bits hinzu
-                if (!vm.executor.setByVM && tris_labels[i] == "i" && tris_labels[i] != "o") {
-                    Logger::error("C++ ist ein idiot");
+                if (!vm.executor.setByVM && tris_labels[i] == "i" && tris_labels[i] != "o") { // set by click on buttons
                     button_labels[i] = portABits[i] ? "1" : "0";
-                } else if (vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") {
-                    Logger::error("C++ ist arsch");
+                } else if (vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") { // set by loaded program
+                    button_labels[i] = portABits[i] ? "1" : "0";
+                } else if (!vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") { // set by change in register
                     button_labels[i] = portABits[i] ? "1" : "0";
                 }
 
@@ -235,14 +230,13 @@ ftxui::Component PortB(PicSimulatorVM &vm, std::string &portBHex, std::string &t
             }
             
             portBBits[i] = (portBValue & (1 << i)) != 0;
-            // Füge ähnliche Logik wie bei PortA hinzu
-            if (!vm.executor.setByVM && tris_labels[i] == "i") {
-                button_labels[i] = portBBits[i] ? "1" : "0";
-            } else if (vm.executor.setByVM && tris_labels[i] == "o") {
-                button_labels[i] = portBBits[i] ? "1" : "0";
-            } else if (vm.executor.setByVM && tris_labels[i] == "i") {
-                button_labels[i] = portBBits[i] ? "0" : "1";
-            }
+            if (!vm.executor.setByVM && tris_labels[i] == "i" && tris_labels[i] != "o") { // set by click on buttons
+                    button_labels[i] = portBBits[i] ? "1" : "0";
+                } else if (vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") { // set by loaded program
+                    button_labels[i] = portBBits[i] ? "1" : "0";
+                } else if (!vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") { // set by change in register
+                    button_labels[i] = portBBits[i] ? "1" : "0";
+                }
 
             return vbox({
                 text(std::to_string(i)) | center | flex,
