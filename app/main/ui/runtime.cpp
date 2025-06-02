@@ -23,7 +23,7 @@ ftxui::Component Runtime(PicSimulatorVM &vm) {
                     invalidInput = true;
                     break;
                 } else {
-                    vm.microseconds = std::stoi(frequency) / 4; // 4 / Cycles = Microseconds per Cycle
+                    vm.microseconds = (4 / std::stod(frequency)*1000000); // 4 / Cycles = Microseconds per Cycle
                 }
             }
         }

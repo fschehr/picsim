@@ -32,6 +32,7 @@ ftxui::Component PortA(PicSimulatorVM &vm, std::string &portAHex, std::string &t
         if (i < 5) {
             buttons[i] = Button(&button_labels[i], [&vm, i] {
                 if (tris_labels[i] == "o") return;
+                vm.executor.setByVM = false;
                 portABits[i] = !portABits[i];
                 uint8_t portAValue = 0;
                 for (int j = 0; j < 8; j++) {
@@ -182,6 +183,7 @@ ftxui::Component PortB(PicSimulatorVM &vm, std::string &portBHex, std::string &t
     for (int i = 0; i < 8; i++) {
         buttons[i] = Button(&button_labels[i], [&vm, i] {
             if (tris_labels[i] == "o") return;
+            vm.executor.setByVM = false;
             portBBits[i] = !portBBits[i];
             uint8_t portBValue = 0;
             for (int j = 0; j < 8; j++) {
@@ -231,12 +233,12 @@ ftxui::Component PortB(PicSimulatorVM &vm, std::string &portBHex, std::string &t
             
             portBBits[i] = (portBValue & (1 << i)) != 0;
             if (!vm.executor.setByVM && tris_labels[i] == "i" && tris_labels[i] != "o") { // set by click on buttons
-                    button_labels[i] = portBBits[i] ? "1" : "0";
-                } else if (vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") { // set by loaded program
-                    button_labels[i] = portBBits[i] ? "1" : "0";
-                } else if (!vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") { // set by change in register
-                    button_labels[i] = portBBits[i] ? "1" : "0";
-                }
+                button_labels[i] = portBBits[i] ? "1" : "0";
+            } else if (vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") { // set by loaded program
+                button_labels[i] = portBBits[i] ? "1" : "0";
+            } else if (!vm.executor.setByVM && tris_labels[i] == "o" && tris_labels[i] != "i") { // set by change in register
+                button_labels[i] = portBBits[i] ? "1" : "0";
+            }
 
             return vbox({
                 text(std::to_string(i)) | center | flex,

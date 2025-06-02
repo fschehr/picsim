@@ -46,9 +46,9 @@ public:
     std::condition_variable cv;
     std::mutex mtx;
     bool halted = false;
-    int microseconds = 500000;
+    double microseconds = 100000.0;
     short cycles;
-    int runtime;
+    double runtime;
     InstructionExecution executor;
     int currentLine = 0;
 

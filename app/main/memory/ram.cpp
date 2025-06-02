@@ -85,6 +85,10 @@ T RamMemory<T>::get(Bank bank, int address) const {
     if (address < 0 || address >= bank0.size()) {
         throw std::out_of_range("Address isn't implemented");
     }
+    if(address == 0x00){
+        //indirekt
+        return (bank == Bank::BANK_0) ? bank0[this->get(0x04)] : bank1[this->get(0x04)]; // FSR
+    }
     return (bank == Bank::BANK_0) ? bank0[address] : bank1[address];
 }
 
@@ -95,8 +99,9 @@ void RamMemory<T>::set(Bank bank, int address, const T& value) {
         throw std::out_of_range("Address isn't implemented");
     }
     Logger::info("set value: " + std::to_string(value)+ " to address: " + std::to_string(address));
-    int oldValue = (bank == Bank::BANK_0) ? bank0[address] : bank1[address];
     
+    int oldValue = (bank == Bank::BANK_0) ? bank0[address] : bank1[address];
+   
     // Prüfen, ob es sich um ein SFR handelt
     bool isSFR = address < 0x0C;
     bool shouldMirror = false;
@@ -118,14 +123,22 @@ void RamMemory<T>::set(Bank bank, int address, const T& value) {
     if (bank == Bank::BANK_0) {
         bank0[address] = value;
         if (shouldMirror) {
-            bank1[address] = value; // Spiegelung zur Bank 1
+            if(address == 0x00){
+                bank1[this->get(0x04)] = value;
+            }else{
+                bank1[address] = value; // Spiegelung zur Bank 1
+            }
         }
     } else {
         bank1[address] = value;
-        if (shouldMirror) {
-            bank0[address] = value; // Spiegelung zur Bank 0
-        }
     }
+        if (shouldMirror) {
+            if(address == 0x00){
+                bank1[this->get(0x04)] = value;
+            }else{
+                bank1[address] = value; // Spiegelung zur Bank 1
+            }
+        }
     
     firePropertyChange("ram", address, oldValue, value);
 }
