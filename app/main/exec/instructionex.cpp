@@ -40,21 +40,80 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
           programCounter(0),
           runtimeCounter(0),
           fileLines(fileLines),
-          prog(prog)
+          prog(prog),
+          wdtEnabled(true),  // Can be controlled by configuration bits
+          wdtCounter(0),
+          wdtTimeout(18000)  // 18ms default timeout
     { }
 
     void InstructionExecution::init() {
+        static bool eeWriteSequenceValid = false;
+        static bool writeTimerActive = false;
+        static uint8_t lastEECON2 = 0;
+
         // Observe RAM memory for detecting reading/writing the EEPROM
         ram.addPropertyChangeListener("ram", [this](int address, uint8_t oldValue, uint8_t newValue) {
-            if (address == EECON1.address) {
-                if ((newValue & 0b10) && (newValue & 0b1)) { // Check RD and WR bits
-                    if (newValue & 0b10) { // RD bit
+            if (address == EECON2.address) {
+                // Check write sequence: 55h followed by AAh
+                if (lastEECON2 == 0x55 && newValue == 0xAA) {
+                    eeWriteSequenceValid = true;
+                } else {
+                    eeWriteSequenceValid = false;
+                }
+                lastEECON2 = newValue;
+            }
+            else if (address == EECON1.address) {
+                // Handle read operation
+                if (newValue & 0b10) { // RD bit set
+                    // Perform EEPROM read
+                    try {
                         ram.set(EEDATA, eeprom.get(ram.get(EEADR)));
+                    } catch (const std::out_of_range&) {
+                        // Invalid address - do nothing
                     }
-                    if (newValue & 0b1) { // WR bit
-                        eeprom.set(ram.get(EEADR), ram.get(EEDATA));
+                    ram.set(EECON1, newValue & ~0b10); // Clear RD bit after read
+                }
+                
+                // Handle write operation
+                if (newValue & 0b1) { // WR bit set
+                    if (!(ram.get(EECON1) & 0b100)) { // WREN bit not set
+                        // Write not enabled - set WRERR
+                        ram.set(EECON1, ram.get(EECON1) | 0b1000);
+                        ram.set(EECON1, newValue & ~0b1); // Clear WR bit
+                        return;
                     }
-                    ram.set(EECON1, newValue & 0b11111100); // Clear RD and WR bits
+                    
+                    if (!eeWriteSequenceValid) {
+                        // Invalid write sequence - set WRERR
+                        ram.set(EECON1, ram.get(EECON1) | 0b1000);
+                        ram.set(EECON1, newValue & ~0b1); // Clear WR bit
+                        return;
+                    }
+
+                    if (!writeTimerActive) {
+                        writeTimerActive = true;
+                        
+                        // Start EEPROM write cycle
+                        try {
+                            eeprom.set(ram.get(EEADR), ram.get(EEDATA));
+                            
+                            // Write complete - set EEIF and clear WR
+                            uint8_t eecon1 = ram.get(EECON1);
+                            ram.set(EECON1, (eecon1 | 0b10000) & ~0b1); // Set EEIF, clear WR
+                            
+                            // Set INTCON.EEIE if enabled
+                            if (ram.get(INTCON) & 0b01000000) { // EEIE bit
+                                ram.set(INTCON, ram.get(INTCON) | 0b10000000); // Set GIE
+                            }
+                            
+                        } catch (const std::out_of_range&) {
+                            // Invalid address - set WRERR
+                            ram.set(EECON1, ram.get(EECON1) | 0b1000);
+                        }
+                        
+                        writeTimerActive = false;
+                        eeWriteSequenceValid = false;
+                    }
                 }
             }
         });
@@ -64,6 +123,14 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         std::lock_guard<std::mutex> guard(lock);
 
         try {
+            // Update and check WDT before instruction execution
+            updateWDT();
+            if (checkWDTTimeout()) {
+                Logger::info("WDT timeout occurred");
+                reset();  // WDT timeout causes reset
+                return programCounter;
+            }
+
             // Check and handle interrupts
             if (checkTMR0Interrupt() || checkRB0Interrupt() || checkRBInterrupts()) {
                 callISR(0x0004); // Calls ISR at address 0x0004
@@ -199,10 +266,14 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 case Instruction::OperationCode::SWAPF:
                     byteAndControlExecutionUnit.executeSWAPF(instruction);
                     updateRuntimeCounter(1);
-                    break;
+                    break;                
                 case Instruction::OperationCode::RETFIE:
                     byteAndControlExecutionUnit.executeRETFIE(instruction);
                     updateRuntimeCounter(2);
+                    break;
+                case Instruction::OperationCode::SLEEP:
+                    byteAndControlExecutionUnit.executeSLEEP();
+                    updateRuntimeCounter(1);
                     break;
 
                 //bit.cpp
@@ -382,6 +453,50 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
             ram.set(INTCON, ram.get(INTCON) | 4);
         }
         ram.set(TMR0, ram.get(TMR0) + 1);
+    }
+
+    void InstructionExecution::updateWDT() {
+        if (!wdtEnabled) return;
+        
+        // Get prescaler value if assigned to WDT
+        uint8_t option = ram.get(OPTION);
+        bool psa = (option & 0b00001000) != 0; // PSA bit
+        if (psa) { // Prescaler is assigned to WDT
+            uint8_t ps = option & 0b00000111; // PS2:PS0 bits
+            uint32_t prescalerValue = 1 << ps; // 1:1 to 1:128
+            wdtCounter += prescalerValue;
+        } else {
+            wdtCounter++; // No prescaler for WDT
+        }
+    }    void InstructionExecution::clearWDT() {
+        // 1. Clear WDT counter
+        wdtCounter = 0;
+
+        // 2. Clear WDT prescaler if assigned to WDT
+        uint8_t option = ram.get(OPTION);
+        bool psa = (option & 0b00001000) != 0; // PSA bit
+        if (psa) { // If prescaler is assigned to WDT
+            // The prescaler is automatically cleared when WDT is cleared
+            // Nothing to do here - prescaler state is implicitly reset when wdtCounter is cleared
+        }
+
+        // 3. Set both TO (bit 4) and PD (bit 3) bits in STATUS register
+        uint8_t status = ram.get(STATUS);
+        ram.set(STATUS, status | 0b00011000); // Set both TO and PD bits
+    }
+
+    bool InstructionExecution::checkWDTTimeout() {
+        if (!wdtEnabled) return false;
+        
+        if (wdtCounter >= wdtTimeout) {
+            // WDT timeout occurred
+            clearWDT();
+            // Clear TO bit in STATUS register on timeout
+            uint8_t status = ram.get(STATUS);
+            ram.set(STATUS, status & ~0b00010000);
+            return true;
+        }
+        return false;
     }
 
     bool InstructionExecution::checkTMR0Interrupt() {

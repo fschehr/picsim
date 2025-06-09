@@ -321,4 +321,22 @@
         executor.setByVM = 1;
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
         executor.setProgramCounter(executor.popStack());
+    }    
+
+    void ByteExecution::executeSLEEP() {
+        Logger::info("executing SLEEP");
+
+        // 1. Set TO bit (bit 4) and clear PD bit (bit 3) in STATUS register
+        uint8_t status = executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[3]); // STATUS is at index 3
+        status = (status | 0b00010000) & ~0b00001000;  // Set TO (bit 4), clear PD (bit 3)
+        executor.setRamContent(RamMemory<uint8_t>::SFR::entries()[3], status);
+
+        // 2. Clear WDT and prescaler
+        executor.clearWDT();
+
+        // The main execution loop already handles all wake-up sources:
+        // - WDT timeout through checkWDTTimeout()
+        // - RB0/INT through checkRB0Interrupt()
+        // - PORTB change through checkRBInterrupts()
+        // - EEPROM write complete through EEIF bit and interrupt
     }

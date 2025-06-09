@@ -48,20 +48,28 @@ private:
     bool checkTMR0Interrupt();
     bool checkRB0Interrupt();
     bool checkRBInterrupts();
-    void callISR(int address);
+    void callISR(int address);    
+    bool wdtEnabled;
+    uint32_t wdtTimeout;
+    void updateWDT();
+    bool checkWDTTimeout();
+
+    void clearWDT();
     
 public:
     InstructionExecution(ProgramMemory<uint16_t>& programMemory, RamMemory<uint8_t>& ram,
-        StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog);
-        
+    StackMemory<int>& stack, EepromMemory<uint8_t>& eeprom, const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines, const std::vector<std::pair<short,short>>& prog);
+    
     bool breakpointthing = true;
     void init();
     int execute();
     void reset();
+        
     
     bool setByVM = 0;
     uint8_t workingRegister;
     uint16_t instructionRegister;
+    uint32_t wdtCounter;
     int programCounter;
     int runtimeCounter;
     short prevProgCounter = 0;

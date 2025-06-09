@@ -100,6 +100,29 @@ void RamMemory<T>::set(Bank bank, int address, const T& value) {
     }
     Logger::info("set value: " + std::to_string(value)+ " to address: " + std::to_string(address));
     
+    // Handle indirect addressing through FSR (address 0x00)
+    if (address == 0x00) {
+        int fsrValue = this->get(0x04); // Get FSR value
+        int oldValue = (bank == Bank::BANK_0) ? bank0[fsrValue] : bank1[fsrValue];
+        
+        if (bank == Bank::BANK_0) {
+            bank0[fsrValue] = value;
+            // Mirror to Bank 1 if it's in the GPR region or if it's a mirrored SFR
+            if (fsrValue >= 0x0C || (fsrValue < 0x0C && SFR::valueOf(bank, fsrValue).mapped)) {
+                bank1[fsrValue] = value;
+            }
+        } else {
+            bank1[fsrValue] = value;
+            // Mirror to Bank 0 if it's in the GPR region or if it's a mirrored SFR
+            if (fsrValue >= 0x0C || (fsrValue < 0x0C && SFR::valueOf(bank, fsrValue).mapped)) {
+                bank0[fsrValue] = value;
+            }
+        }
+        
+        firePropertyChange("ram", fsrValue, oldValue, value);
+        return;
+    }
+    
     int oldValue = (bank == Bank::BANK_0) ? bank0[address] : bank1[address];
    
     // Prüfen, ob es sich um ein SFR handelt
@@ -123,22 +146,14 @@ void RamMemory<T>::set(Bank bank, int address, const T& value) {
     if (bank == Bank::BANK_0) {
         bank0[address] = value;
         if (shouldMirror) {
-            if(address == 0x00){
-                bank1[this->get(0x04)] = value;
-            }else{
-                bank1[address] = value; // Spiegelung zur Bank 1
-            }
+            bank1[address] = value; // Spiegelung zur Bank 1
         }
     } else {
         bank1[address] = value;
-    }
         if (shouldMirror) {
-            if(address == 0x00){
-                bank1[this->get(0x04)] = value;
-            }else{
-                bank1[address] = value; // Spiegelung zur Bank 1
-            }
+            bank0[address] = value; // Spiegelung zur Bank 0
         }
+    }
     
     firePropertyChange("ram", address, oldValue, value);
 }

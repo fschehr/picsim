@@ -33,7 +33,8 @@ public:
     void executeRRF(const Instruction& instruction);
     void executeNOP();
     void executeSWAPF(const Instruction& instruction);
-    void executeRETFIE(const Instruction& instruction);
+    void executeRETFIE(const Instruction& instruction); 
+    void executeSLEEP();
 
     const std::vector<std::pair<std::pair<bool,bool*>,std::pair<short, std::string>>>& fileLines;
     const std::vector<std::pair<short,short>>& prog;

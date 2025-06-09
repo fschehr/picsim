@@ -1,23 +1,5 @@
-// #include "document.hpp"
-#include "controls.cpp"
-#include "editor.cpp"
-#include "registerTable.cpp"
-#include "settings.cpp"
-#include "stats.cpp"
-#include "logs.cpp"
-#include "resets.cpp"
-#include "runtime.cpp"
-#include "ledArray.cpp"
+#include "document.hpp"
 
-#include <ftxui/dom/elements.hpp>
-#include <ftxui/component/component.hpp>
-#include <vector>
-#include <string>
-#include <sstream>
-#include <iomanip>
-#include <chrono>
-#include <array>
-#include "../simvm.h"
 /**
  * @brief The main UI component
  * 
@@ -55,7 +37,7 @@ ftxui::Component Document(const std::string &filePath, std::vector<std::pair<std
         registerValues[16][1], // Option Register
         registerValues[0][5], // Port A Pins
         registerValues[0][6], // Port B Pins
-        registerValues[16][5], // TR    ISA
+        registerValues[16][5], // TRISA
         registerValues[16][6],  // TRISB
         vm
     );
