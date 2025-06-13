@@ -117,6 +117,9 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 }
             }
         });
+        
+        // Setup PCL update handler
+        setupPCLUpdateHandler();
     }
 
     int InstructionExecution::execute() {
@@ -526,6 +529,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     }
 
     void InstructionExecution::setProgramCounter(int value) {
+        
         if(ram.get(PCLATH) != 0x00){
             //if pclath bit is set, add the bits from PCLATH to PCL. 1111 1111 1111 1111
             //                                                          |----| |-------|
@@ -539,6 +543,16 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
 
     void InstructionExecution::setWorkingRegister(uint8_t value) {
         workingRegister = value;
+    }
+
+    void InstructionExecution::setProgramCounterWithoutPCLUpdate(int value) {
+        if(ram.get(PCLATH) != 0x00){
+            //if pclath bit is set, add the bits from PCLATH to PCL. 1111 1111 1111 1111
+            //                                                          |----| |-------|
+            //                                                          pclath     pc
+            value = (value & 0x07FF) | ((ram.get(PCLATH) & 0x1C) << 8);
+        }
+        programCounter = value;
     }
 
     void InstructionExecution::setRuntimeCounter(int value) {
@@ -561,4 +575,24 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
             0x0B   // INTCON
         };
         return std::find(mirroredAddresses.begin(), mirroredAddresses.end(), address) != mirroredAddresses.end();
+    }
+
+    void InstructionExecution::setupPCLUpdateHandler() {
+        // Register callback for PCL updates
+        ram.setPCLUpdateCallback([this](uint8_t newPCLValue) {
+            handlePCLUpdate(newPCLValue);
+        });
+    }
+
+    void InstructionExecution::handlePCLUpdate(uint8_t newPCLValue) {
+        // When PCL is written, update the program counter
+        // Combine PCL with PCLATH to form the full program counter
+        uint8_t pclath = ram.get(PCLATH);
+        int newPC = ((pclath & 0x1F) << 8) | newPCLValue;
+        
+        // Update the program counter (but don't update PCL again to avoid recursion)
+        setProgramCounterWithoutPCLUpdate(newPC);
+        
+        Logger::info("PCL updated to: " + std::to_string(newPCLValue) + 
+                    ", Program Counter set to: " + std::to_string(programCounter));
     }

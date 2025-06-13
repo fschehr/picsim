@@ -12,11 +12,11 @@
         uint8_t argument = instruction.getArguments()[0];
         uint8_t workingRegister = executor.getWorkingRegister();
 
-        executor.checkDigitCarryFlag((0xF < ((argument & 0xF) + (workingRegister & 0xF))));
+        executor.checkDigitCarryFlag(((argument & 0xF) + (workingRegister & 0xF)) > 0xF);
 
         int result = (0xFF & argument) + (0xFF & workingRegister);
 
-        executor.checkCarryFlag(result);
+        executor.checkCarryFlag(result > 0xFF);
         executor.checkZeroFlag(result);
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
         executor.setWorkingRegister(static_cast<uint8_t>(result));
@@ -32,7 +32,7 @@
 
         int result = (0xFF & argument) + (0xFF & (~workingRegister + 1));
 
-        executor.checkCarryFlag(result);
+        executor.checkCarryFlag(result > 0xFF);
         executor.checkZeroFlag(result);
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
         executor.setWorkingRegister(static_cast<uint8_t>(result));

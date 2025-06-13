@@ -19,7 +19,7 @@
         executor.checkCarryFlag(result > 0xFF);
         executor.checkZeroFlag(result);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -37,7 +37,7 @@
 
         executor.checkZeroFlag(result);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -55,7 +55,7 @@
 
         executor.checkZeroFlag(result);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -75,7 +75,7 @@
         executor.checkCarryFlag(value >= executor.getWorkingRegister());
         executor.checkZeroFlag(result);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -126,7 +126,7 @@
 
         executor.checkZeroFlag(result);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -145,7 +145,7 @@
 
         executor.checkZeroFlag(result);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -164,7 +164,7 @@
 
         executor.checkZeroFlag(result);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -182,7 +182,7 @@
 
         executor.checkZeroFlag(value);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(value);
         } else {
             executor.setRamContent(bank, address, value);
@@ -201,7 +201,7 @@
 
         executor.checkZeroFlag(result);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -223,7 +223,7 @@
             executor.setProgramCounter(executor.getProgramCounter() + 1);
         }
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -244,7 +244,7 @@
             executor.setProgramCounter(executor.getProgramCounter() + 1);
         }
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(static_cast<uint8_t>(result));
         } else {
             executor.setRamContent(bank, address, static_cast<uint8_t>(result));
@@ -263,7 +263,7 @@
         value = (value << 1) | (executor.isCarryFlag() ? 0x01 : 0x00);
 
         executor.checkCarryFlag(newCarryFlag);
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(value);
         } else {
             executor.setRamContent(bank, address, value);
@@ -283,7 +283,7 @@
         value = (value >> 1) | (executor.isCarryFlag() ? 0x80 : 0x00);
 
         executor.checkCarryFlag(newCarryFlag);
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(value);
         } else {
             executor.setRamContent(bank, address, value);
@@ -306,7 +306,7 @@
         uint8_t value = executor.getRamContent(bank, address);
         uint8_t result = ((value & 0x0F) << 4) | ((value & 0xF0) >> 4);
 
-        if (instruction.getArguments()[0] == 0) {
+        if (instruction.getArguments()[1] == 0) {
             executor.setWorkingRegister(result);
         } else {
             executor.setRamContent(bank, address, result);

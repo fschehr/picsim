@@ -54,7 +54,6 @@ private:
     void updateWDT();
     bool checkWDTTimeout();
 
-    void clearWDT();
     
 public:
     InstructionExecution(ProgramMemory<uint16_t>& programMemory, RamMemory<uint8_t>& ram,
@@ -64,6 +63,7 @@ public:
     void init();
     int execute();
     void reset();
+    void clearWDT();
         
     
     bool setByVM = 0;
@@ -78,6 +78,10 @@ public:
     void setCycleUpdateCallback(std::function<void(int)> callback) {
         cycleUpdateCallback = callback;
     }
+    
+    void setupPCLUpdateHandler();
+    void handlePCLUpdate(uint8_t newPCLValue);
+
     bool shouldMirrorAddress(int address);
     void setInstructionRegister(uint16_t value);
     void setProgramCounter(int value);
@@ -85,6 +89,9 @@ public:
     void setRuntimeCounter(int value);
 
     void setZeroFlag();
+    
+    // Private method to set PC without updating PCL (to avoid recursion)
+    void setProgramCounterWithoutPCLUpdate(int value);
 
     void setRamContent(int address, uint8_t value);
     void setRamContent(RamMemory<uint8_t>::SFR sfr, uint8_t value);

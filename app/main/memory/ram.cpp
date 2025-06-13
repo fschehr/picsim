@@ -71,6 +71,12 @@ void RamMemory<T>::removePropertyChangeListener(const std::string& propertyName)
 }
 
 template <typename T>
+void RamMemory<T>::setPCLUpdateCallback(std::function<void(T)> callback) {
+    std::lock_guard<std::mutex> lock(mutex);
+    pclUpdateCallback = callback;
+}
+
+template <typename T>
 T RamMemory<T>::get(int address) const {
     std::lock_guard<std::mutex> lock(mutex);
     if (address < 0 || address >= bank0.size() * 2) {
