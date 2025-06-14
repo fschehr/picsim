@@ -78,20 +78,14 @@ public:
     void setCycleUpdateCallback(std::function<void(int)> callback) {
         cycleUpdateCallback = callback;
     }
-    
-    void setupPCLUpdateHandler();
-    void handlePCLUpdate(uint8_t newPCLValue);
 
-    bool shouldMirrorAddress(int address);
     void setInstructionRegister(uint16_t value);
+    void setProgramCounter(int value, Instruction::OperationCode opc);
     void setProgramCounter(int value);
     void setWorkingRegister(uint8_t value);
     void setRuntimeCounter(int value);
 
     void setZeroFlag();
-    
-    // Private method to set PC without updating PCL (to avoid recursion)
-    void setProgramCounterWithoutPCLUpdate(int value);
 
     void setRamContent(int address, uint8_t value);
     void setRamContent(RamMemory<uint8_t>::SFR sfr, uint8_t value);
@@ -105,6 +99,7 @@ public:
     bool checkCarryFlag(bool condition);
     bool checkDigitCarryFlag(bool condition);
     int getProgramCounter();
+    int getprevProgCounter();
     StackMemory<int>& getStack();
     uint8_t getRamContent(int address);
     uint8_t getRamContent(RamMemory<uint8_t>::SFR sfr) const;

@@ -117,9 +117,6 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 }
             }
         });
-        
-        // Setup PCL update handler
-        setupPCLUpdateHandler();
     }
 
     int InstructionExecution::execute() {
@@ -133,27 +130,34 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 reset();  // WDT timeout causes reset
                 return programCounter;
             }
-
+            
             // Check and handle interrupts
             if (checkTMR0Interrupt() || checkRB0Interrupt() || checkRBInterrupts()) {
                 callISR(0x0004); // Calls ISR at address 0x0004
                 updateTimer();
                 return programCounter;
             }
+            
+            
             Logger::info("Program counter is: " + std::to_string(programCounter));
-            Logger::info("is set by vm"+std::to_string(setByVM));
+            //Logger::info("is set by vm"+std::to_string(setByVM));
+            
             // Fetch and decode instruction
             setInstructionRegister(programMemory.get(programCounter));
             if(*fileLines[prog[programCounter].first].first.second){
                 Logger::info("reached Breakpoint");
             }
-            setProgramCounter(programCounter+1);
             Instruction instruction = decoder.decode(instructionRegister);
+            Instruction::OperationCode opc = instruction.getOpc();
+            
+            //handle PC
+            int prevPCL = ram.get(PCL);
+            setProgramCounter(programCounter, opc);
+            
             Logger::info("Executing instruction: " + instruction.toString());
             
-
-            //literalex.cpp
             switch (instruction.getOpc()) {
+                //literalex.cpp
                 case Instruction::OperationCode::ADDLW:
                     literalExecutionUnit.executeADDLW(instruction);
                     updateRuntimeCounter(1);
@@ -300,61 +304,113 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
                 default:
                     throw std::runtime_error("Unsupported instruction code");
             }
+            Logger::info("done executing"); 
+
+            if(!(opc == Instruction::OperationCode::CALL  || opc == Instruction::OperationCode::GOTO)  ){ 
+                if(opc == Instruction::OperationCode::RETFIE || opc == Instruction::OperationCode::RETURN || opc == Instruction::OperationCode::RETLW){
+                    Logger::info("Program Counter:" + std::to_string(programCounter));
+                    ram.set(PCL, programCounter & 0x00FF); // Reset PCL to lower byte of programCounter
+                }else{
+                    Logger::info("PCL changed from " + std::to_string(prevPCL) + " to " + std::to_string(ram.get(PCL)));
+                    ram.set(PCL, ram.get(PCL) + 1); // Increment PCL
+                    programCounter = (programCounter & 0xFF00) | ram.get(PCL); // Update programCounter with new PCL
+                }
+            }
+
+            const_cast<std::pair<bool,bool*>&>(fileLines[prog[prevProgCounter].first].first).first = false;
+            const_cast<std::pair<bool,bool*>&>(fileLines[prog[programCounter].first].first).first = true;
+            prevProgCounter = programCounter; 
+            Logger::info("t");
         } catch (const std::out_of_range& e) {
             Logger::warning(std::string("Out of range error during execution: ") + e.what());
         } catch (const std::runtime_error& e) {
             Logger::warning(std::string("Runtime error during execution: ") + e.what());
         }
-        const_cast<std::pair<bool,bool*>&>(fileLines[prog[prevProgCounter].first].first).first = false;
-        const_cast<std::pair<bool,bool*>&>(fileLines[prog[programCounter].first].first).first = true;
-        prevProgCounter = programCounter; 
+        
         updateTimer();
         return programCounter;
     }
 
     void InstructionExecution::reset() {
-        setWorkingRegister(0x00);
-        setProgramCounter(0x00);
-        setInstructionRegister(0x00);
+        try {
+            Logger::info("[EX_RST] Starting executor reset");
+            
+            // First reset internal registers that don't touch RAM
+            workingRegister = 0x00;
+            Logger::info("[EX_RST] Working register reset");
+            
+            instructionRegister = 0x00;
+            Logger::info("[EX_RST] Instruction register reset");
+            
+            runtimeCounter = 0;
+            Logger::info("[EX_RST] Runtime counter reset");
 
-        // Initialize runtime counter
-        setRuntimeCounter(0);
+            // Initialize special function registers one by one with direct bank access
+            Logger::info("[EX_RST] Initializing special function registers");
+            try {
+                // Bank 0 registers first
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x03, 0x18);  // STATUS first to ensure correct bank selection
+                Logger::info("[EX_RST] STATUS initialized");
+                
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x02, 0x00);  // PCL
+                Logger::info("[EX_RST] PCL initialized");
+                
+                ram.initializing = true;  // Set initializing flag to true for direct INDF initialization
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x00, 0x00);  // INDF
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x01, 0x00);  // TMR0
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x04, 0x00);  // FSR
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x05, 0x00);  // PORTA
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x06, 0x00);  // PORTB
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x08, 0x00);  // EEDATA
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x09, 0x00);  // EEADR
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x0A, 0x00);  // PCLATH
+                ram.set(RamMemory<uint8_t>::Bank::BANK_0, 0x0B, 0x00);  // INTCON
+                Logger::info("[EX_RST] Bank 0 registers initialized");
 
-        // Initialize special function registers
-        std::vector<RamMemory<uint8_t>::SFR> sfrEntries = RamMemory<uint8_t>::SFR::entries();
-        ram.set(INDF, 0x00);
-        ram.set(TMR0,0x00);
-        ram.set(PCL, 0x00);
-        ram.set(STATUS, 0x18);
-        ram.set(FSR, 0x00);
-        ram.set(PORTA, 0x00);
-        ram.set(PORTB, 0x00);
-        ram.set(EEDATA, 0x00);
-        ram.set(EEADR, 0x00);
-        ram.set(PCLATH, 0x00);
-        ram.set(INTCON, 0x00);
-        ram.set(OPTION, 255);
-        ram.set(TRISA, 0x1F);
-        ram.set(TRISB, 0xFF);
-        ram.set(EECON1, 0x00);
-        ram.set(EECON2, 0x00);
-        Logger::info("Simulator reset");
+                // Bank 1 registers
+                ram.set(RamMemory<uint8_t>::Bank::BANK_1, 0x01, 0xFF);  // OPTION
+                ram.set(RamMemory<uint8_t>::Bank::BANK_1, 0x05, 0x1F);  // TRISA
+                ram.set(RamMemory<uint8_t>::Bank::BANK_1, 0x06, 0xFF);  // TRISB
+                ram.set(RamMemory<uint8_t>::Bank::BANK_1, 0x08, 0x00);  // EECON1
+                ram.set(RamMemory<uint8_t>::Bank::BANK_1, 0x09, 0x00);  // EECON2
+                Logger::info("[EX_RST] Bank 1 registers initialized");
+
+                // Set program counter last
+                programCounter = 0x00;
+                Logger::info("[EX_RST] Program counter reset");
+
+            } catch (const std::exception& e) {
+                Logger::error("[EX_RST] Failed setting register: " + std::string(e.what()));
+                throw;
+            }
+            
+            Logger::info("[EX_RST] Executor reset completed successfully");
+        } catch (const std::exception& e) {
+            Logger::error("[EX_RST] Failed during executor reset: " + std::string(e.what()));
+            throw;
+        }
     }
     int InstructionExecution::getWorkingRegister() {
         return workingRegister;
+    }
+    int InstructionExecution::getprevProgCounter() {
+        return prevProgCounter;
     }
     int InstructionExecution::getProgramCounter() {
         return programCounter;
     }
     bool InstructionExecution::checkZeroFlag(int value) {
+        Logger::info("Checking Zero Flag for value: " + std::to_string(value));
         ram.set(STATUS, (value & 0xFF) == 0 ? ram.get(STATUS) | 0x04 : ram.get(STATUS) & ~0x04);
         return (value & 0xFF) == 0;
     }
     bool InstructionExecution::checkCarryFlag(bool condition) {
+        Logger::info("Checking Carry Flag: " + std::string(condition ? "true" : "false"));
         ram.set(STATUS, condition ? ram.get(STATUS) | 0x01 : ram.get(STATUS) & ~0x01);
         return condition;
     }
     bool InstructionExecution::checkDigitCarryFlag(bool condition) {
+        Logger::info("Checking Digit Carry Flag: " + std::string(condition ? "true" : "false"));
         ram.set(STATUS, condition ? ram.get(STATUS) | 0x02 : ram.get(STATUS) & ~0x02);
         return condition;
     }
@@ -413,12 +469,6 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     }
     
     void InstructionExecution::setRamContent(RamMemory<uint8_t>::Bank bank, int address, uint8_t value) {
-        // When setting a value to a mirrored register, we need to update both banks
-        if (address < 0x0C && shouldMirrorAddress(address)) {  // First 12 addresses might be mirrored
-            ram.set(RamMemory<uint8_t>::Bank::BANK_0, address, value);
-            ram.set(RamMemory<uint8_t>::Bank::BANK_1, address, value);
-            return;
-        }
         ram.set(bank, address, value);
     }
 
@@ -427,6 +477,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         RamMemory<uint8_t>::Bank bank = instruction.getBank();
         return (static_cast<int>(bank) << 7) | address; // Example: Combine bank and address
     }
+    
     RamMemory<uint8_t>::Bank InstructionExecution::getSelectedBank(const Instruction& instruction) {
         uint8_t status = ram.get(STATUS);  // Use STATUS SFR directly
         bool rp0Set = ((status & (1 << 5)) != 0); // Check RP0 bit (bit 5 of STATUS)
@@ -437,6 +488,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     void InstructionExecution::pushStack(int value) {
         stack.push(value);
     }
+    
     int InstructionExecution::popStack() {
         return stack.pop();
     }
@@ -471,7 +523,9 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         } else {
             wdtCounter++; // No prescaler for WDT
         }
-    }    void InstructionExecution::clearWDT() {
+    }    
+    
+    void InstructionExecution::clearWDT() {
         // 1. Clear WDT counter
         wdtCounter = 0;
 
@@ -529,15 +583,18 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     }
 
     void InstructionExecution::setProgramCounter(int value) {
-        
-        if(ram.get(PCLATH) != 0x00){
+        programCounter = value;
+    }
+
+    void InstructionExecution::setProgramCounter(int value, Instruction::OperationCode opc) {
+
+        if((opc==Instruction::OperationCode::CALL || opc == Instruction::OperationCode::GOTO) && ram.get(PCLATH) != 0x00){
             //if pclath bit is set, add the bits from PCLATH to PCL. 1111 1111 1111 1111
             //                                                          |----| |-------|
-            //                                                          pclath     pc
-            value = (value & 0x07FF) | ((ram.get(PCLATH) & 0x1C) << 8);
+            //                                                          pclath     PCL
+            value = (value & 0x07FF) | ((ram.get(PCLATH) & 0x1F) << 8);
+            ram.set(PCL, value & 0xFF); 
         }
-        //PCL are the lower 8 bits of the program counter
-        ram.set(PCL, value & 0xFF);
         programCounter = value;
     }
 
@@ -545,15 +602,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         workingRegister = value;
     }
 
-    void InstructionExecution::setProgramCounterWithoutPCLUpdate(int value) {
-        if(ram.get(PCLATH) != 0x00){
-            //if pclath bit is set, add the bits from PCLATH to PCL. 1111 1111 1111 1111
-            //                                                          |----| |-------|
-            //                                                          pclath     pc
-            value = (value & 0x07FF) | ((ram.get(PCLATH) & 0x1C) << 8);
-        }
-        programCounter = value;
-    }
+
 
     void InstructionExecution::setRuntimeCounter(int value) {
         runtimeCounter = value;
@@ -564,35 +613,6 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         ram.set(STATUS, (status | 0x04));
     }
 
-    bool InstructionExecution::shouldMirrorAddress(int address) {
-        // These addresses are mirrored between banks
-        static const std::vector<int> mirroredAddresses = {
-            0x00,  // INDF
-            0x02,  // PCL
-            0x03,  // STATUS
-            0x04,  // FSR
-            0x0A,  // PCLATH
-            0x0B   // INTCON
-        };
-        return std::find(mirroredAddresses.begin(), mirroredAddresses.end(), address) != mirroredAddresses.end();
-    }
 
-    void InstructionExecution::setupPCLUpdateHandler() {
-        // Register callback for PCL updates
-        ram.setPCLUpdateCallback([this](uint8_t newPCLValue) {
-            handlePCLUpdate(newPCLValue);
-        });
-    }
 
-    void InstructionExecution::handlePCLUpdate(uint8_t newPCLValue) {
-        // When PCL is written, update the program counter
-        // Combine PCL with PCLATH to form the full program counter
-        uint8_t pclath = ram.get(PCLATH);
-        int newPC = ((pclath & 0x1F) << 8) | newPCLValue;
-        
-        // Update the program counter (but don't update PCL again to avoid recursion)
-        setProgramCounterWithoutPCLUpdate(newPC);
-        
-        Logger::info("PCL updated to: " + std::to_string(newPCLValue) + 
-                    ", Program Counter set to: " + std::to_string(programCounter));
-    }
+

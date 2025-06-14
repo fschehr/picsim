@@ -44,19 +44,32 @@ PicSimulatorVM::PicSimulatorVM(const std::vector<std::pair<std::pair<bool,bool*>
     running(false),
     loaded(false),
     cycles(0),
-    runtime(0.0),
-    microseconds(100000.0),
+    runtime(0),
+    microseconds(100000),
     programMemory(programMemorySize, nullptr)
 {
-    // Logger auf Dateiausgabe umstellen
-    Logger::setOutputToFile();
-    Logger::info("Simulator constructed");
-    // programMemory.resize(programMemorySize, nullptr); // Already initialized in initializer list
-    
-    // Setze den Callback für Zyklusaktualisierungen
-    executor.setCycleUpdateCallback([this](int cycles) {
-        this->updateCyclesCounter(cycles);
-    });
+    try {
+        Logger::info("Starting PicSimulatorVM constructor");
+        
+        if (fileLines.empty()) {
+            Logger::error("Empty file lines provided");
+            throw std::runtime_error("Empty file lines provided");
+        }
+        
+        if (prog.empty()) {
+            Logger::error("Empty program provided");
+            throw std::runtime_error("Empty program provided");
+        }
+        
+        Logger::info("VM components initialized");
+        executor.setCycleUpdateCallback([this](int cycles) {
+            this->updateCyclesCounter(cycles);
+        });
+        Logger::info("Simulator constructed successfully");
+    } catch (const std::exception& e) {
+        Logger::error("Failed to construct PicSimulatorVM: " + std::string(e.what()));
+        throw;
+    }
 }
 
 PicSimulatorVM::~PicSimulatorVM() {
@@ -70,16 +83,31 @@ PicSimulatorVM::~PicSimulatorVM() {
 }
 
 void PicSimulatorVM::initialize() {
-    programDecode();
-    load();
-    // execute(); //is called in ui
+    try {
+        Logger::info("Starting program decode");
+        programDecode();
+        Logger::info("Program decode completed");
+        
+        Logger::info("Starting program load");
+        load();
+        Logger::info("Program load completed");
+        
+        Logger::info("Initialization complete");
+    } catch (const std::exception& e) {
+        Logger::error("Initialization failed: " + std::string(e.what()));
+        throw;
+    }
 }
 
 void PicSimulatorVM::programDecode() {
+    Logger::info("Program decode: checking size");
     if (prog.size() > programMemory.size()) {
         throw std::runtime_error("Program size exceeds program memory capacity");
     }
+    
+    Logger::info("Program decode: decoding instructions");
     for (size_t i = 0; i < prog.size(); i++) {
+        //Logger::info("Decoding instruction at index " + std::to_string(i));
         Instruction* instruction = new ConcreteInstruction(decoder.decode(prog[i].second));
         programMemory[i] = instruction;
     }
@@ -88,30 +116,28 @@ void PicSimulatorVM::programDecode() {
         if (programMemory[i] != nullptr) {
             std::stringstream ss;
             ss << programMemory[i]->getOpc();
-            Logger::info("Instruction " + ss.str() + 
-                        " with arguments " + programMemory[i]->getArgumentsAsString());
+            //Logger::info("Instruction " + ss.str() + " with arguments " + programMemory[i]->getArgumentsAsString());
         }
     }
 }
 
 void PicSimulatorVM::stop() {
+    Logger::info("Stopping VM");
     running = false;
     halted = false;
     cv.notify_all();  // Wake up any waiting threads
     
-    // Warten bis ein laufender Thread beendet ist, falls vorhanden und joinable
     if (executionThread.joinable()) {
+        Logger::info("Waiting for execution thread to join");
         executionThread.join();
     }
     threadRunning = false;
+    Logger::info("VM stopped successfully");
 }
 
 void PicSimulatorVM::start() {
+    Logger::info("Starting VM");
     running = true;
-    
-}
-bool PicSimulatorVM::getRunning(){
-    return running;
 }
 
 void PicSimulatorVM::reset() {
@@ -128,6 +154,7 @@ void PicSimulatorVM::reset() {
 
 // Neue Methode für die Ausführung eines einzelnen Schritts
 void PicSimulatorVM::executeStep() {
+    Logger::info("Executing single step");
     if (!loaded) {
         throw std::runtime_error("No executable program loaded");
     }
@@ -147,20 +174,26 @@ void PicSimulatorVM::executeStep() {
 }
 
 void PicSimulatorVM::load() {
+    Logger::info("Load: stopping previous execution");
     stop();
 
+    Logger::info("Load: loading program into memory");
     for (size_t address = 0; address < prog.size(); address++) {
         program.set(address, prog[address].second);
     }
+    Logger::info("Load: program loaded into memory");
     loaded = true;
+    Logger::info("Load: starting program");
     start();
+    Logger::info("Load: resetting executor");
     executor.reset();
     
-    // Markiere die erste auszuführende Zeile direkt nach dem Laden des Programms
     if (prog.size() > 0) {
+        Logger::info("Load: marking first line");
         const_cast<std::pair<bool,bool*>&>(fileLines[prog[0].first].first).first = true;
         executor.prevProgCounter = 0;
     }
+    Logger::info("Load: completed successfully");
 }
 
 void PicSimulatorVM::execute() {
@@ -190,7 +223,7 @@ void PicSimulatorVM::execute() {
                     halt();
                 }
                 executor.execute();
-                 std::this_thread::sleep_for(std::chrono::microseconds(static_cast<long long>(microseconds)));
+                std::this_thread::sleep_for(std::chrono::microseconds(static_cast<int>(microseconds)));
                 
                 std::unique_lock<std::mutex> lock(mtx);
                 while (halted) {
@@ -224,4 +257,8 @@ void PicSimulatorVM::updateCyclesCounter(int i) {
 }
 void PicSimulatorVM::updateRuntimeCounter() {
     runtime = cycles * microseconds; 
+}
+
+bool PicSimulatorVM::getRunning() {
+    return running;
 }

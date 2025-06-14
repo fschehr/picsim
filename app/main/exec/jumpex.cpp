@@ -11,7 +11,7 @@
         Logger::info("executing " + instruction.toString());
         // Save address of next instruction to stack memory
         //const_cast<std::pair<bool,bool*>&>(fileLines[prog[executor.getProgramCounter()].first].first).first = false;
-        executor.pushStack(executor.getProgramCounter());
+        executor.pushStack(executor.getprevProgCounter()+1);
 
         // Consists of the opcode/address given as argument and the upper bits (bit 3 + 4) of PCLATH register
         int pclathBits = (executor.getRamContent(RamMemory<uint8_t>::SFR::entries()[9].address) & 0b00011000) << 8;
@@ -38,4 +38,5 @@
         address = address | pclathBits;             // Adding PCLATH
         
         executor.setProgramCounter(address);
+        executor.setRamContent(RamMemory<uint8_t>::SFR::entries()[2], (address & 0xFF)); 
     }

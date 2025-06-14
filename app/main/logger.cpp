@@ -7,12 +7,14 @@
 
 // Statische Variablen initialisieren
 std::ofstream Logger::logFile;
-bool Logger::useFile = false;
+bool Logger::useFile = true;
 bool Logger::enabled = true;
 std::mutex Logger::logMutex;
 std::vector<std::pair<LogType, std::string>> Logger::logHistory;
 std::string Logger::lastMessage = "Nothing to log.";
 LogType Logger::lastType = LogType::INFO;
+
+
 
 void Logger::log(const std::string& level, const std::string& message, LogType type) {
     if (!enabled) {

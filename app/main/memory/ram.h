@@ -31,7 +31,7 @@ public:
     void set(const SFR& sfr, const T& value);
     T get(const SFR& sfr) const;
     void clear();
-
+    bool initializing = true;;
 private:
     std::vector<T> bank0;
     std::vector<T> bank1;
@@ -39,6 +39,8 @@ private:
     std::function<void(T)> pclUpdateCallback;
     mutable std::mutex mutex;
     void firePropertyChange(const std::string& propertyName, int index, T oldValue, T newValue);
+    bool checkSFRMirroring(Bank bank, int address) const;
+    void handleIndirectSet(Bank bank, const T& value);
 };
 
 #endif // RAM_H

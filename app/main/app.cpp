@@ -18,7 +18,8 @@ int main(int argc, char* argv[]) {
     using namespace ftxui;
 
     // Logger-Konfiguration
-    Logger::setOutputToConsole();
+    //Logger::setOutputToConsole();
+    Logger::setOutputToFile("picsim.log");
     Logger::info("PicSim gestartet");
     
     Parser parser;
@@ -33,38 +34,47 @@ int main(int argc, char* argv[]) {
     std::vector<std::pair<short, short>> fileLinesShort = parser.parseToShortWithLines(filePath);
 
     // Initialize the simulator
+    Logger::info("Simulator wird initialisiert...");
     PicSimulatorVM vm(fileLines, fileLinesShort);
-
+    Logger::info("PicSimulatorVM erstellt");
     try {
-        vm.initialize();
+            vm.initialize();
+            Logger::info("...Simulator initialisiert");
     } catch (const std::exception& e) {
-        Logger::warning(std::string("Error during initialization: ") + e.what());
-        std::cin.get();
-        return 1;
+            Logger::info(std::string("Error during initialization: ") + e.what());
+            std::cin.get();
+            return 1;
     }
-    
+    Logger::info("Simulator initialized successfully");
+
     // ui
     auto screen = ScreenInteractive::Fullscreen();
-    
+    Logger::info("Screen initialized");
     // Create a flag for controlling the refresh thread
     std::atomic<bool> refresh_ui_continue = true;
+    
+    
+    
+    
+
     
     // Create background refresh thread
     std::thread refresh_ui([&] {
         while (refresh_ui_continue) {
+            //Logger::info("Refreshing UI...");
             std::this_thread::sleep_for(std::chrono::milliseconds(18)); // ~60 FPS
             screen.Post(Event::Custom);
         }
     });
-    
+    Logger::info("Refresh thread started\n ----------------SETUP COMPLETE----------------");
     auto document = Document(filePath, fileLines, vm);
     screen.Loop(document);
 
-    // Clean up the refresh thread
-    refresh_ui_continue = false;
-    if (refresh_ui.joinable()) {
-        refresh_ui.join();
-    }
+   // Clean up the refresh thread
+        refresh_ui_continue = false;
+        if (refresh_ui.joinable()) {
+            refresh_ui.join();
+        }
 
    
     return 0;

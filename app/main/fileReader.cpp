@@ -24,7 +24,7 @@ std::vector<std::string> FileReader::read(const std::string& filePath) {
                 line = line.substr(0, semicolonPos);
             }
             lines.push_back(line);
-            Logger::info("Read line: " + line);
+            //Logger::info("Read line: " + line);
         }
 
         file.close();

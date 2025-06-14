@@ -34,7 +34,7 @@
         value = static_cast<uint8_t>(mask | value); // Set bit using the mask
         Logger::info("value: " + std::to_string(value));
         executor.setRamContent(bank, address, value);
-        executor.setByVM = true;
+        executor.setByVM = 1;
     }
 
     /**
