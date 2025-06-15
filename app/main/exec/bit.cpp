@@ -8,13 +8,13 @@
 
     void BitExecution::executeBCF(const Instruction& instruction) {
         Logger::info("executing " + instruction.toString());
-        int address = instruction.getArguments()[0];  // File register address comes first
-        int bit = instruction.getArguments()[1];      // Bit position comes second
+        int address = executor.getFileAddress(instruction);
         auto bank = executor.getSelectedBank(instruction);
-
         uint8_t value = executor.getRamContent(bank, address);
-        value &= ~(1 << bit);  // Just clear the bit, nothing fancy
-        
+        uint8_t mask = static_cast<uint8_t>(0x01 << instruction.getArguments()[1]);
+
+        value = static_cast<uint8_t>(value & ~mask); // Clear bit using mask
+        Logger::info("value: " + std::to_string(value));
         executor.setRamContent(bank, address, value);
         executor.setByVM = 1;
     }
@@ -49,10 +49,11 @@
         auto bank = executor.getSelectedBank(instruction);
 
         uint8_t value = executor.getRamContent(bank, address);
-        Logger::info("BTFSC checking bit " + std::to_string(bit) + " of value " + std::to_string(value));
+        Logger::info("BTFSC checking address " + std::to_string(address) + "Bit "+ std::to_string(bit) + " of value " + std::to_string(value));
         
         if ((value & (1 << bit)) == 0) {  // If bit is clear
             executor.setProgramCounter(executor.getProgramCounter() + 1);  // Skip next instruction
+            executor.setRamContent(RamMemory<uint8_t>::SFR::entries()[2], (executor.getProgramCounter() & 0xFF)); // Update PCL
             Logger::info("BTFSC: Bit is clear, skipping next instruction");
         } else {
             Logger::info("BTFSC: Bit is set, continuing");
@@ -66,18 +67,20 @@
      * @param instruction Instruction consisting of OPC and arguments.
 */      void BitExecution::executeBTFSS(const Instruction& instruction) {
         Logger::info("executing " + instruction.toString());
-        int address = instruction.getArguments()[0];  // file register address
+        int address = executor.getFileAddress(instruction); // file register address
         int bit = instruction.getArguments()[1];      // bit position
         auto bank = executor.getSelectedBank(instruction);
         
         uint8_t value = executor.getRamContent(bank, address);
         
         // Log the value we're checking
-        Logger::info("BTFSS checking bit " + std::to_string(bit) + " of value " + std::to_string(value));
+        Logger::info("BTFSS checking address " + std::to_string(address) + "Bit "+ std::to_string(bit) + " of value " + std::to_string(value));
+        
         
         if ((value & (1 << bit)) != 0) {  // if bit is set
             // Skip next instruction
             executor.setProgramCounter(executor.getProgramCounter() + 1);
+            executor.setRamContent(RamMemory<uint8_t>::SFR::entries()[2], (executor.getProgramCounter() & 0xFF)); // Update PCL
             Logger::info("BTFSS: Bit is set, skipping next instruction");
         } else {
             Logger::info("BTFSS: Bit is not set, continuing");

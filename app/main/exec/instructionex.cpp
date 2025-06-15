@@ -307,11 +307,12 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
             Logger::info("done executing"); 
 
             if(!(opc == Instruction::OperationCode::CALL  || opc == Instruction::OperationCode::GOTO)  ){ 
-                if(opc == Instruction::OperationCode::RETFIE || opc == Instruction::OperationCode::RETURN || opc == Instruction::OperationCode::RETLW){
+                if(opc == Instruction::OperationCode::RETFIE || 
+                    opc == Instruction::OperationCode::RETURN || 
+                    opc == Instruction::OperationCode::RETLW){
                     Logger::info("Program Counter:" + std::to_string(programCounter));
-                    ram.set(PCL, programCounter & 0x00FF); // Reset PCL to lower byte of programCounter
+                    ram.set(PCL, programCounter & 0x00FF);
                 }else{
-                    Logger::info("PCL changed from " + std::to_string(prevPCL) + " to " + std::to_string(ram.get(PCL)));
                     ram.set(PCL, ram.get(PCL) + 1); // Increment PCL
                     programCounter = (programCounter & 0xFF00) | ram.get(PCL); // Update programCounter with new PCL
                 }
@@ -335,6 +336,9 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
         try {
             Logger::info("[EX_RST] Starting executor reset");
             
+            //reset entire ram memory
+            ram.clear();
+
             // First reset internal registers that don't touch RAM
             workingRegister = 0x00;
             Logger::info("[EX_RST] Working register reset");
@@ -583,6 +587,7 @@ RamMemory<uint8_t>::SFR EECON2 = RamMemory<uint8_t>::SFR::entries()[15];
     }
 
     void InstructionExecution::setProgramCounter(int value) {
+        Logger::info("Setting program counter to: " + std::to_string(value));
         programCounter = value;
     }
 

@@ -26,9 +26,9 @@ const std::vector<RamMemory<int>::SFR>& RamMemory<int>::SFR::entries() {
         {Bank::BANK_0, 0x0B, true},  // INTCON - in beiden Bänken gespiegelt
         {Bank::BANK_1, 0x01, false}, // OPTION_REG - nur in Bank 1
         {Bank::BANK_1, 0x05, false}, // TRISA - nur in Bank 1
-        {Bank::BANK_1, 0x06, false}, // TRISB - nur in Bank 1
-        {Bank::BANK_1, 0x08, false}, // EECON1 - nur in Bank 1
-        {Bank::BANK_1, 0x09, false}, // EECON2 - nur in Bank 1
+        {Bank::BANK_1, 0x06, false}, // TRISB - nur in Bank 1        
+        {Bank::BANK_1, 0x88, false}, // EECON1 - nur in Bank 1 (korrekte Adresse)
+        {Bank::BANK_1, 0x89, false}, // EECON2 - nur in Bank 1 (korrekte Adresse)
     };
     return sfrEntries;
 }
@@ -49,9 +49,9 @@ const std::vector<RamMemory<uint8_t>::SFR>& RamMemory<uint8_t>::SFR::entries() {
         {Bank::BANK_0, 0x0B, true},  // INTCON - in beiden Bänken gespiegelt
         {Bank::BANK_1, 0x01, false}, // OPTION_REG - nur in Bank 1
         {Bank::BANK_1, 0x05, false}, // TRISA - nur in Bank 1
-        {Bank::BANK_1, 0x06, false}, // TRISB - nur in Bank 1
-        {Bank::BANK_1, 0x08, false}, // EECON1 - nur in Bank 1
-        {Bank::BANK_1, 0x09, false}, // EECON2 - nur in Bank 1
+        {Bank::BANK_1, 0x06, false}, // TRISB - nur in Bank 1        
+        {Bank::BANK_1, 0x88, false}, // EECON1 - nur in Bank 1 (korrekte Adresse)
+        {Bank::BANK_1, 0x89, false}, // EECON2 - nur in Bank 1 (korrekte Adresse)
     };
     return sfrEntries;
 }
@@ -82,7 +82,13 @@ T RamMemory<T>::get(int address) const {
     if (address < 0 || address >= bank0.size() * 2) {
         throw std::out_of_range("Address isn't implemented");
     }
-    return (address < bank0.size()) ? bank0[address] : bank1[address - bank0.size()];
+    
+    // Linear mapping for UI: 0-127 = bank0, 128-255 = bank1
+    if (address < bank0.size()) {
+        return bank0[address];
+    } else {
+        return bank1[address - bank0.size()];
+    }
 }
 
 template <typename T>
@@ -93,11 +99,10 @@ T RamMemory<T>::get(Bank bank, int address) const {
     if (address < 0 || address >= bank0.size()) {
         Logger::error("[RAM] Invalid address access: " + std::to_string(address));
         throw std::out_of_range("Address isn't implemented");
-    }
-
-    // Special handling for INDF register (indirect addressing)
+    }    // Special handling for INDF register (indirect addressing)
     if(address == 0x00) {
-        int fsr = bank0[0x04];
+        // FSR is mirrored, so read from the same bank we're accessing
+        int fsr = (bank == Bank::BANK_0) ? bank0[0x04] : bank1[0x04];
         //Logger::info("[RAM] Indirect access through FSR: " + std::to_string(fsr));
         
         if (fsr == 0x00) {
@@ -148,7 +153,7 @@ void RamMemory<T>::set(Bank bank, int address, const T& value) {
 
     try {
         int oldValue = (bank == Bank::BANK_0) ? bank0[address] : bank1[address];
-        bool shouldMirror = (address < 0x0C) ? checkSFRMirroring(bank, address) : true;
+        bool shouldMirror = checkSFRMirroring(bank, address);
         
         if (bank == Bank::BANK_0) {
             bank0[address] = value;
@@ -184,10 +189,13 @@ T RamMemory<T>::get(const SFR &sfr) const
     return get(sfr.bank, sfr.address);
 }
 
-// template <typename T>
-// void RamMemory<T>::clear() {
-//     *this = RamMemory<uint8_t> (bank0.size);
-// }
+template <typename T>
+void RamMemory<T>::clear() {
+    std::lock_guard<std::mutex> lock(mutex);
+    std::fill(bank0.begin(), bank0.end(), T{});
+    std::fill(bank1.begin(), bank1.end(), T{});
+    Logger::info("[RAM] Memory cleared");
+}
 
 
 template <typename T>
@@ -200,8 +208,8 @@ void RamMemory<T>::firePropertyChange(const std::string& propertyName, int index
 template <typename T>
 bool RamMemory<T>::checkSFRMirroring(Bank bank, int address) const {
     for (const auto& sfr : SFR::entries()) {
-        if (sfr.address == address && sfr.bank == bank) {
-            return sfr.mapped;
+        if (sfr.address == address && sfr.mapped) {
+            return true;  // If any SFR at this address is mirrored, return true
         }
     }
     return false;
@@ -210,7 +218,8 @@ bool RamMemory<T>::checkSFRMirroring(Bank bank, int address) const {
 template <typename T>
 void RamMemory<T>::handleIndirectSet(Bank bank, const T& value) {
     Logger::info("[RAM] Handling indirect set for bank " + std::to_string(static_cast<int>(bank)) + " with value " + std::to_string(value));
-    int fsrValue = bank0[0x04]; // Get FSR value
+    // FSR is mirrored, so read from the same bank we're accessing
+    int fsrValue = (bank == Bank::BANK_0) ? bank0[0x04] : bank1[0x04];
     Logger::info("[RAM] Indirect set through FSR: " + std::to_string(fsrValue));
     
     if (fsrValue == 0x00) {
@@ -224,15 +233,18 @@ void RamMemory<T>::handleIndirectSet(Bank bank, const T& value) {
 
     int oldValue = (bank == Bank::BANK_0) ? bank0[fsrValue] : bank1[fsrValue];
     
+    // Check if the target address should be mirrored
+    bool shouldMirror = checkSFRMirroring(bank, fsrValue);
+    
     if (bank == Bank::BANK_0) {
         bank0[fsrValue] = value;
-        if (fsrValue >= 0x0C || (fsrValue < 0x0C && checkSFRMirroring(bank, fsrValue))) {
+        if (shouldMirror) {
             bank1[fsrValue] = value;
             Logger::info("[RAM] Mirrored indirect value to bank 1");
         }
     } else {
         bank1[fsrValue] = value;
-        if (fsrValue >= 0x0C || (fsrValue < 0x0C && checkSFRMirroring(bank, fsrValue))) {
+        if (shouldMirror) {
             bank0[fsrValue] = value;
             Logger::info("[RAM] Mirrored indirect value to bank 0");
         }
