@@ -10,50 +10,15 @@ using RegisterChangeCallback = std::function<void(int, uint8_t)>;
 ftxui::Component RegisterTable(PicSimulatorVM &vm, std::string (&registerValues)[32][8], RegisterChangeCallback on_register_change = nullptr) {
     using namespace ftxui;
 
-    auto container = Container::Vertical({});
-
-    for (int i = 0; i < 32; ++i) {
+    auto container = Container::Vertical({});    for (int i = 0; i < 32; ++i) {
         auto row = Container::Horizontal({});
         
         for (int j = 0; j < 8; ++j) {
-            auto registerInputOption = InputOption();
-            registerInputOption.content = &registerValues[i][j];
             std::stringstream hexPos;
             hexPos << std::hex << std::uppercase << ( 8 * i ) + j;
-            registerInputOption.placeholder = hexPos.str(); // No° des Registers
-            registerInputOption.multiline = false;
             
-            registerInputOption.on_change = [&vm, i, j, &registerValues, on_register_change]() {
-                if (registerValues[i][j].length() > 2) {
-                    registerValues[i][j] = registerValues[i][j].substr(0, 2);
-                }
-                
-                std::string validInput;
-                for (char c : registerValues[i][j]) {
-                    if (std::isxdigit(c)) {
-                        validInput.push_back(std::toupper(c));
-                    }
-                }
-                vm.executor.setByVM = false;
-                registerValues[i][j] = validInput;
-                
-                // Konvertiere den HEX-String in einen uint8_t Wert und aktualisiere den RAM
-                if (!validInput.empty()) {
-                    try {
-                        uint8_t value = static_cast<uint8_t>(std::stoi(validInput, nullptr, 16));
-                        // Berechne die RAM-Adresse basierend auf i und j
-                        int address = i * 8 + j;
-                        // Externe Funktion aufrufen, um den RAM zu aktualisieren
-                        if (on_register_change) {
-                            on_register_change(address, value);
-                        }
-                    } catch (const std::exception& e) {
-                        // Fehlerbehandlung bei ungültiger Konvertierung
-                    }
-                }
-            };
-            
-            row->Add(Input(&registerValues[i][j], registerInputOption));
+            auto input = Input(&registerValues[i][j], hexPos.str());
+            row->Add(input);
         }
         
         container->Add(row);

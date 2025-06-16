@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.14)
 
 # Project name
 project(picsim)
@@ -10,7 +10,16 @@ project(picsim)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_subdirectory(third_party/ftxui)
+# Use FetchContent to automatically download FTXUI
+include(FetchContent)
+
+FetchContent_Declare(
+  ftxui
+  GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
+  GIT_TAG v4.1.1  # Use stable version
+)
+
+FetchContent_MakeAvailable(ftxui)
 
 # Add source files
 set(SOURCES
